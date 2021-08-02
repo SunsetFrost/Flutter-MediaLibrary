@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:pokemon/pokemon.model.dart';
+import 'package:pokemon/model/Pokemon.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,6 +11,25 @@ void main() {
     home: HomePage(),
     debugShowCheckedModeBanner: false,
   ));
+}
+
+Future<List<Pokemon>> fetchData() async {
+  final url =
+      "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
+
+  final response = await http.get(Uri.parse((url)));
+  if (response.statusCode == 200) {
+    return parseData(response.body);
+  } else {
+    throw Exception('Failed fetch pokemon data!');
+  }
+}
+
+List<Pokemon> parseData(response) {
+  final parsed = jsonDecode(response)['pokemon'];
+  final pokemonList =
+      parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
+  return pokemonList;
 }
 
 class HomePage extends StatefulWidget {
@@ -21,25 +40,13 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final url =
-      "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
-
-  final testUrl = 'https://jsonplaceholder.typicode.com/albums/1';
+  late Future<List<Pokemon>> pokeList;
 
   @override
   void initState() {
     super.initState();
 
-    fetchData();
-  }
-
-  Future<PokemonModel> fetchData() async {
-    final response = await http.get(Uri.parse((url)));
-    if (response.statusCode == 200) {
-      return PokemonModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed fetch pokemon data!');
-    }
+    pokeList = fetchData();
   }
 
   Widget build(BuildContext context) {
@@ -47,6 +54,20 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Frost Pokemon App"),
         backgroundColor: Colors.cyan,
+      ),
+      body: Center(
+        child: FutureBuilder<List<Pokemon>>(
+          future: pokeList,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data;
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+
+            return const CircularProgressIndicator();
+          },
+        ),
       ),
     );
   }
