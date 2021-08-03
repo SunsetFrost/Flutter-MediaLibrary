@@ -11,7 +11,7 @@ Pokemon _$PokemonFromJson(Map<String, dynamic> json) {
     json['id'] as int?,
     json['num'] as String?,
     json['name'] as String?,
-    json['img'] as String?,
+    json['img'] as String,
     (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
     json['height'] as String?,
     json['weight'] as String?,

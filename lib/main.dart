@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:pokemon/model/Pokemon.dart';
+import 'package:pokemon/list.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -60,7 +61,7 @@ class HomePageState extends State<HomePage> {
           future: pokeList,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return snapshot.data;
+              return PokemonList(pokemons: snapshot.data!);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
