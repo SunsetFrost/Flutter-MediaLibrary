@@ -14,9 +14,8 @@ void main() {
   ));
 }
 
-Future<List<Pokemon>> fetchData() async {
-  final url =
-      "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
+Future<List<String>> fetchData() async {
+  final url = "https://pokeapi.co/api/v2/pokemon/?limit=10";
 
   final response = await http.get(Uri.parse((url)));
   if (response.statusCode == 200) {
@@ -26,11 +25,16 @@ Future<List<Pokemon>> fetchData() async {
   }
 }
 
-List<Pokemon> parseData(response) {
-  final parsed = jsonDecode(response)['pokemon'];
-  final pokemonList =
-      parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
-  return pokemonList;
+List<String> parseData(response) {
+  final parsed = jsonDecode(response);
+  // final pokemonList =
+  //     parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
+  final pokemonNameList =
+      parsed['results'].map((item) => item['name']).toList();
+
+  final result = List<String>.from(pokemonNameList);
+
+  return result;
 }
 
 class HomePage extends StatefulWidget {
@@ -41,12 +45,11 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  late Future<List<Pokemon>> pokeList;
+  late Future<List<String>> pokeList;
 
   @override
   void initState() {
     super.initState();
-
     pokeList = fetchData();
   }
 
@@ -54,14 +57,24 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Frost Pokemon App"),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue[300],
       ),
       body: Center(
-        child: FutureBuilder<List<Pokemon>>(
+        child: FutureBuilder<List<String>>(
           future: pokeList,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return PokemonList(pokemons: snapshot.data!);
+              // return PokemonList(pokemons: snapshot.data!);
+              return ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: 50,
+                      child:
+                          Center(child: Text('Entry ${snapshot.data![index]}')),
+                    );
+                  });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }

@@ -8,6 +8,7 @@ class PokemonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(pokemons);
     return GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
