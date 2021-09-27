@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:io' as Io;
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +18,9 @@ void main() {
 }
 
 Future<List<String>> fetchData() async {
-  final url = "https://pokeapi.co/api/v2/pokemon/?limit=10";
+  final url = "http://127.0.0.1:7001/api/v1/pokemon?page=1&perpage=10";
 
-  final response = await http.get(Uri.parse((url)));
+  final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     return parseData(response.body);
   } else {
@@ -29,8 +32,7 @@ List<String> parseData(response) {
   final parsed = jsonDecode(response);
   // final pokemonList =
   //     parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
-  final pokemonNameList =
-      parsed['results'].map((item) => item['name']).toList();
+  final pokemonNameList = parsed.map((item) => item['img']).toList();
 
   final result = List<String>.from(pokemonNameList);
 
@@ -53,6 +55,12 @@ class HomePageState extends State<HomePage> {
     pokeList = fetchData();
   }
 
+  Image decodeBase642Image(source) {
+    Uint8List decodeBytes = base64Decode(source);
+
+    return Image.memory(decodeBytes);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -71,14 +79,13 @@ class HomePageState extends State<HomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       height: 50,
-                      child:
-                          Center(child: Text('Entry ${snapshot.data![index]}')),
+                      child: Center(
+                          child: decodeBase642Image(snapshot.data![index])),
                     );
                   });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-
             return const CircularProgressIndicator();
           },
         ),
