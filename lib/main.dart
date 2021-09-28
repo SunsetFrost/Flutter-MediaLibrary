@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:pokemon/model/Pokemon.dart';
 import 'package:pokemon/list.dart';
+import 'package:pokemon/test.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -89,6 +90,14 @@ class HomePageState extends State<HomePage> {
             return const CircularProgressIndicator();
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => TestWidget()));
+        },
+        child: const Icon(Icons.add_circle),
+        backgroundColor: Colors.green,
       ),
     );
   }

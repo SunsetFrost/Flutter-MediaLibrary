@@ -10,6 +10,8 @@
       - [一次性生成](#一次性生成)
       - [持续生成](#持续生成)
     - [消费自动生成的实体类](#消费自动生成的实体类)
+  - [Use Poke API](#use-poke-api)
+  - [首页剑气加载动画](#首页剑气加载动画)
   - [参考](#参考)
 ## 项目介绍
 口袋妖怪展示App
@@ -128,5 +130,11 @@ List<Pokemon> parseData(response) {
 ## Use Poke API
 接口数据中的口袋妖怪图片网址不稳定，更换第三方API
 [PokeAPI]()
+
+## 首页剑气加载动画
+实现参考 [Flutter实现"剑气"加载](https://juejin.cn/post/7002977635206692901)
+
+
+
 ## 参考
 - [Flutter官网](https://flutter.dev/docs/development/data-and-backend/json)
