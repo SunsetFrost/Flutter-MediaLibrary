@@ -18,7 +18,7 @@ void main() {
   ));
 }
 
-Future<List<String>> fetchData() async {
+Future<List<Pokemon>> fetchData() async {
   final url = "http://127.0.0.1:7001/api/v1/pokemon?page=1&perpage=10";
 
   final response = await http.get(Uri.parse(url));
@@ -29,15 +29,15 @@ Future<List<String>> fetchData() async {
   }
 }
 
-List<String> parseData(response) {
+List<Pokemon> parseData(response) {
   final parsed = jsonDecode(response);
-  // final pokemonList =
-  //     parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
-  final pokemonNameList = parsed.map((item) => item['img']).toList();
+  final pokemonList =
+      parsed.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
+  // final pokemonNameList = parsed.map((item) => item['img']).toList();
 
-  final result = List<String>.from(pokemonNameList);
+  // final result = List<String>.from(pokemonList);
 
-  return result;
+  return pokemonList;
 }
 
 class HomePage extends StatefulWidget {
@@ -48,7 +48,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  late Future<List<String>> pokeList;
+  late Future<List<Pokemon>> pokeList;
 
   @override
   void initState() {
@@ -69,21 +69,21 @@ class HomePageState extends State<HomePage> {
         backgroundColor: Colors.lightBlue[300],
       ),
       body: Center(
-        child: FutureBuilder<List<String>>(
+        child: FutureBuilder<List<Pokemon>>(
           future: pokeList,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // return PokemonList(pokemons: snapshot.data!);
-              return ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 50,
-                      child: Center(
-                          child: decodeBase642Image(snapshot.data![index])),
-                    );
-                  });
+              return PokemonList(pokemons: snapshot.data!);
+              // return ListView.builder(
+              //     padding: const EdgeInsets.all(8),
+              //     itemCount: snapshot.data!.length,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return Container(
+              //         height: 50,
+              //         child: Center(
+              //             child: decodeBase642Image(snapshot.data![index])),
+              //       );
+              //     });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
