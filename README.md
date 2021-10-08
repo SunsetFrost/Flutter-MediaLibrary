@@ -134,7 +134,9 @@ List<Pokemon> parseData(response) {
 ## 剑气加载动画
 实现参考 [Flutter实现"剑气"加载](https://juejin.cn/post/7002977635206692901)
 
+## bug
+When building Flutter applications, you may run into the following error:
 
-
+Vertical viewport was given unbounded height
 ## 参考
 - [Flutter官网](https://flutter.dev/docs/development/data-and-backend/json)
