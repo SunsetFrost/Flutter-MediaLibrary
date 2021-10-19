@@ -1,6 +1,15 @@
 # pokemon
 - [pokemon](#pokemon)
   - [项目介绍](#项目介绍)
+  - [Roadmap](#roadmap)
+    - [project structure](#project-structure)
+      - [route](#route)
+    - [Pokemon List Page](#pokemon-list-page)
+      - [Card](#card)
+      - [Search](#search)
+      - [中文](#中文)
+    - [Pokemon Detail Page](#pokemon-detail-page)
+    - [Mock API](#mock-api)
   - [数据获取&JSON自动转换Dart类](#数据获取json自动转换dart类)
     - [包安装](#包安装)
       - [安装Bug](#安装bug)
@@ -10,14 +19,57 @@
       - [一次性生成](#一次性生成)
       - [持续生成](#持续生成)
     - [消费自动生成的实体类](#消费自动生成的实体类)
-  - [Use Poke API](#use-poke-api)
   - [剑气加载动画](#剑气加载动画)
+  - [Mock Data](#mock-data)
+    - [图片加载后调试闪退](#图片加载后调试闪退)
+  - [bug](#bug)
+    - [argb](#argb)
   - [参考](#参考)
 ## 项目介绍
 口袋妖怪展示App
 
 - 截图
 
+
+
+## Roadmap
+
+### project structure
+#### route
+- [ ] route
+  - [ ] flutter route 1.0
+  
+  - 匿名route
+  - 指定route
+  - onGenerateRoute
+
+  - [ ] flutter route 2.0
+
+  - page
+  - route
+  - route delegate
+
+
+### Pokemon List Page
+#### Card
+- [x] picture
+- [x] layout
+- [x] type
+- [x] icon
+- [x] font
+
+#### Search
+- [ ] search
+- [ ] filter
+#### 中文
+
+pokemon api支持中文，还是使用中文开发吧
+
+### Pokemon Detail Page
+
+
+### Mock API
+- [x] dio interceptor 实现
 
 
 ## 数据获取&JSON自动转换Dart类
@@ -127,16 +179,21 @@ List<Pokemon> parseData(response) {
 }
 ```
 
-## Use Poke API
-接口数据中的口袋妖怪图片网址不稳定，更换第三方API
-[PokeAPI]()
 
 ## 剑气加载动画
 实现参考 [Flutter实现"剑气"加载](https://juejin.cn/post/7002977635206692901)
+
+## Mock Data
+
+### 图片加载后调试闪退
 
 ## bug
 When building Flutter applications, you may run into the following error:
 
 Vertical viewport was given unbounded height
+
+### argb
+十六进制   a在第一位
+
 ## 参考
 - [Flutter官网](https://flutter.dev/docs/development/data-and-backend/json)

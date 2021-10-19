@@ -1,0 +1,134 @@
+[
+      {
+        "id": 1,
+        "name": "bulbasaur",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 318
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "name": "ivysaur",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 405
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "name": "venusaur",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 525
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "name": "charmander",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 309
+            }
+          }
+        }
+      },
+      {
+        "id": 5,
+        "name": "charmeleon",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 405
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "name": "charizard",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 534
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "name": "squirtle",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 314
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "name": "wartortle",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 405
+            }
+          }
+        }
+      },
+      {
+        "id": 9,
+        "name": "blastoise",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 530
+            }
+          }
+        }
+      },
+      {
+        "id": 10,
+        "name": "caterpie",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 195
+            }
+          }
+        }
+      },
+      {
+        "id": 11,
+        "name": "metapod",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 205
+            }
+          }
+        }
+      },
+      {
+        "id": 12,
+        "name": "butterfree",
+        "pokemon_v2_pokemonstats_aggregate": {
+          "aggregate": {
+            "sum": {
+              "base_stat": 395
+            }
+          }
+        }
+      }
+    ]
