@@ -1,134 +1,396 @@
-[
+{
+  "data": {
+    "pokemon_v2_pokemonspecies": [
       {
-        "id": 1,
-        "name": "bulbasaur",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 318
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "妙蛙種子"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 1,
+            "name": "bulbasaur",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "grass"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "poison"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 318
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 2,
-        "name": "ivysaur",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 405
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "小火龍"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 4,
+            "name": "charmander",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "fire"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 309
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 3,
-        "name": "venusaur",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 525
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "傑尼龜"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 7,
+            "name": "squirtle",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "water"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 314
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 4,
-        "name": "charmander",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 309
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "綠毛蟲"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 10,
+            "name": "caterpie",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "bug"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 195
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 5,
-        "name": "charmeleon",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 405
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "獨角蟲"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 13,
+            "name": "weedle",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "bug"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "poison"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 195
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 6,
-        "name": "charizard",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 534
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "波波"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 16,
+            "name": "pidgey",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "normal"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "flying"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 251
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 7,
-        "name": "squirtle",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 314
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "小拉達"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 19,
+            "name": "rattata",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "normal"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 253
+                }
+              }
+            }
+          },
+          {
+            "id": 10091,
+            "name": "rattata-alola",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "dark"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "normal"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 253
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 8,
-        "name": "wartortle",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 405
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "烈雀"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 21,
+            "name": "spearow",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "normal"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "flying"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 262
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 9,
-        "name": "blastoise",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 530
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "阿柏蛇"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 23,
+            "name": "ekans",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "poison"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 288
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 10,
-        "name": "caterpie",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 195
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "穿山鼠"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 27,
+            "name": "sandshrew",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "ground"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 300
+                }
+              }
+            }
+          },
+          {
+            "id": 10101,
+            "name": "sandshrew-alola",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "ice"
+                }
+              },
+              {
+                "pokemon_v2_type": {
+                  "name": "steel"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 300
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 11,
-        "name": "metapod",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 205
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "尼多蘭"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 29,
+            "name": "nidoran-f",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "poison"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 275
+                }
+              }
             }
           }
-        }
+        ]
       },
       {
-        "id": 12,
-        "name": "butterfree",
-        "pokemon_v2_pokemonstats_aggregate": {
-          "aggregate": {
-            "sum": {
-              "base_stat": 395
+        "pokemon_v2_pokemonspeciesnames": [
+          {
+            "name": "尼多朗"
+          }
+        ],
+        "pokemon_v2_pokemons": [
+          {
+            "id": 32,
+            "name": "nidoran-m",
+            "pokemon_v2_pokemontypes": [
+              {
+                "pokemon_v2_type": {
+                  "name": "poison"
+                }
+              }
+            ],
+            "pokemon_v2_pokemonstats_aggregate": {
+              "aggregate": {
+                "sum": {
+                  "base_stat": 273
+                }
+              }
             }
           }
-        }
+        ]
       }
     ]
+  }
+}

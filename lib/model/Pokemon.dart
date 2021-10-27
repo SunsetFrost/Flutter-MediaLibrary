@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 
 /// This allows the `User` class to access private members in
@@ -9,10 +11,14 @@ part 'Pokemon.g.dart';
 class Pokemon {
   final int id;
   final String name;
+  final List<String> type;
+  final int state;
 
   Pokemon(
     this.id,
     this.name,
+    this.type,
+    this.state,
   );
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
