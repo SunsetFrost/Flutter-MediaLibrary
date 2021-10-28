@@ -3,12 +3,12 @@
   - [项目介绍](#项目介绍)
   - [Roadmap](#roadmap)
     - [project structure](#project-structure)
-      - [route](#route)
     - [Pokemon List Page](#pokemon-list-page)
       - [Card](#card)
       - [Search](#search)
       - [中文](#中文)
     - [Pokemon Detail Page](#pokemon-detail-page)
+    - [Custom Theme](#custom-theme)
     - [Mock API](#mock-api)
   - [数据获取&JSON自动转换Dart类](#数据获取json自动转换dart类)
     - [包安装](#包安装)
@@ -21,6 +21,7 @@
     - [消费自动生成的实体类](#消费自动生成的实体类)
   - [剑气加载动画](#剑气加载动画)
   - [Mock Data](#mock-data)
+  - [Route](#route)
     - [图片加载后调试闪退](#图片加载后调试闪退)
   - [bug](#bug)
     - [argb](#argb)
@@ -35,20 +36,7 @@
 ## Roadmap
 
 ### project structure
-#### route
-- [ ] route
-  - [ ] flutter route 1.0
-  
-  - 匿名route
-  - 指定route
-  - onGenerateRoute
-
-  - [ ] flutter route 2.0
-
-  - page
-  - route
-  - route delegate
-
+- [x] route
 
 ### Pokemon List Page
 #### Card
@@ -59,15 +47,19 @@
 - [x] font
 
 #### Search
-- [ ] search
+- [x] search
 - [ ] filter
 #### 中文
 
-pokemon api支持中文，还是使用中文开发吧
+pokemon api支持多语言
+> 部分信息不支持
+- [x] 语言更换为中文
 
 ### Pokemon Detail Page
+- [ ] detail page
 
-
+### Custom Theme
+- [ ] 抽取样式
 ### Mock API
 - [x] dio interceptor 实现
 
@@ -184,6 +176,20 @@ List<Pokemon> parseData(response) {
 实现参考 [Flutter实现"剑气"加载](https://juejin.cn/post/7002977635206692901)
 
 ## Mock Data
+
+## Route
+-  route
+   -  flutter route 1.0
+  
+  - 匿名route
+  - 指定route
+  - onGenerateRoute
+
+- flutter route 2.0
+
+  - page
+  - route
+  - route delegate
 
 ### 图片加载后调试闪退
 

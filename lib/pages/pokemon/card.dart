@@ -8,7 +8,7 @@ class PokemonCard extends StatelessWidget {
 
   final Pokemon pokemon;
 
-  String getImageUrl(sourceIndex) {
+  String _getImageUrl(sourceIndex) {
     final imgUrl = 'assets/pic/' + sourceIndex.toString() + '的副本.gif';
     return imgUrl;
   }
@@ -21,7 +21,7 @@ class PokemonCard extends StatelessWidget {
         children: <Widget>[
           Positioned(
             // height: MediaQuery.of(context).size.height / 6,
-            width: MediaQuery.of(context).size.width / 3.8,
+            width: MediaQuery.of(context).size.width / 3.2,
             height: 120,
             // left: 10.0,
             top: 30,
@@ -83,7 +83,7 @@ class PokemonCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     image: AssetImage(
-                      getImageUrl(pokemon.id),
+                      _getImageUrl(pokemon.id),
                     ),
                     // image: AssetImage('assets/pic/2.gif'),
                     alignment: Alignment.bottomCenter,
@@ -92,7 +92,7 @@ class PokemonCard extends StatelessWidget {
                 )),
           ),
           Align(
-              alignment: Alignment(0, 0.5),
+              alignment: Alignment(0, 0.6),
               child: Container(
                   width: 54,
                   height: 26,
