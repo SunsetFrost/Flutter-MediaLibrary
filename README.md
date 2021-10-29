@@ -49,6 +49,10 @@
 #### Search
 - [x] search
 - [ ] filter
+  实现方案 
+  - expanedList? ✖️
+  - [x] container + visible  ✔️
+  - [ ] 对接后台 
 #### 中文
 
 pokemon api支持多语言

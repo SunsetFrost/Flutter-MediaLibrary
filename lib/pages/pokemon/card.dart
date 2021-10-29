@@ -33,7 +33,7 @@ class PokemonCard extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: 28,
+                    height: 30,
                   ),
                   Text(
                     pokemon.name,
@@ -92,7 +92,7 @@ class PokemonCard extends StatelessWidget {
                 )),
           ),
           Align(
-              alignment: Alignment(0, 0.6),
+              alignment: Alignment(0, .7),
               child: Container(
                   width: 54,
                   height: 26,
