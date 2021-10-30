@@ -20,7 +20,7 @@ class RouteConfiguration {
   static List<Path> paths = [
     Path(
       r'^' + pokemon_routes.listRoute,
-      (context, match) => pokemon_app.PokemonApp(),
+      (context, match) => ChildAppWrapper(childApp: pokemon_app.PokemonApp()),
     ),
     Path(r'^/', (context, match) => NavigatePage())
   ];

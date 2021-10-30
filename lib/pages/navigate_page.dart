@@ -54,3 +54,43 @@ class _NavigatePageState extends State<NavigatePage> {
     );
   }
 }
+
+/*
+  子app赋能组件：回主app
+*/
+class ChildAppWrapper extends StatefulWidget {
+  const ChildAppWrapper({
+    Key? key,
+    required this.childApp,
+  });
+
+  final Widget childApp;
+
+  @override
+  _ChildAppWrapperState createState() => _ChildAppWrapperState();
+}
+
+class _ChildAppWrapperState extends State<ChildAppWrapper> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        widget.childApp,
+        SafeArea(
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .popUntil((route) => route.settings.name == '/');
+                    },
+                    child: const Icon(Icons.home),
+                    backgroundColor: Colors.orangeAccent,
+                  ),
+                )))
+      ],
+    );
+  }
+}

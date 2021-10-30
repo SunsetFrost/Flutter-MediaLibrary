@@ -24,7 +24,6 @@
   - [Route](#route)
     - [图片加载后调试闪退](#图片加载后调试闪退)
   - [bug](#bug)
-    - [argb](#argb)
   - [参考](#参考)
 ## 项目介绍
 口袋妖怪展示App
@@ -37,7 +36,7 @@
 
 ### project structure
 - [x] route
-
+- [ ] 子app管理自身路由(模仿flutter gallery路由管理)
 ### Pokemon List Page
 #### Card
 - [x] picture
@@ -198,12 +197,14 @@ List<Pokemon> parseData(response) {
 ### 图片加载后调试闪退
 
 ## bug
-When building Flutter applications, you may run into the following error:
 
+- [ ] When building Flutter applications, you may run into the following error:
 Vertical viewport was given unbounded height
 
-### argb
-十六进制   a在第一位
+column 内有gridview控件，需要放入`expand`内
+
+
+- [ ] 后退滑动直接回主页面
 
 ## 参考
 - [Flutter官网](https://flutter.dev/docs/development/data-and-backend/json)

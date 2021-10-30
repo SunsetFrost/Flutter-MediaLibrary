@@ -10,23 +10,30 @@ class PokemonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PokemonList();
-    // MaterialApp(
-    //   title: 'Pokemon',
-    //   debugShowCheckedModeBanner: false,
-    //   initialRoute: listRoute,
-    //   routes: <String, WidgetBuilder>{
-    //     listRoute: (context) => PokemonList(),
-    //   },
-    //   theme: ThemeData(
-    //     scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
-    //     fontFamily: 'IPix',
-    //     textTheme: const TextTheme(
-    //         // headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-    //         // headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    //         // bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-    //         ),
-    //   ),
-    // );
+    // return PokemonList();
+    return MaterialApp(
+      title: 'Pokemon',
+      debugShowCheckedModeBanner: false,
+      initialRoute: listRoute,
+      routes: <String, WidgetBuilder>{
+        listRoute: (context) => PokemonList(),
+        detailRoute: (context) => PokemonDetail(),
+      },
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+        fontFamily: 'IPix',
+        textTheme: const TextTheme(
+            headline2: TextStyle(
+          color: Color.fromRGBO(244, 176, 22, 1.0),
+          fontSize: 19,
+          fontWeight: FontWeight.w500,
+          wordSpacing: 10,
+        )
+            // headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            // headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            // bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+            ),
+      ),
+    );
   }
 }

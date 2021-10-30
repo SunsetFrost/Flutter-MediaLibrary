@@ -10,7 +10,7 @@ class PokemonList extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+      // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child:
@@ -23,13 +23,7 @@ class PokemonList extends StatelessWidget {
               ),
               child: Text(
                 '口袋图鉴',
-                style: TextStyle(
-                  color: Color.fromRGBO(244, 176, 22, 1.0),
-                  fontFamily: 'IPix',
-                  fontSize: 19,
-                  fontWeight: FontWeight.w500,
-                  wordSpacing: 10,
-                ),
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
             SearchWidget(),
@@ -60,13 +54,6 @@ class PokemonList extends StatelessWidget {
                       );
                     }))
           ])),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/');
-        },
-        child: const Icon(Icons.home),
-        backgroundColor: Colors.orangeAccent,
-      ),
     );
   }
 }
@@ -115,8 +102,7 @@ class SearchWidget extends StatelessWidget {
           decoration: InputDecoration(
               contentPadding: EdgeInsets.all(0),
               hintText: '请输入搜索的口袋妖怪',
-              hintStyle: TextStyle(
-                  fontFamily: 'IPix', color: Colors.white54, fontSize: 14),
+              hintStyle: TextStyle(color: Colors.white54, fontSize: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
@@ -148,7 +134,7 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  bool _isPanelVisible = true;
+  bool _isPanelVisible = false;
 
   @override
   Widget build(BuildContext context) {
