@@ -20,20 +20,32 @@ class PokemonApp extends StatelessWidget {
         detailRoute: (context) => PokemonDetail(),
       },
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
-        fontFamily: 'IPix',
-        textTheme: const TextTheme(
+          scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+          fontFamily: 'IPix',
+          backgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+          primaryColor: Color.fromRGBO(244, 176, 22, 1.0),
+          cardColor: Color.fromRGBO(40, 44, 82, 1.0),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: Color.fromRGBO(190, 193, 215, 1.0)),
+          textTheme: const TextTheme(
             headline2: TextStyle(
-          color: Color.fromRGBO(244, 176, 22, 1.0),
-          fontSize: 19,
-          fontWeight: FontWeight.w500,
-          wordSpacing: 10,
-        )
-            // headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            // headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            // bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+              color: Color.fromRGBO(244, 176, 22, 1.0),
+              fontSize: 19,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 10,
             ),
-      ),
+            // card name
+            headline4: TextStyle(
+              color: Color.fromRGBO(190, 193, 215, 1.0),
+              fontSize: 12,
+            ),
+            headline5: TextStyle(
+                color: Color.fromRGBO(190, 193, 215, 1.0), fontSize: 10),
+            headline6: TextStyle(
+              color: Color.fromRGBO(244, 176, 22, 1.0),
+              fontSize: 12,
+            ),
+          )),
     );
   }
 }

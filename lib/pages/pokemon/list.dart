@@ -188,7 +188,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               width: double.infinity,
               height: 100,
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(40, 44, 82, 1.0),
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.symmetric(horizontal: 4),
             ))

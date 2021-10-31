@@ -41,7 +41,7 @@ class PokemonCard extends StatelessWidget {
                 // left: 10.0,
                 top: 30,
                 child: Card(
-                  color: Color.fromRGBO(40, 44, 82, 1.0),
+                  color: Theme.of(context).cardColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
@@ -53,11 +53,7 @@ class PokemonCard extends StatelessWidget {
                       Text(
                         pokemon.name,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(190, 193, 215, 1.0),
-                          fontFamily: 'IPix',
-                          fontSize: 12,
-                        ),
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
                         height: 14,
@@ -76,10 +72,8 @@ class PokemonCard extends StatelessWidget {
                                     ),
                                     child: Text(
                                       pokemonTypeMap[e]!.name,
-                                      style: TextStyle(
-                                          color: Colors.white60,
-                                          fontFamily: 'IPix',
-                                          fontSize: 10),
+                                      style:
+                                          Theme.of(context).textTheme.headline5,
                                     ),
                                   ))
                               .toList())
