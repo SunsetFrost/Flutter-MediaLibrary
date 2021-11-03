@@ -1,6 +1,11 @@
-# pokemon
-- [pokemon](#pokemon)
+# SunsetFrost
+- [SunsetFrost](#sunsetfrost)
   - [项目介绍](#项目介绍)
+    - [Video](#video)
+    - [Music](#music)
+    - [Book](#book)
+    - [Game](#game)
+    - [pokemon](#pokemon)
   - [Roadmap](#roadmap)
     - [project structure](#project-structure)
     - [Pokemon List Page](#pokemon-list-page)
@@ -22,21 +27,32 @@
   - [剑气加载动画](#剑气加载动画)
   - [Mock Data](#mock-data)
   - [Route](#route)
-    - [图片加载后调试闪退](#图片加载后调试闪退)
-  - [bug](#bug)
+  - [Bug](#bug)
   - [参考](#参考)
 ## 项目介绍
-口袋妖怪展示App
+self hobits collection
+### Video
+- API source  
+[the movie db](https://www.themoviedb.org/documentation/api?language=en-US)
+### Music
+- API source  
+youtube music
 
-- 截图
-
-
+### Book
+- API source  
+google book
+### Game
+- API source  
+[RAWG](https://rawg.io/apidocs)
+### pokemon
+- API source  
+[PokeAPI](https://pokeapi.co)
 
 ## Roadmap
 
 ### project structure
 - [x] route
-- [ ] 子app管理自身路由(模仿flutter gallery路由管理)
+- [x] 子app管理自身路由(模仿flutter gallery路由管理)
 ### Pokemon List Page
 #### Card
 - [x] picture
@@ -59,10 +75,12 @@ pokemon api支持多语言
 - [x] 语言更换为中文
 
 ### Pokemon Detail Page
-- [ ] detail page
+- [x] detail page widget
+- [ ] model
+- [ ] data fetch
 
 ### Custom Theme
-- [ ] 抽取样式
+- [x] 抽取样式
 ### Mock API
 - [x] dio interceptor 实现
 
@@ -194,11 +212,11 @@ List<Pokemon> parseData(response) {
   - route
   - route delegate
 
-### 图片加载后调试闪退
 
-## bug
+## Bug
 
-- [ ] When building Flutter applications, you may run into the following error:
+- [x] 图片加载后调试闪退
+- [x] When building Flutter applications, you may run into the following error:
 Vertical viewport was given unbounded height
 
 column 内有gridview控件，需要放入`expand`内

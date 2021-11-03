@@ -16,11 +16,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        backgroundColor: Color(0xFFF1F2F6),
+        primaryColor: Color(0xFF202736),
         textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-          // headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-          // bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
+            headline1: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF202736),
+            ),
+            headline2: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff455a64),
+            )),
       ),
       onGenerateRoute: RouteConfiguration.onGenerateRoute,
     );

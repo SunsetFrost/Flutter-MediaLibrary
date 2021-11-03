@@ -37,6 +37,7 @@ flutter:
 
   assets:
     - assets/json/pokemon/
-    - assets/json/movie/
-    - assets/json/anime/
+    - assets/json/video/
+    - assets/json/music/
+    - assets/json/book/
     - assets/pic/

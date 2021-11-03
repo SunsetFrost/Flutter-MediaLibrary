@@ -31,7 +31,12 @@ class _NavigatePageState extends State<NavigatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: pages.elementAt(_selectedIndex)),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: SafeArea(
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: pages.elementAt(_selectedIndex)),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

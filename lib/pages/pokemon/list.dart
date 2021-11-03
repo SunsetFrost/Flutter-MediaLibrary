@@ -8,6 +8,7 @@ import 'package:pokemon/widgets/sword_paint.dart';
 class PokemonList extends StatelessWidget {
   const PokemonList({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
