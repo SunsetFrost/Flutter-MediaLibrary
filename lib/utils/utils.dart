@@ -30,6 +30,10 @@ String getMockJsonPath(String path) {
     return _jsonDir + '/pokemon/pokeList' + _jsonExtension;
   } else if (path.startsWith('/pokemon/')) {
     return _jsonDir + '/pokemon/pokeDetail' + _jsonExtension;
+  } else if (path == '/video') {
+    return _jsonDir + '/video/list' + _jsonExtension;
+  } else if (path.startsWith('/video/')) {
+    return _jsonDir + '/video/detail' + _jsonExtension;
   } else {
     return '';
   }

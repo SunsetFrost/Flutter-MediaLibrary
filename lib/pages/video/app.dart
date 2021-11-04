@@ -19,8 +19,8 @@ class VideoApp extends StatelessWidget {
         detailRoute: (context) => VideoDetail(),
       },
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
-      ),
+          // scaffoldBackgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+          ),
     );
   }
 }
