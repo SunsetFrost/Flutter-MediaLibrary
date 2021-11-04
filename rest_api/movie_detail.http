@@ -1,0 +1,9 @@
+GET https://api.themoviedb.org/3/movie/372058
+    ?page=1
+    &api_key=fa04a17bc22dc1de7776f598ba12b3f2
+    &language=zh-CN
+
+###
+
+GET https://image.tmdb.org/t/p/w500/ojjDsF5GnxqahAZQccuh7hQ32cU.jpg
+

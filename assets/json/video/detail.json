@@ -1,0 +1,40 @@
+{
+  "adult": false,
+  "backdrop_path": "/dIWwZW7dJJtqC6CgWzYkNVKIUm8.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    { "id": 10749, "name": "爱情" },
+    { "id": 16, "name": "动画" },
+    { "id": 18, "name": "剧情" }
+  ],
+  "homepage": "http://www.kiminona.com",
+  "id": 372058,
+  "imdb_id": "tt5311514",
+  "original_language": "ja",
+  "original_title": "君の名は。",
+  "overview": "故事发生在每千年回归一次的彗星造访过一个月之後，日本某个深山的乡下小镇。女高中生三叶每天都过着忧郁的生活，而她烦恼的不光有担任镇长的父亲所举行的选举运动，还有家传神社的古老习俗。在这个小小的城镇，周围都只是些爱瞎操心的老人。为此三叶对於大都市充满了憧憬。某一天，她做了一个变成男孩子的梦。在梦中三叶有着陌生的房间丶陌生的朋友，而眼前出现的则是东京的街道。三叶虽然感到困惑，但是能够来到朝思暮想的都市生活，让她觉得神清气爽。另一方面，在东京生活的男高中生泷也做了个奇怪的梦。他在一个从未去过的深山小镇中，变成了女高中生。「寻找从未见过的你」，两个陌生人就这样开始了寻找彼此的历程。",
+  "popularity": 155.724,
+  "poster_path": "/ojjDsF5GnxqahAZQccuh7hQ32cU.jpg",
+  "production_companies": [
+    {
+      "id": 3756,
+      "logo_path": "/t38uPdbKmyBB8brKKeTFWIwojRz.png",
+      "name": "CoMix Wave Films",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [{ "iso_3166_1": "JP", "name": "Japan" }],
+  "release_date": "2016-08-26",
+  "revenue": 357986087,
+  "runtime": 106,
+  "spoken_languages": [
+    { "english_name": "Japanese", "iso_639_1": "ja", "name": "日本語" }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "你的名字。",
+  "video": false,
+  "vote_average": 8.6,
+  "vote_count": 8002
+}
