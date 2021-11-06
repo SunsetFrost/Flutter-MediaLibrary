@@ -22,4 +22,8 @@ class VideoData {
     final videoDetail = VideoInfo.fromJson(response);
     return videoDetail;
   }
+
+  static String getImagePath({relativePath}) {
+    return 'https://image.tmdb.org/t/p/w500/' + relativePath;
+  }
 }

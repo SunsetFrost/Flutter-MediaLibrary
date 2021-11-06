@@ -64,10 +64,8 @@ class VideoGrid extends StatelessWidget {
                     height: MediaQuery.of(context).size.width / 3.2 * 1.2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500/' +
-                                videos[index].posterPath,
-                          ),
+                          image: NetworkImage(VideoData.getImagePath(
+                              relativePath: videos[index].posterPath)),
                           fit: BoxFit.contain),
                     )),
                 Text(
