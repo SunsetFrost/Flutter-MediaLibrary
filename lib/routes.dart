@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 import 'package:pokemon/pages/navigate_page.dart';
@@ -5,6 +7,8 @@ import 'package:pokemon/pages/pokemon/app.dart' as pokemon_app;
 import 'package:pokemon/pages/pokemon/routes.dart' as pokemon_routes;
 import 'package:pokemon/pages/video/app.dart' as video_app;
 import 'package:pokemon/pages/video/routes.dart' as video_routes;
+import 'package:pokemon/pages/book/app.dart' as book_app;
+import 'package:pokemon/pages/book/routes.dart' as book_routes;
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, String);
 
@@ -28,8 +32,13 @@ class RouteConfiguration {
       r'^' + video_routes.listRoute,
       (context, match) => ChildAppWrapper(childApp: video_app.VideoApp()),
     ),
+    // book
+    Path(
+      r'^' + book_routes.listRoute,
+      (context, match) => ChildAppWrapper(childApp: book_app.BookApp()),
+    ),
     // home
-    Path(r'^/', (context, match) => NavigatePage())
+    Path(r'^/', (context, match) => NavigatePage()),
   ];
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

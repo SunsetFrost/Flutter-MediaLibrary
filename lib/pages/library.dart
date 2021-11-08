@@ -2,11 +2,38 @@ import 'package:flutter/material.dart';
 
 import 'package:pokemon/widgets/library_card.dart';
 
+Map<String, LibraryCard> libraryCards = {
+  '视频库': LibraryCard(
+    name: '视频库',
+    color: Colors.blueAccent,
+    width: 220.0,
+    height: 120.0,
+    path: '/video',
+  ),
+  '音乐库': LibraryCard(
+    name: '音乐库',
+  ),
+  '书库': LibraryCard(
+    name: '书库',
+    color: Colors.amber,
+    width: 220.0,
+    height: 120.0,
+    path: '/book',
+  ),
+};
+
+Map<String, LibraryCard> dataSourceCards = {
+  '口袋妖怪': LibraryCard(
+    name: '口袋妖怪',
+    color: Colors.orangeAccent,
+    width: 220.0,
+    height: 120.0,
+    path: '/pokemon',
+  ),
+};
+
 class Library extends StatelessWidget {
   Library({Key? key}) : super(key: key);
-
-  static const List<String> mockVideos = ['视频库', '音乐库', '书库'];
-  static const List<String> mockGames = ['口袋妖怪'];
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +58,9 @@ class Library extends StatelessWidget {
           height: 160.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: mockVideos.length,
+            itemCount: libraryCards.values.length,
             itemBuilder: (BuildContext context, int index) {
-              return LibraryCard(
-                name: mockVideos[index],
-                color: Colors.blueAccent,
-                width: 220.0,
-                height: 120.0,
-                path: '/video',
-              );
+              return libraryCards.values.toList()[index];
             },
           ),
         ),
@@ -54,15 +75,9 @@ class Library extends StatelessWidget {
           height: 160.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: mockGames.length,
+            itemCount: dataSourceCards.length,
             itemBuilder: (BuildContext context, int index) {
-              return LibraryCard(
-                name: mockGames[index],
-                color: Colors.orangeAccent,
-                width: 220.0,
-                height: 120.0,
-                path: '/pokemon',
-              );
+              return dataSourceCards.values.toList()[index];
             },
           ),
         ),
