@@ -18,6 +18,7 @@ class MusicApp extends StatelessWidget {
       initialRoute: listRoute,
       routes: <String, WidgetBuilder>{
         listRoute: (context) => MusicList(),
+        detailRoute: (context) => MusicDetail(),
       },
     );
   }
