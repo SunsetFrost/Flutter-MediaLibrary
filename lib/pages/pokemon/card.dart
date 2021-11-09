@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/model/Pokemon.dart';
-import 'package:pokemon/constants.dart';
-import 'package:pokemon/pages/pokemon/routes.dart' as routes;
+import 'package:media_library/model/Pokemon.dart';
+import 'package:media_library/constants.dart';
+import 'package:media_library/pages/pokemon/routes.dart' as routes;
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({Key? key, required this.pokemon}) : super(key: key);

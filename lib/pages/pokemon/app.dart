@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/pokemon/list.dart';
-import 'package:pokemon/pages/pokemon/detail.dart';
-import 'package:pokemon/pages/pokemon/routes.dart' as routes;
+import 'package:media_library/pages/pokemon/list.dart';
+import 'package:media_library/pages/pokemon/detail.dart';
+import 'package:media_library/pages/pokemon/routes.dart' as routes;
 
 class PokemonApp extends StatelessWidget {
   static const String listRoute = routes.listRoute;

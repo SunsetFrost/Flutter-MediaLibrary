@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/routes.dart';
+import 'package:media_library/routes.dart';
 // import 'package:pokemon/model/Pokemon.dart';
 // import 'package:pokemon/list.dart';
 // import 'package:pokemon/sword_paint.dart';

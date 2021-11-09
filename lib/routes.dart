@@ -1,14 +1,14 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/navigate_page.dart';
-import 'package:pokemon/pages/pokemon/app.dart' as pokemon_app;
-import 'package:pokemon/pages/pokemon/routes.dart' as pokemon_routes;
-import 'package:pokemon/pages/video/app.dart' as video_app;
-import 'package:pokemon/pages/video/routes.dart' as video_routes;
-import 'package:pokemon/pages/book/app.dart' as book_app;
-import 'package:pokemon/pages/book/routes.dart' as book_routes;
+import 'package:media_library/pages/navigate_page.dart';
+import 'package:media_library/pages/pokemon/app.dart' as pokemon_app;
+import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
+import 'package:media_library/pages/video/app.dart' as video_app;
+import 'package:media_library/pages/video/routes.dart' as video_routes;
+import 'package:media_library/pages/book/app.dart' as book_app;
+import 'package:media_library/pages/book/routes.dart' as book_routes;
+import 'package:media_library/pages/music/app.dart' as music_app;
+import 'package:media_library/pages/music/routes.dart' as music_routes;
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, String);
 
@@ -36,6 +36,11 @@ class RouteConfiguration {
     Path(
       r'^' + book_routes.listRoute,
       (context, match) => ChildAppWrapper(childApp: book_app.BookApp()),
+    ),
+    // music
+    Path(
+      r'^' + music_routes.listRoute,
+      (context, match) => ChildAppWrapper(childApp: music_app.MusicApp()),
     ),
     // home
     Path(r'^/', (context, match) => NavigatePage()),

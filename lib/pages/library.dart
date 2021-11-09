@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/widgets/library_card.dart';
+import 'package:media_library/widgets/library_card.dart';
 
 Map<String, LibraryCard> libraryCards = {
   '视频库': LibraryCard(
     name: '视频库',
-    color: Colors.blueAccent,
+    color: Color(0xff6bd3e0),
     width: 220.0,
     height: 120.0,
     path: '/video',
   ),
   '音乐库': LibraryCard(
     name: '音乐库',
+    color: Color(0xffe3e6e4),
+    width: 220.0,
+    height: 120.0,
+    path: '/music',
   ),
   '书库': LibraryCard(
     name: '书库',
-    color: Colors.amber,
+    color: Color(0xffd6c5ad),
     width: 220.0,
     height: 120.0,
     path: '/book',
@@ -25,7 +29,7 @@ Map<String, LibraryCard> libraryCards = {
 Map<String, LibraryCard> dataSourceCards = {
   '口袋妖怪': LibraryCard(
     name: '口袋妖怪',
-    color: Colors.orangeAccent,
+    color: Color.fromRGBO(244, 176, 22, 1.0),
     width: 220.0,
     height: 120.0,
     path: '/pokemon',
@@ -42,9 +46,17 @@ class Library extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 300.0,
-          color: Color(0xFF66CCFF),
+          decoration: BoxDecoration(
+            color: Color(0xFF66CCFF),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Center(
-            child: Text('repo widget'),
+            child: Text(
+              'repo widget',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
         Padding(

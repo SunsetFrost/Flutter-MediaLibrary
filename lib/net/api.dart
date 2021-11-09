@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import 'package:pokemon/net/mock_interceptor.dart';
-import 'package:pokemon/constants.dart';
+import 'package:media_library/net/mock_interceptor.dart';
+import 'package:media_library/constants.dart';
 
 class HttpManager {
   var options = BaseOptions(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/video/list.dart';
-import 'package:pokemon/pages/video/detail.dart';
-import 'package:pokemon/pages/video/player.dart';
-import 'package:pokemon/pages/video/routes.dart' as routes;
+import 'package:media_library/pages/video/list.dart';
+import 'package:media_library/pages/video/detail.dart';
+import 'package:media_library/pages/video/player.dart';
+import 'package:media_library/pages/video/routes.dart' as routes;
 
 class VideoApp extends StatelessWidget {
   const VideoApp({Key? key}) : super(key: key);

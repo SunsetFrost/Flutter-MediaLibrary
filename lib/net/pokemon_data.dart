@@ -1,5 +1,5 @@
-import 'package:pokemon/net/api.dart';
-import 'package:pokemon/model/Pokemon.dart';
+import 'package:media_library/net/api.dart';
+import 'package:media_library/model/Pokemon.dart';
 
 class PokemonData {
   static _refactorPokemonJson(json) {

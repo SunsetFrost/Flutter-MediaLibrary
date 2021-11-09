@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/book/list.dart';
-import 'package:pokemon/pages/book/detail.dart';
-import 'package:pokemon/pages/book/routes.dart' as routes;
+import 'package:media_library/pages/book/list.dart';
+import 'package:media_library/pages/book/detail.dart';
+import 'package:media_library/pages/book/routes.dart' as routes;
 
 class BookApp extends StatelessWidget {
   const BookApp({Key? key}) : super(key: key);

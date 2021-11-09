@@ -1,6 +1,6 @@
-import 'package:pokemon/net/api.dart';
-import 'package:pokemon/model/Video.dart';
-import 'package:pokemon/model/VideoDetail.dart';
+import 'package:media_library/net/api.dart';
+import 'package:media_library/model/Video.dart';
+import 'package:media_library/model/VideoDetail.dart';
 
 class VideoData {
   static Future<List<Video>> getVideoList({page = 1}) async {

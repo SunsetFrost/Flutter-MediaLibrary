@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
-import 'package:media_library/model/Video.dart';
-import 'package:media_library/net/video_data.dart';
-import 'package:media_library/pages/video/routes.dart' as routes;
+import 'package:media_library/model/MusicAlbum.dart';
+import 'package:media_library/net/music_data.dart';
+import 'package:media_library/pages/music/routes.dart' as routes;
 
-class VideoList extends StatelessWidget {
-  const VideoList({Key? key}) : super(key: key);
+class MusicList extends StatelessWidget {
+  const MusicList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: FutureBuilder<List<Video>>(
-            future: VideoData.getVideoList(),
+          child: FutureBuilder<List<Album>>(
+            future: MusicData.getAlbumList(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return VideoGrid(videos: snapshot.data!);
+                return MusicGrid(albums: snapshot.data!);
               } else if (snapshot.hasError) {
                 return Icon(Icons.error);
               }
@@ -35,41 +35,41 @@ class VideoList extends StatelessWidget {
   }
 }
 
-class VideoGrid extends StatelessWidget {
-  const VideoGrid({Key? key, required this.videos}) : super(key: key);
+class MusicGrid extends StatelessWidget {
+  const MusicGrid({Key? key, required this.albums}) : super(key: key);
 
-  final List<Video> videos;
+  final List<Album> albums;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.all(8),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 20,
           mainAxisSpacing: 10,
           childAspectRatio: 0.6,
         ),
-        itemCount: videos.length,
+        itemCount: albums.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed(routes.detailRoute,
-                  arguments: routes.DetailArguments(videos[index].id));
+                  arguments:
+                      routes.DetailArguments(int.parse(albums[index].id)));
             },
             child: Column(
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * 1.2,
+                    height: MediaQuery.of(context).size.width / 3.2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(VideoData.getImagePath(
-                              relativePath: videos[index].posterPath)),
+                          image: NetworkImage(albums[index].images[1].url),
                           fit: BoxFit.contain),
                     )),
                 Text(
-                  videos[index].title,
+                  albums[index].name,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

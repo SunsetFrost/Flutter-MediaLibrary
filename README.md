@@ -1,5 +1,5 @@
-# SunsetFrost
-- [SunsetFrost](#sunsetfrost)
+# Media Library
+- [Media Library](#media-library)
   - [项目介绍](#项目介绍)
     - [Video](#video)
     - [Music](#music)
@@ -30,7 +30,7 @@
   - [Bug](#bug)
   - [参考](#参考)
 ## 项目介绍
-self hobits collection
+favor media collection
 ### Video
 - API source  
 [the movie db](https://www.themoviedb.org/documentation/api?language=en-US)

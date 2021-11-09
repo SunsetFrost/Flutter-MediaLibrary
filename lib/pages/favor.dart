@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/widgets/library_card.dart';
+import 'package:media_library/widgets/library_card.dart';
 
 class Favor extends StatelessWidget {
   Favor({Key? key}) : super(key: key);

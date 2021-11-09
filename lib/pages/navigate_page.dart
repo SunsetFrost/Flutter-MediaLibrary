@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/favor.dart';
-import 'package:pokemon/pages/library.dart';
-import 'package:pokemon/pages/mine.dart';
+import 'package:media_library/pages/favor.dart';
+import 'package:media_library/pages/library.dart';
+import 'package:media_library/pages/mine.dart';
 
 class NavigatePage extends StatefulWidget {
   NavigatePage({Key? key}) : super(key: key);

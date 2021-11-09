@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/pages/pokemon/routes.dart';
-import 'package:pokemon/constants.dart';
+import 'package:media_library/pages/pokemon/routes.dart';
+import 'package:media_library/constants.dart';
 
 class PokemonDetail extends StatelessWidget {
   const PokemonDetail({Key? key}) : super(key: key);

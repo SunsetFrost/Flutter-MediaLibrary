@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/widgets/sword_paint.dart';
-import 'package:pokemon/model/VideoDetail.dart';
-import 'package:pokemon/pages/video/routes.dart';
-import 'package:pokemon/net/video_data.dart';
+import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/model/VideoDetail.dart';
+import 'package:media_library/pages/video/routes.dart';
+import 'package:media_library/net/video_data.dart';
 
 class VideoDetail extends StatelessWidget {
   const VideoDetail({Key? key}) : super(key: key);

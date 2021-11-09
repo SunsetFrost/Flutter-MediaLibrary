@@ -12,9 +12,12 @@ GET https://api.spotify.com/v1/search
   ?type=album
   &q=artist:One%20ok%20rock
   &include_external=audio  
-Authorization: Bearer BQCNu5dmPsjN2_UvZOCahkotDJgkKvSSrZAynZ0nefOpEVYl5W06YRl7SAGbLjx5etbtnP8igg3Tp_tPdfQ
+Authorization: Bearer BQCDdz4z8zRy2LtBQMqReVD9MnAYenDV7BlJcM7lj_Gf3Q3Z2j6lp3aMYrflsbnAcVvFJfBjhZgm_u34kYg
 Content-Type: application/json
 
 ### album tracks
 GET https://api.spotify.com/v1/albums/0p1YL9nzIuKTonZH6Gq58i/tracks
-Authorization: Bearer BQCNu5dmPsjN2_UvZOCahkotDJgkKvSSrZAynZ0nefOpEVYl5W06YRl7SAGbLjx5etbtnP8igg3Tp_tPdfQ
+Authorization: Bearer BQCDdz4z8zRy2LtBQMqReVD9MnAYenDV7BlJcM7lj_Gf3Q3Z2j6lp3aMYrflsbnAcVvFJfBjhZgm_u34kYg
+
+### album image
+GET https://i.scdn.co/image/ab67616d0000b273794179deeade79ef08eabd94

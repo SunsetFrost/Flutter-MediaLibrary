@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/model/Pokemon.dart';
-import 'package:pokemon/net/pokemon_data.dart';
-import 'package:pokemon/pages/pokemon/card.dart';
-import 'package:pokemon/widgets/sword_paint.dart';
+import 'package:media_library/model/Pokemon.dart';
+import 'package:media_library/net/pokemon_data.dart';
+import 'package:media_library/pages/pokemon/card.dart';
+import 'package:media_library/widgets/sword_paint.dart';
 
 class PokemonList extends StatelessWidget {
   const PokemonList({Key? key}) : super(key: key);
