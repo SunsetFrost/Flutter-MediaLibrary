@@ -23,6 +23,8 @@ String getMockJsonPath(String path) {
     return _jsonDir + '/music/albums' + _jsonExtension;
   } else if (path == '/music/tracks') {
     return _jsonDir + '/music/tracks' + _jsonExtension;
+  } else if (path == '/book') {
+    return _jsonDir + '/book/list' + _jsonExtension;
   } else {
     return '';
   }

@@ -77,7 +77,7 @@ class VolumeInfo {
   late final Dimensions dimensions;
   late final String printType;
   late final List<String> categories;
-  late final int averageRating;
+  late final double averageRating;
   late final int ratingsCount;
   late final String maturityRating;
   late final bool allowAnonLogging;
@@ -92,30 +92,20 @@ class VolumeInfo {
   VolumeInfo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     authors = List.castFrom<dynamic, String>(json['authors']);
-    publisher = json['publisher'];
+    publisher = json['publisher'] ?? '';
     publishedDate = json['publishedDate'];
     description = json['description'];
     industryIdentifiers = List.from(json['industryIdentifiers'])
         .map((e) => IndustryIdentifiers.fromJson(e))
         .toList();
     readingModes = ReadingModes.fromJson(json['readingModes']);
-    pageCount = json['pageCount'];
-    printedPageCount = json['printedPageCount'];
-    dimensions = Dimensions.fromJson(json['dimensions']);
+    printedPageCount = json['printedPageCount'] ?? 0;
+    dimensions = json['dimensions'] != null
+        ? Dimensions.fromJson(json['dimensions'])
+        : Dimensions(height: '', width: '', thickness: '');
+    Dimensions(height: '0', width: '0', thickness: '0');
     printType = json['printType'];
     categories = List.castFrom<dynamic, String>(json['categories']);
-    averageRating = json['averageRating'];
-    ratingsCount = json['ratingsCount'];
-    maturityRating = json['maturityRating'];
-    allowAnonLogging = json['allowAnonLogging'];
-    contentVersion = json['contentVersion'];
-    panelizationSummary =
-        PanelizationSummary.fromJson(json['panelizationSummary']);
-    imageLinks = ImageLinks.fromJson(json['imageLinks']);
-    language = json['language'];
-    previewLink = json['previewLink'];
-    infoLink = json['infoLink'];
-    canonicalVolumeLink = json['canonicalVolumeLink'];
   }
 
   Map<String, dynamic> toJson() {
