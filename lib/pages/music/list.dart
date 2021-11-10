@@ -55,7 +55,10 @@ class MusicGrid extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed(routes.detailRoute,
-                  arguments: routes.DetailArguments(albums[index].id));
+                  arguments: routes.DetailArguments(
+                    albums[index].id,
+                    albums[index].images[1].url,
+                  ));
             },
             child: Column(
               children: [

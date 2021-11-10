@@ -3,6 +3,7 @@ const String detailRoute = '/music/detail';
 
 class DetailArguments {
   final String id;
+  final String image;
 
-  DetailArguments(this.id);
+  DetailArguments(this.id, this.image);
 }
