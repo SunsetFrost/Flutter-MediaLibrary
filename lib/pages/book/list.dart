@@ -41,44 +41,47 @@ class BookGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 20,
           mainAxisSpacing: 10,
-          childAspectRatio: 0.6,
+          childAspectRatio: 0.5,
         ),
         itemCount: books.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.of(context).pushNamed(routes.detailRoute,
-              //     arguments: routes.DetailArguments(books[index].id));
+              Navigator.of(context).pushNamed(routes.detailRoute,
+                  arguments: routes.DetailArguments(books[index]));
             },
             child: Column(
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * 1.2,
+                    height: MediaQuery.of(context).size.width / 3.2 * 1.3,
+                    margin: EdgeInsets.only(bottom: 6.0),
                     decoration: BoxDecoration(
-                      color: Colors.amber,
-                      // image: DecorationImage(
-                      //     image: NetworkImage(BookData.getImagePath(
-                      //         relativePath: videos[index].posterPath)),
-                      //     fit: BoxFit.contain),
+                      image: DecorationImage(
+                          image: NetworkImage(books[index]
+                              .volumeInfo
+                              .imageLinks
+                              .smallThumbnail),
+                          fit: BoxFit.fill),
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(16.0, 20.0)),
                     )),
                 Text(
-                  books[index].id,
+                  books[index].volumeInfo.title,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
           );
-          // Container(
-          //   width: MediaQuery.of(context).size.width / 3.8,
-          //   color: Colors.blueAccent,
-          //   child: Text(index.toString()),
-          // );
         });
   }
 }

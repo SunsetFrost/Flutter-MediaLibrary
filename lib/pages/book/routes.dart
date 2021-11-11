@@ -1,8 +1,10 @@
+import 'package:media_library/model/BookInfo.dart';
+
 const String listRoute = '/book';
-const String detailRoute = '/book/bookId';
+const String detailRoute = '/book/detail';
 
 class DetailArguments {
-  final int id;
+  final BookInfo book;
 
-  DetailArguments(this.id);
+  DetailArguments(this.book);
 }
