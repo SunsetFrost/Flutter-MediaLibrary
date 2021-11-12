@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:epub_viewer/epub_viewer.dart';
 
 import 'package:media_library/pages/book/routes.dart';
 
 class BookDetail extends StatelessWidget {
   const BookDetail({Key? key}) : super(key: key);
+
+  void openEpubBook(BuildContext context) {
+    EpubViewer.setConfig(
+      themeColor: Theme.of(context).primaryColor,
+      identifier: "iosBook",
+      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+      allowSharing: true,
+      enableTts: true,
+      nightMode: true,
+    );
+
+    EpubViewer.openAsset(
+        'assets/book/Jue Ji _ Yong Sheng Zhi Hai . Di Er Juan - Guo Jing Ming.epub');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +55,24 @@ class BookDetail extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 250,
+                  width: 300,
                   height: 300,
                   margin: EdgeInsets.symmetric(vertical: 30),
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //   image: NetworkImage(
-                    //     VideoData.getImagePath(relativePath: video.posterPath),
-                    //   ),
+                  // decoration: BoxDecoration(
+                  //   // image: DecorationImage(
+                  //   //   image: NetworkImage(
+                  //   //     VideoData.getImagePath(relativePath: video.posterPath),
+                  //   //   ),
 
-                    // ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  //   // ),
+                  //   borderRadius: BorderRadius.circular(20),
+                  // ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       book.volumeInfo.imageLinks.smallThumbnail,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -87,7 +102,9 @@ class BookDetail extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.of(context).pushNamed(playerRoute);
+                    // Navigator.of(context).pushNamed(readerRoute,
+                    //     arguments: DetailArguments(book));
+                    openEpubBook(context);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,7 +113,7 @@ class BookDetail extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(100, 30),
                   ),
-                )
+                ),
               ],
             ),
           )

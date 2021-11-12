@@ -21,3 +21,7 @@ Color lighten(Color color, [double amount = .1]) {
 
   return hslLight.toColor();
 }
+
+void downloadFile(String src, String dist) {
+  print('download');
+}

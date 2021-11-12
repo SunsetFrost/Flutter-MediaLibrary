@@ -224,5 +224,7 @@ column 内有gridview控件，需要放入`expand`内
 
 - [ ] 后退滑动直接回主页面
 
+- [x] epub包需要的realm依赖安装时间很长，需等待
+
 ## 参考
 - [Flutter官网](https://flutter.dev/docs/development/data-and-backend/json)
