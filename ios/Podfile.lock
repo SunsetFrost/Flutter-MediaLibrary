@@ -2,6 +2,37 @@ PODS:
   - AEXML (4.6.0)
   - audio_session (0.0.1):
     - Flutter
+  - DKImagePickerController/Core (4.3.2):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.2)
+  - DKImagePickerController/PhotoGallery (4.3.2):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.2)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
   - epub_viewer (0.0.2):
     - EpubViewerKit (~> 0.1.3)
     - Flutter
@@ -12,6 +43,9 @@ PODS:
     - RealmSwift (= 5.5.1)
     - SSZipArchive (= 2.2.3)
     - ZFDragableModalTransition (= 0.6)
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
   - Flutter (1.0.0)
   - FontBlaster (5.1.1)
   - just_audio (0.0.1):
@@ -24,7 +58,11 @@ PODS:
   - Realm/Headers (5.5.1)
   - RealmSwift (5.5.1):
     - Realm (= 5.5.1)
+  - SDWebImage (5.12.1):
+    - SDWebImage/Core (= 5.12.1)
+  - SDWebImage/Core (5.12.1)
   - SSZipArchive (2.2.3)
+  - SwiftyGif (5.4.0)
   - video_player (0.0.1):
     - Flutter
   - ZFDragableModalTransition (0.6)
@@ -32,6 +70,7 @@ PODS:
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - epub_viewer (from `.symlinks/plugins/epub_viewer/ios`)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -40,12 +79,16 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AEXML
+    - DKImagePickerController
+    - DKPhotoGallery
     - EpubViewerKit
     - FontBlaster
     - MenuItemKit
     - Realm
     - RealmSwift
+    - SDWebImage
     - SSZipArchive
+    - SwiftyGif
     - ZFDragableModalTransition
 
 EXTERNAL SOURCES:
@@ -53,6 +96,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audio_session/ios"
   epub_viewer:
     :path: ".symlinks/plugins/epub_viewer/ios"
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
   just_audio:
@@ -65,8 +110,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AEXML: 2fbb73d8724797ed2cde888731e176fa4d44dd83
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
+  DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   epub_viewer: 422e82cc0068756c376102e3fa0e0fda570ddeb8
   EpubViewerKit: 5f6c8ff9161bba18d6742c59b3c575c19f0623a9
+  file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   FontBlaster: 8897ebdbb4b6ace3ab78c92b665d88c954f19e4a
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
@@ -74,10 +122,12 @@ SPEC CHECKSUMS:
   path_provider: d1e9807085df1f9cc9318206cd649dc0b76be3de
   Realm: c2ffe0667f9c98c9ba65f608ba85684d39826145
   RealmSwift: 5a35c1c35c3e1925e6fcd092c881d5cc4a826bff
+  SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   video_player: ecd305f42e9044793efd34846e1ce64c31ea6fcb
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 
 COCOAPODS: 1.10.1
