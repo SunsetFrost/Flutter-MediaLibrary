@@ -32,11 +32,7 @@ class _NavigatePageState extends State<NavigatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: SafeArea(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: pages.elementAt(_selectedIndex)),
-      ),
+      body: pages.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

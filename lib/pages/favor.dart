@@ -39,19 +39,19 @@ class Favor extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        Container(
-          height: 160.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: mockVideoCard.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LibraryCard(
-                name: mockVideoCard[index],
-                color: Color(0xff6bd3e0),
-              );
-            },
-          ),
-        ),
+        // Container(
+        //   height: 160.0,
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: mockVideoCard.length,
+        //     itemBuilder: (BuildContext context, int index) {
+        //       return LibraryCard(
+        //         name: mockVideoCard[index],
+        //         color: Color(0xff6bd3e0),
+        //       );
+        //     },
+        //   ),
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Text(
@@ -59,19 +59,19 @@ class Favor extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        Container(
-          height: 160.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: mockMusicCard.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LibraryCard(
-                name: mockMusicCard[index],
-                color: Color(0xffe3e6e4),
-              );
-            },
-          ),
-        ),
+        // Container(
+        //   height: 160.0,
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: mockMusicCard.length,
+        //     itemBuilder: (BuildContext context, int index) {
+        //       return LibraryCard(
+        //         name: mockMusicCard[index],
+        //         color: Color(0xffe3e6e4),
+        //       );
+        //     },
+        //   ),
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Text(
@@ -79,19 +79,19 @@ class Favor extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        Container(
-          height: 160.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: mockBookCard.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LibraryCard(
-                name: mockBookCard[index],
-                color: Color(0xffd6c5ad),
-              );
-            },
-          ),
-        ),
+        // Container(
+        //   height: 160.0,
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: mockBookCard.length,
+        //     itemBuilder: (BuildContext context, int index) {
+        //       return LibraryCard(
+        //         name: mockBookCard[index],
+        //         color: Color(0xffd6c5ad),
+        //       );
+        //     },
+        //   ),
+        // ),
       ],
     );
   }

@@ -16,8 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        backgroundColor: Color(0xFFF1F2F6),
+        backgroundColor: Color(0xFFEFF1F6),
         primaryColor: Color(0xFF202736),
+        secondaryHeaderColor: Color(0xff718792),
+        cardColor: Color(0xff455a64),
         textTheme: const TextTheme(
             headline1: TextStyle(
               fontSize: 20.0,
@@ -28,6 +30,11 @@ class MyApp extends StatelessWidget {
               fontSize: 20.0,
               fontWeight: FontWeight.w500,
               color: Color(0xff455a64),
+            ),
+            subtitle2: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
+              color: Color(0xff718792),
             )),
       ),
       onGenerateRoute: RouteConfiguration.onGenerateRoute,
