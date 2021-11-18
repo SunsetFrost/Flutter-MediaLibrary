@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:epub_viewer/epub_viewer.dart';
+// import 'package:epub_viewer/epub_viewer.dart';
 
 import 'package:media_library/pages/book/routes.dart';
 
@@ -7,17 +7,17 @@ class BookDetail extends StatelessWidget {
   const BookDetail({Key? key}) : super(key: key);
 
   void openEpubBook(BuildContext context) {
-    EpubViewer.setConfig(
-      themeColor: Theme.of(context).primaryColor,
-      identifier: "iosBook",
-      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      allowSharing: true,
-      enableTts: true,
-      nightMode: true,
-    );
+    // EpubViewer.setConfig(
+    //   themeColor: Theme.of(context).primaryColor,
+    //   identifier: "iosBook",
+    //   scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+    //   allowSharing: true,
+    //   enableTts: true,
+    //   nightMode: true,
+    // );
 
-    EpubViewer.openAsset(
-        'assets/book/Jue Ji _ Yong Sheng Zhi Hai . Di Er Juan - Guo Jing Ming.epub');
+    // EpubViewer.openAsset(
+    //     'assets/book/Jue Ji _ Yong Sheng Zhi Hai . Di Er Juan - Guo Jing Ming.epub');
   }
 
   @override
