@@ -4,7 +4,7 @@ import 'package:media_library/model/VideoDetail.dart';
 
 class VideoData {
   static Future<List<Video>> getVideoList({page = 1}) async {
-    final url = '/video';
+    final url = '/api/v1/video';
 
     final response = await httpManager.fetch(url, {page}, null);
     final result = response['results'];

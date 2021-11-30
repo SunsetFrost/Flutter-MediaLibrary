@@ -5,6 +5,6 @@ class Mine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Mine Page');
+    return Text('');
   }
 }

@@ -1,4 +1,0 @@
-GET https://api.themoviedb.org/3/movie/popular
-    ?page=1
-    &api_key=fa04a17bc22dc1de7776f598ba12b3f2
-    &language=zh-CN

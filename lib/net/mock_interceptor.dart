@@ -35,7 +35,7 @@ class MockInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     final resourcePath = getMockJsonPath(options.path);
-    if (isDev && resourcePath != '') {
+    if (isMock && resourcePath != '') {
       final data = await rootBundle.load(resourcePath);
       final map = json.decode(
         utf8.decode(

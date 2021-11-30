@@ -5,7 +5,7 @@ import 'package:media_library/constants.dart';
 
 class HttpManager {
   var options = BaseOptions(
-    baseUrl: backendURI + apiVersion,
+    baseUrl: backendURI,
     connectTimeout: 5000,
     receiveTimeout: 3000,
   );
