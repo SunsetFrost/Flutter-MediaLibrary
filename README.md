@@ -27,6 +27,7 @@
   - [剑气加载动画](#剑气加载动画)
   - [Mock Data](#mock-data)
   - [Route](#route)
+  - [Save temp or permanetent](#save-temp-or-permanetent)
   - [Bug](#bug)
   - [参考](#参考)
 ## 项目介绍
@@ -207,11 +208,15 @@ List<Pokemon> parseData(response) {
   - onGenerateRoute
 
 - flutter route 2.0
-
   - page
   - route
   - route delegate
 
+## Save temp or permanetent
+- share_preference 
+- path_provider
+- sqllite
+- hive
 
 ## Bug
 

@@ -11,10 +11,10 @@ class VideoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as DetailArguments;
-
+    print(args);
     return Scaffold(
       body: FutureBuilder<VideoInfo>(
-        future: VideoData.getVideoDetail(),
+        future: VideoData.getVideoDetail(args.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return DetailPage(video: snapshot.data!);
@@ -117,7 +117,8 @@ class DetailPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(playerRoute);
+                  Navigator.of(context).pushNamed(playerRoute,
+                      arguments: DetailArguments(video.id));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

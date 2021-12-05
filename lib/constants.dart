@@ -1,5 +1,5 @@
 // const String backendURI = 'http://192.168.4.224';
-const String backendURI = 'http://127.0.0.1:7001';
+const String backendURI = 'http://127.0.0.1:3000';
 const String apiVersion = '/api/v1';
 const bool isDev = true;
 const bool isMock = false;
