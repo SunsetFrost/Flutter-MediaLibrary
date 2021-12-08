@@ -4,6 +4,7 @@ import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/model/VideoDetail.dart';
 import 'package:media_library/pages/video/routes.dart';
 import 'package:media_library/net/video_data.dart';
+import 'package:media_library/utils/cache_data.dart';
 
 class VideoDetail extends StatelessWidget {
   const VideoDetail({Key? key}) : super(key: key);
@@ -22,20 +23,39 @@ class VideoDetail extends StatelessWidget {
             return Text('${snapshot.error}');
           }
           return const Center(
-              child: SwordLoading(
-            loadColor: Colors.white,
-            size: 60,
-          ));
+            child: SwordLoading(
+              loadColor: Colors.white,
+              size: 60,
+            ),
+          );
         },
       ),
     );
   }
 }
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   const DetailPage({Key? key, required this.video}) : super(key: key);
 
   final VideoInfo video;
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool _isFavored = false;
+
+  @override
+  void initState() {
+    GlobleCacheData.favorVideos.forEach((element) {
+      if (element.id == widget.video.id) {
+        _isFavored = true;
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +65,7 @@ class DetailPage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                VideoData.getImagePath(relativePath: video.posterPath),
+                VideoData.getImagePath(widget.video.posterPath),
               ),
               fit: BoxFit.fitHeight,
             ),
@@ -59,15 +79,39 @@ class DetailPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: TextButton(
-                  child: Icon(Icons.chevron_left),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  style: TextButton.styleFrom(primary: Colors.white),
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    child: Icon(Icons.chevron_left),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: TextButton.styleFrom(primary: Colors.white),
+                  ),
+                  TextButton(
+                    child: Icon(Icons.favorite),
+                    onPressed: () {
+                      if (_isFavored) {
+                        // cancel favor
+                        GlobleCacheData.favorVideos.removeWhere(
+                            (element) => element.id == widget.video.id);
+                        GlobleCacheData.saveVideos();
+                      } else {
+                        // add favor
+                        GlobleCacheData.favorVideos.add(widget.video);
+                      }
+                      GlobleCacheData.saveVideos();
+                      print(GlobleCacheData.favorVideos);
+                      setState(() {
+                        _isFavored = !_isFavored;
+                      });
+                    },
+                    style: TextButton.styleFrom(
+                        primary: _isFavored ? Colors.red : Colors.white),
+                  ),
+                ],
               ),
               Container(
                 width: 250,
@@ -86,13 +130,13 @@ class DetailPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
-                    VideoData.getImagePath(relativePath: video.posterPath),
+                    VideoData.getImagePath(widget.video.posterPath),
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               Text(
-                video.title,
+                widget.video.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -103,7 +147,7 @@ class DetailPage extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                video.overview,
+                widget.video.overview,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -118,7 +162,7 @@ class DetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(playerRoute,
-                      arguments: DetailArguments(video.id));
+                      arguments: DetailArguments(widget.video.id));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

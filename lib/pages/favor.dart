@@ -1,98 +1,74 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/widgets/library_card.dart';
+import 'package:media_library/model/VideoDetail.dart';
+import 'package:media_library/net/video_data.dart';
+import 'package:media_library/utils/cache_data.dart';
+import 'package:media_library/widgets/common_card.dart';
 
-class Favor extends StatelessWidget {
+class Favor extends StatefulWidget {
   Favor({Key? key}) : super(key: key);
 
-  static const List<String> mockVideoCard = [
-    '电影1',
-    '电影2',
-    '电影3',
-    '电影4',
-    '电影5',
-  ];
-  static const List<String> mockMusicCard = [
-    '歌曲1',
-    '歌曲2',
-    '歌曲3',
-    '歌曲4',
-    '歌曲5',
-  ];
-  static const List<String> mockBookCard = [
-    '书籍1',
-    '书籍2',
-    '书籍3',
-    '书籍4',
-    '书籍5',
-  ];
+  @override
+  State<Favor> createState() => _FavorState();
+}
+
+class _FavorState extends State<Favor> {
+  late List<VideoInfo> videos;
+
+  @override
+  void initState() {
+    videos = GlobleCacheData.favorVideos;
+    print(videos);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 20),
-          child: Text(
-            '最近收藏的视频',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
         ),
-        // Container(
-        //   height: 160.0,
-        //   child: ListView.builder(
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: mockVideoCard.length,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return LibraryCard(
-        //         name: mockVideoCard[index],
-        //         color: Color(0xff6bd3e0),
-        //       );
-        //     },
-        //   ),
-        // ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            '最近收藏的音乐',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + 16.0,
+          left: 12.0,
+          right: 12.0,
         ),
-        // Container(
-        //   height: 160.0,
-        //   child: ListView.builder(
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: mockMusicCard.length,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return LibraryCard(
-        //         name: mockMusicCard[index],
-        //         color: Color(0xffe3e6e4),
-        //       );
-        //     },
-        //   ),
-        // ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            '最近收藏的书籍',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Theme.of(context).backgroundColor,
+              Color(0xFFD5DFFC)
+            ])),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Text(
+                '最近收藏的视频',
+                style: Theme.of(context).textTheme.headline2,
+              ),
+            ),
+            Container(
+              height: 200.0,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: videos.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CommonCard(
+                      name: videos[index].title,
+                      imagePath:
+                          VideoData.getImagePath(videos[index].posterPath));
+                },
+              ),
+            ),
+          ],
         ),
-        // Container(
-        //   height: 160.0,
-        //   child: ListView.builder(
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: mockBookCard.length,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return LibraryCard(
-        //         name: mockBookCard[index],
-        //         color: Color(0xffd6c5ad),
-        //       );
-        //     },
-        //   ),
-        // ),
-      ],
+      ),
     );
   }
 }

@@ -33,7 +33,7 @@ class VideoData {
     return trailer;
   }
 
-  static String getImagePath({relativePath}) {
+  static String getImagePath(String relativePath) {
     return 'https://image.tmdb.org/t/p/w500/' + relativePath;
   }
 }

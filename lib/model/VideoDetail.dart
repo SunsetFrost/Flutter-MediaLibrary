@@ -82,7 +82,7 @@ class VideoInfo {
     tagline = json['tagline'];
     title = json['title'];
     video = json['video'];
-    voteAverage = json['vote_average'];
+    voteAverage = json['vote_average'] ?? 0.0;
     voteCount = json['vote_count'];
   }
 
@@ -154,7 +154,7 @@ class ProductionCompanies {
 
   ProductionCompanies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    logoPath = json['logo_path'];
+    logoPath = json['logo_path'] ?? '';
     name = json['name'];
     originCountry = json['origin_country'];
   }
@@ -162,7 +162,7 @@ class ProductionCompanies {
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['id'] = id;
-    _data['logo_path'] = logoPath;
+    _data['logo_path'] ??= logoPath;
     _data['name'] = name;
     _data['origin_country'] = originCountry;
     return _data;

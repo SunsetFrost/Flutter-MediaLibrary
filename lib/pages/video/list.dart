@@ -4,6 +4,7 @@ import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/model/Video.dart';
 import 'package:media_library/net/video_data.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
+import 'package:media_library/widgets/common_card.dart';
 
 class VideoList extends StatelessWidget {
   const VideoList({Key? key}) : super(key: key);
@@ -53,6 +54,11 @@ class VideoGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // void onClick = () {
+    //             Navigator.of(context).pushNamed(routes.detailRoute,
+    //                 arguments: routes.DetailArguments(videos[index].id));
+    // }
+
     return GridView.builder(
         padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -63,42 +69,9 @@ class VideoGrid extends StatelessWidget {
         ),
         itemCount: videos.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(routes.detailRoute,
-                  arguments: routes.DetailArguments(videos[index].id));
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * 1.4,
-                    margin: EdgeInsets.only(bottom: 6.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          image: NetworkImage(VideoData.getImagePath(
-                              relativePath: videos[index].posterPath)),
-                          fit: BoxFit.fill),
-                    )),
-                Text(
-                  videos[index].title,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ],
-            ),
-          );
-          // Container(
-          //   width: MediaQuery.of(context).size.width / 3.8,
-          //   color: Colors.blueAccent,
-          //   child: Text(index.toString()),
-          // );
+          return CommonCard(
+              name: videos[index].title,
+              imagePath: VideoData.getImagePath(videos[index].posterPath));
         });
   }
 }

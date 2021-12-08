@@ -1,14 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:media_library/routes.dart';
-// import 'package:pokemon/model/Pokemon.dart';
-// import 'package:pokemon/list.dart';
-// import 'package:pokemon/sword_paint.dart';
-// import 'package:pokemon/net/pokemon_data.dart';
+import 'utils/cache_data.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    // init user data
+    await GlobleCacheData.init();
+    runApp(MyApp());
+  }, (error, st) => {print(error)});
 }
+// => GlobleCacheData.init().then((e) => runApp(MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
