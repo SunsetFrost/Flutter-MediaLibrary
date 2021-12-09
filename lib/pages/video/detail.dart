@@ -86,7 +86,9 @@ class _DetailPageState extends State<DetailPage> {
                   TextButton(
                     child: Icon(Icons.chevron_left),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      if (Navigator.of(context).canPop()) {
+                        Navigator.of(context).pop();
+                      }
                     },
                     style: TextButton.styleFrom(primary: Colors.white),
                   ),
