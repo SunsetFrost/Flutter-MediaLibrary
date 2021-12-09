@@ -7,12 +7,12 @@ import 'package:media_library/net/video_data.dart';
 import 'package:media_library/utils/cache_data.dart';
 
 class VideoDetail extends StatelessWidget {
-  const VideoDetail({Key? key}) : super(key: key);
+  const VideoDetail({Key? key, required this.args}) : super(key: key);
+
+  final DetailArguments args;
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as DetailArguments;
-    print(args);
     return Scaffold(
       body: FutureBuilder<VideoInfo>(
         future: VideoData.getVideoDetail(args.id),

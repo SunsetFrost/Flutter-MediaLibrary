@@ -23,8 +23,8 @@ class VideoInfo {
     required this.tagline,
     required this.title,
     required this.video,
-    required this.voteAverage,
-    required this.voteCount,
+    this.voteAverage,
+    this.voteCount,
   });
   late final bool adult;
   late final String backdropPath;
@@ -49,8 +49,8 @@ class VideoInfo {
   late final String tagline;
   late final String title;
   late final bool video;
-  late final double voteAverage;
-  late final int voteCount;
+  late final double? voteAverage;
+  late final int? voteCount;
 
   VideoInfo.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -82,7 +82,7 @@ class VideoInfo {
     tagline = json['tagline'];
     title = json['title'];
     video = json['video'];
-    voteAverage = json['vote_average'] ?? 0.0;
+    voteAverage = json['vote_average'].toDouble();
     voteCount = json['vote_count'];
   }
 

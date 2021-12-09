@@ -70,8 +70,13 @@ class VideoGrid extends StatelessWidget {
         itemCount: videos.length,
         itemBuilder: (context, index) {
           return CommonCard(
-              name: videos[index].title,
-              imagePath: VideoData.getImagePath(videos[index].posterPath));
+            name: videos[index].title,
+            imagePath: VideoData.getImagePath(videos[index].posterPath),
+            onClick: () => {
+              Navigator.of(context).pushNamed(routes.detailRoute,
+                  arguments: routes.DetailArguments(videos[index].id)),
+            },
+          );
         });
   }
 }

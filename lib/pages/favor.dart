@@ -4,6 +4,7 @@ import 'package:media_library/model/VideoDetail.dart';
 import 'package:media_library/net/video_data.dart';
 import 'package:media_library/utils/cache_data.dart';
 import 'package:media_library/widgets/common_card.dart';
+import 'package:media_library/pages/video/routes.dart' as routes;
 
 class Favor extends StatefulWidget {
   Favor({Key? key}) : super(key: key);
@@ -59,10 +60,19 @@ class _FavorState extends State<Favor> {
                 scrollDirection: Axis.horizontal,
                 itemCount: videos.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return CommonCard(
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 6.0),
+                    child: CommonCard(
                       name: videos[index].title,
                       imagePath:
-                          VideoData.getImagePath(videos[index].posterPath));
+                          VideoData.getImagePath(videos[index].posterPath),
+                      onClick: () => {
+                        Navigator.of(context).pushNamed(routes.detailRoute,
+                            arguments:
+                                routes.DetailArguments(videos[index].id)),
+                      },
+                    ),
+                  );
                 },
               ),
             ),

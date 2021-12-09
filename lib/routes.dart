@@ -10,7 +10,7 @@ import 'package:media_library/pages/book/routes.dart' as book_routes;
 import 'package:media_library/pages/music/app.dart' as music_app;
 import 'package:media_library/pages/music/routes.dart' as music_routes;
 
-typedef PathWidgetBuilder = Widget Function(BuildContext, String);
+typedef PathWidgetBuilder = Widget Function(BuildContext, RouteSettings);
 
 class Path {
   const Path(this.pattern, this.builder);
@@ -30,7 +30,10 @@ class RouteConfiguration {
     // video
     Path(
       r'^' + video_routes.listRoute,
-      (context, match) => ChildAppWrapper(childApp: video_app.VideoApp()),
+      (context, match) => ChildAppWrapper(
+          childApp: video_app.VideoApp(
+        defaultRoute: match,
+      )),
     ),
     // book
     Path(
@@ -56,7 +59,7 @@ class RouteConfiguration {
         //     (firstMatch?.groupCount == 1) ? firstMatch?.group(1) : null;
 
         return MaterialPageRoute<void>(
-          builder: (context) => path.builder(context, name),
+          builder: (context) => path.builder(context, settings),
           settings: settings,
         );
       }
