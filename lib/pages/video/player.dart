@@ -1,41 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:media_library/widgets/sword_paint.dart';
-import 'package:media_library/widgets/video_player.dart';
 import 'package:media_library/model/VideoTrailer.dart';
 import 'package:media_library/net/video_data.dart';
-import 'package:media_library/pages/video/routes.dart';
 
 class Player extends StatelessWidget {
-  const Player({Key? key}) : super(key: key);
+  const Player({Key? key, required this.id}) : super(key: key);
+
+  final String id;
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as DetailArguments;
-
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            VideoPlayerScreen(),
-            FutureBuilder<VideoTrailer>(
-                future: VideoData.getVideoTrailer(args.id),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return TrailerPlayer(trailer: snapshot.data!);
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return const Center(
-                      child: SwordLoading(
-                    loadColor: Colors.white,
-                    size: 60,
-                  ));
-                })
-          ],
-        ),
-      ),
-    );
+    return FutureBuilder<VideoTrailer>(
+        future: VideoData.getVideoTrailer(id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return TrailerPlayer(trailer: snapshot.data!);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const Center(
+              child: SwordLoading(
+            loadColor: Colors.white,
+            size: 60,
+          ));
+        });
   }
 }
 

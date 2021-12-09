@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:media_library/pages/video/list.dart';
 import 'package:media_library/pages/video/detail.dart';
-import 'package:media_library/pages/video/player.dart';
 import 'package:media_library/pages/video/routes.dart';
 
 class VideoApp extends StatelessWidget {
@@ -23,7 +22,6 @@ class VideoApp extends StatelessWidget {
           listRoute: (context) => VideoList(),
           detailRoute: (context) =>
               VideoDetail(args: settings.arguments as DetailArguments),
-          playerRoute: (context) => Player(),
         };
         WidgetBuilder builder = routes[settings.name]!;
         return MaterialPageRoute(builder: builder, settings: settings);
