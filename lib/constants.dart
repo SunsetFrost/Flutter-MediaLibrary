@@ -4,6 +4,10 @@ const String apiVersion = '/api/v1';
 const bool isDev = true;
 const bool isMock = false;
 
+// video
+const String videoImageUrl = 'https://image.tmdb.org/t/p/w154/';
+
+// pokemon
 class PokemonType {
   final String name;
   final String nameEn;

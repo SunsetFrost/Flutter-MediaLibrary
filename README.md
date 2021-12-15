@@ -5,7 +5,7 @@
     - [Music](#music)
     - [Book](#book)
     - [Game](#game)
-    - [pokemon](#pokemon)
+    - [Pokemon](#pokemon)
   - [Roadmap](#roadmap)
     - [project structure](#project-structure)
     - [Pokemon List Page](#pokemon-list-page)
@@ -15,21 +15,28 @@
     - [Pokemon Detail Page](#pokemon-detail-page)
     - [Custom Theme](#custom-theme)
     - [Mock API](#mock-api)
-  - [数据获取&JSON自动转换Dart类](#数据获取json自动转换dart类)
-    - [包安装](#包安装)
+  - [数据](#数据)
+    - [数据获取&JSON自动转换Dart类](#数据获取json自动转换dart类)
+      - [包安装](#包安装)
       - [安装Bug](#安装bug)
-    - [编写模版类](#编写模版类)
-    - [Null Safety](#null-safety)
-    - [类代码自动生成](#类代码自动生成)
-      - [一次性生成](#一次性生成)
-      - [持续生成](#持续生成)
-    - [消费自动生成的实体类](#消费自动生成的实体类)
-  - [剑气加载动画](#剑气加载动画)
-  - [Mock Data](#mock-data)
+      - [编写模版类](#编写模版类)
+      - [Null Safety](#null-safety)
+      - [类代码自动生成](#类代码自动生成)
+        - [一次性生成](#一次性生成)
+        - [持续生成](#持续生成)
+      - [消费自动生成的实体类](#消费自动生成的实体类)
+    - [Mock Data](#mock-data)
+    - [全局数据管理方案](#全局数据管理方案)
+    - [数据初始化&持久化](#数据初始化持久化)
+  - [组件](#组件)
+    - [剑气加载动画](#剑气加载动画)
+    - [瀑布流列表(Infinite List)](#瀑布流列表infinite-list)
+      - [组件候选](#组件候选)
   - [Route](#route)
-  - [Save temp or permanetent](#save-temp-or-permanetent)
+  - [性能优化](#性能优化)
   - [Bug](#bug)
   - [参考](#参考)
+
 ## 项目介绍
 favor media collection
 ### Video
@@ -45,7 +52,7 @@ google book
 ### Game
 - API source  
 [RAWG](https://rawg.io/apidocs)
-### pokemon
+### Pokemon
 - API source  
 [PokeAPI](https://pokeapi.co)
 
@@ -85,11 +92,11 @@ pokemon api支持多语言
 ### Mock API
 - [x] dio interceptor 实现
 
-
-## 数据获取&JSON自动转换Dart类
+## 数据
+### 数据获取&JSON自动转换Dart类
 使用`json_serializable`转换第三方API提供的口袋妖怪JSON数据
 
-### 包安装
+#### 包安装
 
 ```
 dependencies:
@@ -122,7 +129,7 @@ dev_dependencies:
   json_serializable: 4.1.3
 ```
 
-### 编写模版类
+#### 编写模版类
 根据口袋妖怪API编写模版类
 ```dart
 import 'package:json_annotation/json_annotation.dart';
@@ -158,7 +165,7 @@ class Pokemon {
 
 ```
 
-### Null Safety
+#### Null Safety
 由于Dart在2.12环境以上支持并默认开启Null Safety特性，因此在类编写时可能为空的属性时声明需要修改。
 ```dart
 final int? id;
@@ -172,19 +179,19 @@ final String num;
 final String name;
 ```
 
-### 类代码自动生成
-#### 一次性生成
+#### 类代码自动生成
+##### 一次性生成
 根目录运行命令即可自动生成
 ```
 flutter pub run build_runner build
 ```
-#### 持续生成
+##### 持续生成
 开启一个`watcher`监视项目文件并自动编译我们需要的文件
 ```
  flutter pub run build_runner watch
 ```
 
-### 消费自动生成的实体类
+#### 消费自动生成的实体类
 ```dart
 List<Pokemon> parseData(response) {
   final parsed = jsonDecode(response)['pokemon'];
@@ -193,12 +200,33 @@ List<Pokemon> parseData(response) {
 }
 ```
 
+### Mock Data
 
-## 剑气加载动画
+### 全局数据管理方案
+- Bloc
+- Redux
+- Fish Redux
+
+### 数据初始化&持久化
+- share_preference 
+- path_provider
+- sqllite
+- hive
+
+## 组件
+### 剑气加载动画
 实现参考 [Flutter实现"剑气"加载](https://juejin.cn/post/7002977635206692901)
 
-## Mock Data
+### 瀑布流列表(Infinite List)
+#### 组件候选
+- 官方
+  - ListView
+  - GridView 
+- 社区
+  - [flutter_staggered_grid_view](https://github.com/letsar/flutter_staggered_grid_view)
+  - [waterfall_flow](https://github.com/fluttercandies/waterfall_flow)
 
+> 参考：[一套 Flutter 混排瀑布流解决方案](https://www.infoq.cn/article/gwhc3cdseq8ixb5hi2lo)
 ## Route
 -  route
    -  flutter route 1.0
@@ -212,12 +240,8 @@ List<Pokemon> parseData(response) {
   - route
   - route delegate
 
-## Save temp or permanetent
-- share_preference 
-- path_provider
-- sqllite
-- hive
-
+## 性能优化
+- cached_network_image `网络缓存图片`
 ## Bug
 
 - [x] 图片加载后调试闪退

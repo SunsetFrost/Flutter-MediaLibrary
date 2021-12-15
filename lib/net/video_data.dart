@@ -1,4 +1,4 @@
-import 'package:media_library/constants.dart';
+import 'package:media_library/constants.dart' as Constants;
 import 'package:media_library/net/api.dart';
 import 'package:media_library/model/Video.dart';
 import 'package:media_library/model/VideoDetail.dart';
@@ -35,9 +35,7 @@ class VideoData {
   }
 
   static String getImagePath(String relativePath) {
-    final rootpath = backendURI + '/video/image';
-    final imageId = relativePath.split('.')[0];
-    print(rootpath + imageId);
-    return rootpath + imageId;
+    final rootpath = Constants.videoImageUrl;
+    return rootpath + relativePath;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/pages/pokemon/routes.dart';
+// import 'package:media_library/pages/pokemon/routes.dart';
 import 'package:media_library/constants.dart';
 
 class PokemonDetail extends StatelessWidget {
@@ -8,7 +8,7 @@ class PokemonDetail extends StatelessWidget {
   static const List<String> mockType = ['grass', 'dragon'];
 
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as DetailArguments;
+    // final args = ModalRoute.of(context)?.settings.arguments as DetailArguments;
 
     return Scaffold(
         // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
