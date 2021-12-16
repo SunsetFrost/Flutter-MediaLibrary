@@ -27,6 +27,8 @@
       - [消费自动生成的实体类](#消费自动生成的实体类)
     - [Mock Data](#mock-data)
     - [全局数据管理方案](#全局数据管理方案)
+      - [concept](#concept)
+      - [struct](#struct)
     - [数据初始化&持久化](#数据初始化持久化)
   - [组件](#组件)
     - [剑气加载动画](#剑气加载动画)
@@ -206,6 +208,26 @@ List<Pokemon> parseData(response) {
 - Bloc
 - Redux
 - Fish Redux
+
+#### concept
+Redux 通过globle store全局管理，提倡immutible和pure function。
+Bloc 通过通知与订阅更新数据量流，可以同时拥有多个不同Bloc数据流。
+
+![Bloc Architecture](https://bloclibrary.dev/assets/bloc_architecture_full.png)
+
+#### struct
+Redux
+需要创建reducer events actions，并构建它们的对应关系
+
+Bloc
+- Presentation
+- Business Logic
+- Data
+  - Repository
+  - Data Provider
+
+
+
 
 ### 数据初始化&持久化
 - share_preference 

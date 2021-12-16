@@ -1,4 +1,6 @@
-class Video {
+import 'package:equatable/equatable.dart';
+
+class Video extends Equatable {
   bool adult;
   String backdropPath;
   List<int> genreIds;
@@ -30,6 +32,24 @@ class Video {
     required this.voteAverage,
     required this.voteCount,
   });
+
+  @override
+  List<Object> get props => [
+        adult,
+        backdropPath,
+        genreIds,
+        id,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        title,
+        video,
+        voteAverage,
+        voteCount,
+      ];
 
   Video.fromJson(Map<String, dynamic> json)
       : adult = json['adult'],

@@ -117,15 +117,15 @@ class _VideoListState extends State<VideoList> {
 
   // pull bottom to load more
   void _loadMoreData() async {
-    setState(() {
-      print('start loading');
-      isLoadingData = true;
-    });
-    List<Video> data = await VideoData.getVideoList();
-    setState(() {
-      print('end loading');
-      _videos = VideoData.getVideoList(page: 2);
-      isLoadingData = false;
-    });
+    // setState(() {
+    //   print('start loading');
+    //   isLoadingData = true;
+    // });
+    // List<Video> data = await VideoData.getVideoList();
+    // setState(() {
+    //   print('end loading');
+    //   _videos = VideoData.getVideoList(page: 2);
+    //   isLoadingData = false;
+    // });
   }
 }
