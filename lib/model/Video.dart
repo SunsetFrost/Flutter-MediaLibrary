@@ -1,24 +1,22 @@
 import 'package:equatable/equatable.dart';
 
 class Video extends Equatable {
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
-  int id;
-  String originalLanguage;
-  String originalTitle;
-  String overview;
-  double popularity;
-  String posterPath;
-  String releaseDate;
-  String title;
-  bool video;
-  double voteAverage;
-  int voteCount;
+  final bool adult;
+  final List<int> genreIds;
+  final int id;
+  final String originalLanguage;
+  final String originalTitle;
+  final String overview;
+  final num popularity;
+  final String posterPath;
+  final String releaseDate;
+  final String title;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
 
   Video({
     required this.adult,
-    required this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalLanguage,
@@ -36,7 +34,6 @@ class Video extends Equatable {
   @override
   List<Object> get props => [
         adult,
-        backdropPath,
         genreIds,
         id,
         originalLanguage,
@@ -53,7 +50,6 @@ class Video extends Equatable {
 
   Video.fromJson(Map<String, dynamic> json)
       : adult = json['adult'],
-        backdropPath = json['backdrop_path'],
         genreIds = json['genre_ids'].cast<int>(),
         id = json['id'],
         originalLanguage = json['original_language'],
@@ -70,7 +66,6 @@ class Video extends Equatable {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['adult'] = this.adult;
-    data['backdrop_path'] = this.backdropPath;
     data['genre_ids'] = this.genreIds;
     data['id'] = this.id;
     data['original_language'] = this.originalLanguage;

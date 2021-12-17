@@ -5,7 +5,7 @@ class BookData {
   static Future<List<BookInfo>> getBookList({page = 1}) async {
     final url = '/book';
 
-    final response = await httpManager.fetch(url, {page}, null);
+    final response = await httpManager.fetch(url);
 
     final bookList = response['items']
         .map<BookInfo>((json) => BookInfo.fromJson(json))

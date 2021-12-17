@@ -7,19 +7,24 @@ import 'package:media_library/model/VideoTrailer.dart';
 class VideoData {
   static Future<List<Video>> getVideoList({page = 1}) async {
     final url = '/video';
-
-    final response = await httpManager.fetch(url, {page}, null);
+    final response = await httpManager.fetch(url, queryParameters: {
+      'page': page,
+    });
     final result = response['results'];
-    final videoList =
-        result.map<Video>((json) => Video.fromJson(json)).toList();
-
-    return videoList;
+    try {
+      final videoList =
+          result.map<Video>((json) => Video.fromJson(json)).toList();
+      return videoList;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   static Future<VideoInfo> getVideoDetail(id) async {
     final url = '/video/' + id.toString();
 
-    final response = await httpManager.fetch(url, null, null);
+    final response = await httpManager.fetch(url);
 
     final videoDetail = VideoInfo.fromJson(response);
     return videoDetail;
@@ -28,7 +33,7 @@ class VideoData {
   static Future<VideoTrailer> getVideoTrailer(id) async {
     final url = '/video/trailer/' + id.toString();
 
-    final response = await httpManager.fetch(url, null, null);
+    final response = await httpManager.fetch(url);
 
     final trailer = VideoTrailer.fromJson(response);
     return trailer;

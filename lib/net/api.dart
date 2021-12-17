@@ -17,15 +17,18 @@ class HttpManager {
     _dio.interceptors.add(new MockInterceptor());
   }
 
-  fetch(url, params, Options? option) async {
+  fetch(String url,
+      {dynamic params,
+      Map<String, dynamic>? queryParameters,
+      Options? option}) async {
     Response response;
 
     if (option == null) {
       option = new Options(method: 'get');
     }
-
     try {
-      response = await _dio.request(url, data: params, options: option);
+      response = await _dio.request(url,
+          data: params, queryParameters: queryParameters, options: option);
     } catch (e) {
       return e;
     }

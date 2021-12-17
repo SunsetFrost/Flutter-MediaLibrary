@@ -19,7 +19,7 @@ class VideoApp extends StatelessWidget {
           settings = defaultRoute;
         }
         final routes = <String, WidgetBuilder>{
-          listRoute: (context) => VideoList(),
+          listRoute: (context) => VideoListPage(),
           detailRoute: (context) =>
               VideoDetail(args: settings.arguments as DetailArguments),
         };

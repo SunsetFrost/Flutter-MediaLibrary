@@ -21,7 +21,7 @@ class PokemonData {
   static Future<List<Pokemon>> getPokemonList({page = 1, perpage = 12}) async {
     final url = "/pokemon";
 
-    final response = await httpManager.fetch(url, {page, perpage}, null);
+    final response = await httpManager.fetch(url);
     final pokemonJson = _refactorPokemonJson(response);
     // map
     final pokemonList =

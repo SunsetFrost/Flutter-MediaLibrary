@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_library/bloc/video_bloc.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/model/Video.dart';
 import 'package:media_library/net/video_data.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
 import 'package:media_library/widgets/common_card.dart';
+
+class VideoListPage extends StatelessWidget {
+  const VideoListPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => VideoBloc()..add(VideoFetched()),
+      child: VideoList(),
+    );
+  }
+}
 
 class VideoList extends StatefulWidget {
   const VideoList({Key? key}) : super(key: key);
@@ -15,15 +29,11 @@ class VideoList extends StatefulWidget {
 
 class _VideoListState extends State<VideoList> {
   late ScrollController _scrollController;
-  late Future<List<Video>> _videos;
-  bool isLoadingData = false;
 
   @override
   void initState() {
     super.initState();
-    _videos = VideoData.getVideoList();
     _scrollController = ScrollController()..addListener(_scrollListener);
-    setState(() {});
   }
 
   @override
@@ -34,41 +44,41 @@ class _VideoListState extends State<VideoList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                colors: [Color(0xFF3F3F3F), Color(0xFF181818)],
-                center: Alignment(0.6, -0.3),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: FutureBuilder<List<Video>>(
-              future: _videos,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return _buildGrid(snapshot.data!);
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Icon(Icons.error),
-                  );
-                }
-                return const Center(
-                  child: SwordLoading(
-                    loadColor: Colors.white,
-                    size: 60,
+    return BlocBuilder<VideoBloc, VideoState>(builder: (context, state) {
+      switch (state.status) {
+        case VideoStatus.failure:
+          return Center(
+            child: Icon(Icons.error),
+          );
+        case VideoStatus.success:
+          return Scaffold(
+            body: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      colors: [Color(0xFF3F3F3F), Color(0xFF181818)],
+                      center: Alignment(0.6, -0.3),
+                    ),
                   ),
-                );
-              },
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                  child: _buildGrid(state.videos),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        default:
+          return const Center(
+            child: SwordLoading(
+              loadColor: Colors.white,
+              size: 60,
+            ),
+          );
+      }
+    });
   }
 
   Widget _buildGrid(List<Video> videos) {
@@ -102,12 +112,7 @@ class _VideoListState extends State<VideoList> {
     );
   }
 
-  void _scrollListener() {
-    if (_scrollController.position.extentAfter < 100.0 &&
-        isLoadingData == false) {
-      _loadMoreData();
-    }
-  }
+  // TODO build empty card while loading
 
   // pull top to refresh content
   Future<void> _refreshData() async {
@@ -115,17 +120,14 @@ class _VideoListState extends State<VideoList> {
     print('refresh invoke');
   }
 
-  // pull bottom to load more
-  void _loadMoreData() async {
-    // setState(() {
-    //   print('start loading');
-    //   isLoadingData = true;
-    // });
-    // List<Video> data = await VideoData.getVideoList();
-    // setState(() {
-    //   print('end loading');
-    //   _videos = VideoData.getVideoList(page: 2);
-    //   isLoadingData = false;
-    // });
+  void _scrollListener() {
+    if (_isBottom) context.read<VideoBloc>().add(VideoFetched());
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }
