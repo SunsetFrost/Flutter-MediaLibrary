@@ -79,6 +79,7 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Player(id: widget.video.id.toString()),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,7 +116,6 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  Player(id: widget.video.id.toString()),
                   Container(
                     width: 250,
                     height: 300,
