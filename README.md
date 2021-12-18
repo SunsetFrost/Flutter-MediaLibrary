@@ -35,6 +35,10 @@
     - [瀑布流列表(Infinite List)](#瀑布流列表infinite-list)
       - [组件候选](#组件候选)
   - [Route](#route)
+    - [V1 `Main App - Child App`](#v1-main-app---child-app)
+      - [主路由配置](#主路由配置)
+      - [子路由配置](#子路由配置)
+    - [V2 `Nest Route`](#v2-nest-route)
   - [性能优化](#性能优化)
   - [Bug](#bug)
   - [参考](#参考)
@@ -261,6 +265,84 @@ Bloc
   - page
   - route
   - route delegate
+
+### V1 `Main App - Child App`
+采用谷歌官方Gallary Demo的路由构建方式，将app分为主app与子app，主app负责根据路由build不同子app，子app自行管理其路由页面。  
+
+#### 主路由配置
+
+```dart
+
+class RouteConfiguration {
+  static List<Path> paths = [
+    // pokemon
+    Path(
+      r'^' + pokemon_routes.listRoute,
+      (context, match) => ChildAppWrapper(childApp: pokemon_app.PokemonApp()),
+    ),
+    // video
+    Path(
+      r'^' + video_routes.listRoute,
+      (context, match) => ChildAppWrapper(
+          childApp: video_app.VideoApp(
+        defaultRoute: match,
+      )),
+    ),
+    // book
+    Path(
+      r'^' + book_routes.listRoute,
+      (context, match) => ChildAppWrapper(childApp: book_app.BookApp()),
+    ),
+    // music
+    Path(
+      r'^' + music_routes.listRoute,
+      (context, match) => ChildAppWrapper(childApp: music_app.MusicApp()),
+    ),
+    // home
+    Path(r'^/', (context, match) => NavigatePage()),
+  ];
+
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    final String name = settings.name!;
+    for (final path in paths) {
+      final regExpPattern = RegExp(path.pattern);
+      if (regExpPattern.hasMatch(name)) {
+        // final firstMatch = regExpPattern.firstMatch(name);
+        // final match =
+        //     (firstMatch?.groupCount == 1) ? firstMatch?.group(1) : null;
+
+        return MaterialPageRoute<void>(
+          builder: (context) => path.builder(context, settings),
+          settings: settings,
+        );
+      }
+    }
+
+    return MaterialPageRoute(
+      builder: (BuildContext context) => Scaffold(
+        body: Center(
+          child: Text('路径错误'),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+#### 子路由配置
+```dart
+
+```
+
+然而如此实现在应用中有如下问题：
+- 主路由难以直接跳转至子路由的某个页面（如详情页面）
+- 滑动返回操作会退出至主路由，而不是子路由的历史上级
+
+因此将路由改为嵌套路由`Nest Route`
+
+### V2 `Nest Route`
+
 
 ## 性能优化
 - cached_network_image `网络缓存图片`

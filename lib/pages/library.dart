@@ -10,7 +10,7 @@ Map<String, LibraryCard> libraryCards = {
     color: Color(0xFFEFB36A),
     colorDark: Color(0xff30a1ae),
     colorLight: Color(0xFFFDF7EE),
-    path: '/video',
+    path: '/video/list',
     iconType: Icons.video_label,
   ),
   '音乐库': LibraryCard(

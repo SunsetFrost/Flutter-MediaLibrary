@@ -77,20 +77,20 @@ class _ChildAppWrapperState extends State<ChildAppWrapper> {
     return Stack(
       children: [
         widget.childApp,
-        SafeArea(
-            child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .popUntil((route) => route.settings.name == '/');
-                    },
-                    child: const Icon(Icons.home),
-                    backgroundColor: Colors.orangeAccent,
-                  ),
-                )))
+        // SafeArea(
+        //     child: Align(
+        //         alignment: Alignment.bottomLeft,
+        //         child: Padding(
+        //           padding: EdgeInsets.only(left: 20),
+        //           child: FloatingActionButton(
+        //             onPressed: () {
+        //               Navigator.of(context)
+        //                   .popUntil((route) => route.settings.name == '/');
+        //             },
+        //             child: const Icon(Icons.home),
+        //             backgroundColor: Colors.orangeAccent,
+        //           ),
+        //         )))
       ],
     );
   }

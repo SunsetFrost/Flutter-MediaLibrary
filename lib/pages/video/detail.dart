@@ -75,7 +75,6 @@ class _DetailPageState extends State<DetailPage> {
           ),
           SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.only(top: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
