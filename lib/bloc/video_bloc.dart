@@ -19,39 +19,87 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 
 class VideoBloc extends Bloc<VideoEvent, VideoState> {
   VideoBloc() : super(const VideoState()) {
-    on<VideoFetched>(_onVideoFetched,
+    on<VideoFetchPopular>(_onVideoFetchPopular,
+        transformer: throttleDroppable(throttleDuration));
+    on<VideoFetchSearch>(_onVideoFetchSearch,
         transformer: throttleDroppable(throttleDuration));
   }
 
-  Future<void> _onVideoFetched(
-    VideoFetched event,
+  Future<void> _onVideoFetchPopular(
+    VideoFetchPopular event,
     Emitter<VideoState> emit,
   ) async {
-    if (state.hasReachedMax) return;
+    print('invoke bloc popular' + state.toString());
+    if (state.type == VideoType.popular && state.hasReachedMax) return;
     try {
-      if (state.status == VideoStatus.initial) {
+      // initial
+      if (state.status == VideoStatus.initial ||
+          state.type == VideoType.search) {
+        print('invoke bloc popular initial');
         final videos = await VideoData.getVideoList();
         return emit(state.copyWith(
           status: VideoStatus.success,
+          type: VideoType.popular,
           videos: videos,
           hasReachedMax: false,
           pageIndex: 1,
         ));
       }
+      print('invoke bloc popular next');
       // fetch next page
       final index = state.pageIndex + 1;
-      print('''pageindex $index''');
       final videos = await VideoData.getVideoList(page: index);
-      print(
-          '''pageindex: $index, videoslength ${videos.length} ${videos.isEmpty}''');
+
       videos.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
           : emit(state.copyWith(
               status: VideoStatus.success,
+              type: VideoType.popular,
               videos: List.of(state.videos)..addAll(videos),
               hasReachedMax: false,
               pageIndex: index));
     } catch (e) {
+      emit(state.copyWith(status: VideoStatus.failure));
+    }
+  }
+
+  Future<void> _onVideoFetchSearch(
+    VideoFetchSearch event,
+    Emitter<VideoState> emit,
+  ) async {
+    if (state.type == VideoType.search && state.hasReachedMax) return;
+    try {
+      // if search text changed, initial
+      if (state.searchText != event.query) {
+        final videos = await VideoData.searchVideos(query: event.query);
+
+        return emit(state.copyWith(
+          status: VideoStatus.success,
+          type: VideoType.search,
+          videos: videos,
+          hasReachedMax: false,
+          pageIndex: 1,
+          searchText: event.query,
+        ));
+      }
+
+      // fetch next search page
+      final index = state.pageIndex + 1;
+      print('bloc search next results  page ' + index.toString());
+      final videos =
+          await VideoData.searchVideos(query: event.query, page: index);
+      print('bloc search next results' + videos.toString());
+
+      videos.isEmpty
+          ? emit(state.copyWith(hasReachedMax: true))
+          : emit(state.copyWith(
+              status: VideoStatus.success,
+              type: VideoType.search,
+              videos: List.of(state.videos)..addAll(videos),
+              pageIndex: index,
+            ));
+    } catch (e) {
+      print(e.toString() + state.toString());
       emit(state.copyWith(status: VideoStatus.failure));
     }
   }

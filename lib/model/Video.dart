@@ -56,7 +56,7 @@ class Video extends Equatable {
         originalTitle = json['original_title'],
         overview = json['overview'],
         popularity = json['popularity'],
-        posterPath = json['poster_path'],
+        posterPath = json['poster_path'] ?? '',
         releaseDate = json['release_date'],
         title = json['title'],
         video = json['video'],

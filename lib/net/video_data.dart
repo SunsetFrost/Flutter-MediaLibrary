@@ -43,4 +43,20 @@ class VideoData {
     final rootpath = Constants.videoImageUrl;
     return rootpath + relativePath;
   }
+
+  static Future<List<Video>> searchVideos({String? query, int? page}) async {
+    final url = '/video/search/movie';
+    final response = await httpManager.fetch(url, queryParameters: {
+      'query': query,
+      'page': page,
+    });
+    try {
+      final videoList =
+          response.map<Video>((json) => Video.fromJson(json)).toList();
+      return videoList;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
 }

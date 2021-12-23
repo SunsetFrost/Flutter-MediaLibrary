@@ -14,7 +14,7 @@ class VideoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => VideoBloc()..add(VideoFetched()),
+      create: (_) => VideoBloc()..add(VideoFetchPopular()),
       child: VideoList(),
     );
   }
@@ -29,6 +29,7 @@ class VideoList extends StatefulWidget {
 
 class _VideoListState extends State<VideoList> {
   late ScrollController _scrollController;
+  String searchText = '';
 
   @override
   void initState() {
@@ -48,7 +49,7 @@ class _VideoListState extends State<VideoList> {
       switch (state.status) {
         case VideoStatus.failure:
           return Center(
-            child: Icon(Icons.error),
+            child: Icon(Icons.error, color: Colors.white),
           );
         case VideoStatus.success:
           return Scaffold(
@@ -63,10 +64,25 @@ class _VideoListState extends State<VideoList> {
                   ),
                 ),
                 Container(
-                  padding:
-                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                  child: _buildGrid(state.videos),
-                ),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        VideoSearchForm(
+                          searchCallback: onSearchCallback,
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Expanded(
+                          child: _VideoGrid(
+                            videos: state.videos,
+                            scrollController: _scrollController,
+                          ),
+                        ),
+                      ],
+                    )),
               ],
             ),
           );
@@ -81,27 +97,74 @@ class _VideoListState extends State<VideoList> {
     });
   }
 
-  Widget _buildGrid(List<Video> videos) {
-    return RefreshIndicator(
-      child: GridView.builder(
-        padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-        controller: _scrollController,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20.0,
-          childAspectRatio: 0.55,
-        ),
-        itemCount: videos.length,
-        itemBuilder: (context, index) {
-          return _buildGridItem(videos[index], context);
-        },
-      ),
-      onRefresh: _refreshData,
-    );
+  void _scrollListener() {
+    if (_isBottom) {
+      /// search text is null, fetch popular movies
+      /// isn't null, fetch search movies
+      if (searchText == '') {
+        context.read<VideoBloc>().add(VideoFetchPopular());
+      } else {
+        print('invoke search' + searchText);
+        context.read<VideoBloc>().add(VideoFetchSearch(searchText));
+      }
+    }
   }
 
-  Widget _buildGridItem(Video video, BuildContext context) {
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
+
+  void onSearchCallback(String? query) {
+    print('invoke call back');
+    setState(() {
+      searchText = query!;
+    });
+    print('invoke onsave' + query.toString());
+    if (query == '') {
+      context.read<VideoBloc>().add(VideoFetchPopular());
+    } else {
+      context.read<VideoBloc>().add(VideoFetchSearch(query!));
+    }
+  }
+}
+
+class _VideoGrid extends StatelessWidget {
+  const _VideoGrid(
+      {Key? key, required this.videos, required this.scrollController})
+      : super(key: key);
+
+  final List<Video> videos;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+      controller: scrollController,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20.0,
+        childAspectRatio: 0.55,
+      ),
+      itemCount: videos.length,
+      itemBuilder: (context, index) {
+        return _VideoGridItem(video: videos[index]);
+      },
+    );
+  }
+}
+
+class _VideoGridItem extends StatelessWidget {
+  const _VideoGridItem({Key? key, required this.video}) : super(key: key);
+
+  final Video video;
+
+  @override
+  Widget build(BuildContext context) {
     return CommonCard(
       name: video.title,
       imagePath: VideoData.getImagePath(video.posterPath),
@@ -111,23 +174,72 @@ class _VideoListState extends State<VideoList> {
       },
     );
   }
+}
 
-  // TODO build empty card while loading
+// TODO build empty card while loading
 
-  // pull top to refresh content
-  Future<void> _refreshData() async {
-    await Future.delayed(Duration(seconds: 2));
-    print('refresh invoke');
-  }
+class VideoSearchForm extends StatefulWidget {
+  const VideoSearchForm({Key? key, required this.searchCallback})
+      : super(key: key);
 
-  void _scrollListener() {
-    if (_isBottom) context.read<VideoBloc>().add(VideoFetched());
-  }
+  final Function(String?) searchCallback;
 
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
+  @override
+  _VideoSearchFormState createState() => _VideoSearchFormState();
+}
+
+class _VideoSearchFormState extends State<VideoSearchForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: Form(
+        key: _formKey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                cursorColor: Colors.white,
+                style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                decoration: const InputDecoration(
+                  hintText: '请输入搜索的电影名',
+                  hintStyle:
+                      TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFF3F3F3F),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color(0xffe5e7eb),
+                  ),
+                ),
+                // validator: (String? value) {
+                //   if (value == null || value.isEmpty) {
+                //     return '请输入名称';
+                //   }
+                //   return null;
+                // },
+                onSaved: (String? value) {
+                  widget.searchCallback(value);
+                },
+                onEditingComplete: () {
+                  _formKey.currentState!.save();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

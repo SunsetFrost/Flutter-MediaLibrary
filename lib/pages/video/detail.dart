@@ -58,121 +58,124 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                    VideoData.getImagePath(this.widget.video.posterPath)),
-                fit: BoxFit.cover,
-                // add opacity
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.7), BlendMode.srcOver),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      VideoData.getImagePath(this.widget.video.posterPath)),
+                  fit: BoxFit.cover,
+                  // add opacity
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.7), BlendMode.srcOver),
+                ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Player(id: widget.video.id.toString()),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        child: Icon(Icons.chevron_left),
-                        onPressed: () {
-                          if (Navigator.of(context).canPop()) {
-                            Navigator.of(context).pop();
-                          }
-                        },
-                        style: TextButton.styleFrom(primary: Colors.white),
+            SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Player(id: widget.video.id.toString()),
+                    Container(
+                      width: 155,
+                      height: 232,
+                      margin: EdgeInsets.symmetric(vertical: 30),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      TextButton(
-                        child: Icon(Icons.favorite),
-                        onPressed: () {
-                          if (_isFavored) {
-                            // cancel favor
-                            GlobleCacheData.favorVideos.removeWhere(
-                                (element) => element.id == widget.video.id);
-                            GlobleCacheData.saveVideos();
-                          } else {
-                            // add favor
-                            GlobleCacheData.favorVideos.add(widget.video);
-                          }
-                          GlobleCacheData.saveVideos();
-                          print(GlobleCacheData.favorVideos);
-                          setState(() {
-                            _isFavored = !_isFavored;
-                          });
-                        },
-                        style: TextButton.styleFrom(
-                            primary: _isFavored ? Colors.red : Colors.white),
+                      child: Stack(
+                        children: [
+                          // ClipRRect(
+                          //   borderRadius: BorderRadius.circular(20),
+                          //   child: Image.network(
+                          //     VideoData.getImagePath(
+                          //         this.widget.video.posterPath),
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          // ),
+                          Image.network(
+                            VideoData.getImagePath(
+                                this.widget.video.posterPath),
+                            fit: BoxFit.cover,
+                          ),
+
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: TextButton(
+                              child: Icon(Icons.favorite),
+                              onPressed: () {
+                                if (_isFavored) {
+                                  // cancel favor
+                                  GlobleCacheData.favorVideos.removeWhere(
+                                      (element) =>
+                                          element.id == widget.video.id);
+                                  GlobleCacheData.saveVideos();
+                                } else {
+                                  // add favor
+                                  GlobleCacheData.favorVideos.add(widget.video);
+                                }
+                                GlobleCacheData.saveVideos();
+                                print(GlobleCacheData.favorVideos);
+                                setState(() {
+                                  _isFavored = !_isFavored;
+                                });
+                              },
+                              style: TextButton.styleFrom(
+                                  primary:
+                                      _isFavored ? Colors.red : Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  Container(
-                    width: 250,
-                    height: 300,
-                    margin: EdgeInsets.symmetric(vertical: 30),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        VideoData.getImagePath(this.widget.video.posterPath),
-                        fit: BoxFit.contain,
+                    Text(
+                      widget.video.title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  Text(
-                    widget.video.title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    widget.video.overview,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
+                    Text(
+                      widget.video.overview,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                      maxLines: 6,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 6,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(playerRoute,
-                          arguments: DetailArguments(widget.video.id));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [Icon(Icons.play_arrow), Text('播放')],
+                    SizedBox(
+                      height: 20,
                     ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(100, 30),
-                    ),
-                  )
-                ],
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(playerRoute,
+                            arguments: DetailArguments(widget.video.id));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [Icon(Icons.play_arrow), Text('播放')],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(100, 30),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -5,4 +5,10 @@ abstract class VideoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class VideoFetched extends VideoEvent {}
+class VideoFetchPopular extends VideoEvent {}
+
+class VideoFetchSearch extends VideoEvent {
+  final String query;
+
+  VideoFetchSearch(this.query);
+}

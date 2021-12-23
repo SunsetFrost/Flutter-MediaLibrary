@@ -57,11 +57,16 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
     return Container(
       child: YoutubePlayer(
         controller: _controller,
-        showVideoProgressIndicator: true,
+        showVideoProgressIndicator: false,
         progressIndicatorColor: Colors.amber,
         progressColors: ProgressBarColors(
           playedColor: Colors.amber,
           handleColor: Colors.amberAccent,
+        ),
+        actionsPadding: EdgeInsets.all(0.0),
+        bufferIndicator: SwordLoading(
+          loadColor: Colors.white,
+          size: 60,
         ),
       ),
     );

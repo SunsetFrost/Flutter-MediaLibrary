@@ -29,6 +29,7 @@
     - [全局数据管理方案](#全局数据管理方案)
       - [concept](#concept)
       - [struct](#struct)
+      - [Bloc Event 传参](#bloc-event-传参)
     - [数据初始化&持久化](#数据初始化持久化)
   - [组件](#组件)
     - [剑气加载动画](#剑气加载动画)
@@ -230,7 +231,7 @@ Bloc
   - Repository
   - Data Provider
 
-
+#### Bloc Event 传参
 
 
 ### 数据初始化&持久化
