@@ -83,7 +83,8 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       width: 155,
                       height: 232,
-                      margin: EdgeInsets.symmetric(vertical: 30),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 32.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -98,6 +99,7 @@ class _DetailPageState extends State<DetailPage> {
                           //     fit: BoxFit.cover,
                           //   ),
                           // ),
+                          /// Poster
                           Hero(
                             tag: 'Poster' + widget.video.title,
                             child: Image.network(
@@ -107,6 +109,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
 
+                          /// favor
                           Align(
                             alignment: Alignment.topRight,
                             child: TextButton(
@@ -136,43 +139,64 @@ class _DetailPageState extends State<DetailPage> {
                         ],
                       ),
                     ),
-                    Text(
-                      widget.video.title,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      widget.video.overview,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
-                      maxLines: 6,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(playerRoute,
-                            arguments: DetailArguments(widget.video.id));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [Icon(Icons.play_arrow), Text('播放')],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(100, 30),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 32.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            widget.video.title,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '评分: ' + widget.video.voteAverage.toString(),
+                                style: _getInlineTextStyle(),
+                              ),
+                              Text(
+                                '发行日期: ' + widget.video.releaseDate,
+                                style: _getInlineTextStyle(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20.0),
+                          Text(
+                            widget.video.overview,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
                     )
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     Navigator.of(context).pushNamed(playerRoute,
+                    //         arguments: DetailArguments(widget.video.id));
+                    //   },
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     children: [Icon(Icons.play_arrow), Text('播放')],
+                    //   ),
+                    //   style: ElevatedButton.styleFrom(
+                    //     fixedSize: Size(100, 30),
+                    //   ),
+                    // )
                   ],
                 ),
               ),
@@ -183,3 +207,8 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 }
+
+TextStyle _getInlineTextStyle() => TextStyle(
+      color: Colors.white,
+      fontSize: 14,
+    );
