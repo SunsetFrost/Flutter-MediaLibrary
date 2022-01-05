@@ -5,8 +5,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:media_library/widgets/library_card.dart';
 
 Map<String, LibraryCard> libraryCards = {
-  '视频库': LibraryCard(
-    name: '视频库',
+  '电影库': LibraryCard(
+    name: '电影库',
+    desc: 'The Movie DataBase',
     color: Color(0xFFEFB36A),
     colorDark: Color(0xff30a1ae),
     colorLight: Color(0xFFFDF7EE),
@@ -15,6 +16,7 @@ Map<String, LibraryCard> libraryCards = {
   ),
   '音乐库': LibraryCard(
     name: '音乐库',
+    desc: 'Spotify',
     color: Color(0xFF858A97),
     colorDark: Color(0xffb1b4b2),
     colorLight: Color(0xFFF2F3F4),
@@ -23,6 +25,7 @@ Map<String, LibraryCard> libraryCards = {
   ),
   '书库': LibraryCard(
     name: '书库',
+    desc: 'Google Book API',
     color: Color(0xFF66B7D9),
     colorDark: Color(0xffa4957e),
     colorLight: Color(0xFFECF7FA),
@@ -34,6 +37,7 @@ Map<String, LibraryCard> libraryCards = {
 Map<String, LibraryCard> dataSourceCards = {
   '口袋妖怪': LibraryCard(
     name: '口袋妖怪',
+    desc: 'Poke API',
     color: Color(0xFFEFB36A),
     colorDark: Color(0xff30a1ae),
     colorLight: Color(0xFFFDF7EE),

@@ -98,10 +98,13 @@ class _DetailPageState extends State<DetailPage> {
                           //     fit: BoxFit.cover,
                           //   ),
                           // ),
-                          Image.network(
-                            VideoData.getImagePath(
-                                this.widget.video.posterPath),
-                            fit: BoxFit.cover,
+                          Hero(
+                            tag: 'Poster' + widget.video.title,
+                            child: Image.network(
+                              VideoData.getImagePath(
+                                  this.widget.video.posterPath),
+                              fit: BoxFit.cover,
+                            ),
                           ),
 
                           Align(
@@ -135,7 +138,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     Text(
                       widget.video.title,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -146,7 +149,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     Text(
                       widget.video.overview,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.white,

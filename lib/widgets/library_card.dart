@@ -4,6 +4,7 @@ class LibraryCard extends StatelessWidget {
   const LibraryCard({
     Key? key,
     required this.name,
+    required this.desc,
     required this.iconType,
     this.path = '',
     this.color = Colors.blueAccent,
@@ -14,6 +15,7 @@ class LibraryCard extends StatelessWidget {
   }) : super(key: key);
 
   final String name;
+  final String desc;
   final String path;
   final Color color;
   final Color colorDark;
@@ -72,9 +74,13 @@ class LibraryCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text('34部电影 12部电视剧',
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  Text(desc,
                       style: TextStyle(
                         color: Theme.of(context).secondaryHeaderColor,
+                        fontSize: 12,
                       ))
                 ],
               ),

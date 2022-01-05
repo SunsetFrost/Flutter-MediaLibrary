@@ -11,20 +11,24 @@ class Player extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<VideoTrailer>(
-        future: VideoData.getVideoTrailer(id),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return TrailerPlayer(trailer: snapshot.data!);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-          return const Center(
-              child: SwordLoading(
-            loadColor: Colors.white,
-            size: 60,
-          ));
-        });
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.width / 16 * 9,
+      child: FutureBuilder<VideoTrailer>(
+          future: VideoData.getVideoTrailer(id),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return TrailerPlayer(trailer: snapshot.data!);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const Center(
+                child: SwordLoading(
+              loadColor: Colors.white,
+              size: 60,
+            ));
+          }),
+    );
   }
 }
 

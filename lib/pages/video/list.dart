@@ -7,6 +7,7 @@ import 'package:media_library/model/Video.dart';
 import 'package:media_library/net/video_data.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
 import 'package:media_library/widgets/common_card.dart';
+import 'package:media_library/widgets/search_filter.dart';
 
 class VideoListPage extends StatelessWidget {
   const VideoListPage({Key? key}) : super(key: key);
@@ -30,6 +31,12 @@ class VideoList extends StatefulWidget {
 class _VideoListState extends State<VideoList> {
   late ScrollController _scrollController;
   String searchText = '';
+  Map<String, String> params = {};
+
+  static const filterData = {
+    'sort': ['popular', 'release', 'vote'],
+    'type': ['all', 'r', 'nc-17'],
+  };
 
   @override
   void initState() {
@@ -72,6 +79,15 @@ class _VideoListState extends State<VideoList> {
                         VideoSearchForm(
                           searchCallback: onSearchCallback,
                         ),
+                        SearchFilter(
+                          filterData: filterData,
+                          onFilterSelected: (val) {
+                            setState(() {
+                              params = val;
+                            });
+                            onFilterCallback(val);
+                          },
+                        ),
                         SizedBox(
                           height: 20.0,
                         ),
@@ -102,9 +118,8 @@ class _VideoListState extends State<VideoList> {
       /// search text is null, fetch popular movies
       /// isn't null, fetch search movies
       if (searchText == '') {
-        context.read<VideoBloc>().add(VideoFetchPopular());
+        context.read<VideoBloc>().add(VideoFetchPopular(params: params));
       } else {
-        print('invoke search' + searchText);
         context.read<VideoBloc>().add(VideoFetchSearch(searchText));
       }
     }
@@ -118,15 +133,21 @@ class _VideoListState extends State<VideoList> {
   }
 
   void onSearchCallback(String? query) {
-    print('invoke call back');
     setState(() {
       searchText = query!;
     });
-    print('invoke onsave' + query.toString());
     if (query == '') {
-      context.read<VideoBloc>().add(VideoFetchPopular());
+      context.read<VideoBloc>().add(VideoFetchPopular(params: params));
     } else {
       context.read<VideoBloc>().add(VideoFetchSearch(query!));
+    }
+  }
+
+  void onFilterCallback(Map<String, String>? params) {
+    if (searchText == '') {
+      context.read<VideoBloc>().add(VideoFetchPopular(params: params));
+    } else {
+      context.read<VideoBloc>().add(VideoFetchSearch(searchText));
     }
   }
 }

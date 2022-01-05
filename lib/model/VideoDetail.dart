@@ -5,7 +5,6 @@ class VideoInfo {
     this.belongsToCollection,
     required this.budget,
     required this.genres,
-    required this.homepage,
     required this.id,
     required this.imdbId,
     required this.originalLanguage,
@@ -31,7 +30,6 @@ class VideoInfo {
   late final Null belongsToCollection;
   late final int budget;
   late final List<Genres> genres;
-  late final String homepage;
   late final int id;
   late final String imdbId;
   late final String originalLanguage;
@@ -58,9 +56,7 @@ class VideoInfo {
     belongsToCollection = null;
     budget = json['budget'];
     genres = List.from(json['genres']).map((e) => Genres.fromJson(e)).toList();
-    homepage = json['homepage'];
     id = json['id'];
-    imdbId = json['imdb_id'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
@@ -93,7 +89,6 @@ class VideoInfo {
     _data['belongs_to_collection'] = belongsToCollection;
     _data['budget'] = budget;
     _data['genres'] = genres.map((e) => e.toJson()).toList();
-    _data['homepage'] = homepage;
     _data['id'] = id;
     _data['imdb_id'] = imdbId;
     _data['original_language'] = originalLanguage;

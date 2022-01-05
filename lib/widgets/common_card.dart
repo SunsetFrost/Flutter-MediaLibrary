@@ -16,7 +16,9 @@ class CommonCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          Hero(
+            tag: 'Poster' + name,
+            child: Container(
               width: MediaQuery.of(context).size.width / 3.2,
               height: MediaQuery.of(context).size.width / 3.2 * 1.4,
               margin: EdgeInsets.only(bottom: 6.0),
@@ -24,7 +26,9 @@ class CommonCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                     image: NetworkImage(imagePath), fit: BoxFit.fill),
-              )),
+              ),
+            ),
+          ),
           Text(
             name,
             overflow: TextOverflow.ellipsis,

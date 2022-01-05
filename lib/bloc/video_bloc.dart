@@ -29,13 +29,11 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
     VideoFetchPopular event,
     Emitter<VideoState> emit,
   ) async {
-    print('invoke bloc popular' + state.toString());
     if (state.type == VideoType.popular && state.hasReachedMax) return;
     try {
       // initial
       if (state.status == VideoStatus.initial ||
           state.type == VideoType.search) {
-        print('invoke bloc popular initial');
         final videos = await VideoData.getVideoList();
         return emit(state.copyWith(
           status: VideoStatus.success,
@@ -45,10 +43,10 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
           pageIndex: 1,
         ));
       }
-      print('invoke bloc popular next');
       // fetch next page
       final index = state.pageIndex + 1;
-      final videos = await VideoData.getVideoList(page: index);
+      final videos =
+          await VideoData.getVideoList(page: index, params: event.params);
 
       videos.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))

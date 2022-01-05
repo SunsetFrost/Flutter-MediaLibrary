@@ -5,7 +5,11 @@ abstract class VideoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class VideoFetchPopular extends VideoEvent {}
+class VideoFetchPopular extends VideoEvent {
+  final Map<String, String>? params;
+
+  VideoFetchPopular({this.params});
+}
 
 class VideoFetchSearch extends VideoEvent {
   final String query;

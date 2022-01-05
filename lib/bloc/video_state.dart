@@ -11,6 +11,7 @@ class VideoState extends Equatable {
     this.hasReachedMax = false,
     this.pageIndex = 0,
     this.searchText = '',
+    this.params = const {},
   });
 
   final VideoStatus status;
@@ -19,6 +20,7 @@ class VideoState extends Equatable {
   final bool hasReachedMax;
   final int pageIndex;
   final String searchText;
+  final Map<String, String> params;
 
   VideoState copyWith({
     VideoStatus? status,
@@ -27,6 +29,7 @@ class VideoState extends Equatable {
     bool? hasReachedMax,
     int? pageIndex,
     String? searchText,
+    Map<String, String>? params,
   }) {
     return VideoState(
       status: status ?? this.status,
@@ -35,6 +38,7 @@ class VideoState extends Equatable {
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       pageIndex: pageIndex ?? this.pageIndex,
       searchText: searchText ?? this.searchText,
+      params: params ?? this.params,
     );
   }
 
@@ -45,5 +49,5 @@ class VideoState extends Equatable {
 
   @override
   List<Object> get props =>
-      [status, type, videos, hasReachedMax, pageIndex, searchText];
+      [status, type, videos, hasReachedMax, pageIndex, searchText, params];
 }
