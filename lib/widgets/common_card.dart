@@ -8,6 +8,7 @@ class CommonCard extends StatelessWidget {
   final String name;
   final String imagePath;
   final void Function()? onClick;
+  final num aspect = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +19,22 @@ class CommonCard extends StatelessWidget {
         children: [
           Hero(
             tag: 'Poster' + name,
-            child: Container(
-              width: MediaQuery.of(context).size.width / 3.2,
-              height: MediaQuery.of(context).size.width / 3.2 * 1.4,
-              margin: EdgeInsets.only(bottom: 6.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                    image: NetworkImage(imagePath), fit: BoxFit.fill),
-              ),
-            ),
+            child: imagePath == ''
+                ? Container(
+                    width: MediaQuery.of(context).size.width / 3.2,
+                    height: MediaQuery.of(context).size.width / 3.2 * aspect,
+                    margin: EdgeInsets.only(bottom: 6.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: NetworkImage(imagePath), fit: BoxFit.fill),
+                    ),
+                  )
+                : Container(
+                    width: MediaQuery.of(context).size.width / 3.2,
+                    height: MediaQuery.of(context).size.width / 3.2 * aspect,
+                    decoration: BoxDecoration(color: Colors.amber),
+                  ),
           ),
           Text(
             name,

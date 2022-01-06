@@ -1,4 +1,4 @@
-const String listRoute = '/music';
+const String listRoute = '/music/list';
 const String detailRoute = '/music/detail';
 
 class DetailArguments {

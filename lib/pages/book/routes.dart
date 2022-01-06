@@ -1,6 +1,6 @@
 import 'package:media_library/model/BookInfo.dart';
 
-const String listRoute = '/book';
+const String listRoute = '/book/list';
 const String detailRoute = '/book/detail';
 const String readerRoute = '/book/reader';
 

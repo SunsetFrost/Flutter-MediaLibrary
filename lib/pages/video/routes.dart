@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:media_library/pages/video/list.dart';
-import 'package:media_library/pages/video/detail.dart';
-
 const String routePrefix = '/video';
 const String listRoute = '/video/list';
 const String detailRoute = '/video/detail';

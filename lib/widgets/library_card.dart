@@ -29,6 +29,7 @@ class LibraryCard extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           if (path != '') {
+            print('path is' + path);
             Navigator.of(context).pushNamed(path);
           }
         },

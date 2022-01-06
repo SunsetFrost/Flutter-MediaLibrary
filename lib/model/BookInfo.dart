@@ -106,7 +106,9 @@ class VolumeInfo {
     Dimensions(height: '0', width: '0', thickness: '0');
     printType = json['printType'];
     categories = List.castFrom<dynamic, String>(json['categories']);
-    imageLinks = ImageLinks.fromJson(json['imageLinks']);
+    imageLinks = json.containsKey('imageLinks')
+        ? ImageLinks.fromJson(json['imageLinks'])
+        : ImageLinks(smallThumbnail: '', thumbnail: '');
     language = json['language'];
     previewLink = json['previewLink'];
   }

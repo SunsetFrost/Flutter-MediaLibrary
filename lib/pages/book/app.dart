@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:media_library/pages/book/list.dart';
 import 'package:media_library/pages/book/detail.dart';
-import 'package:media_library/pages/book/routes.dart' as routes;
+import 'package:media_library/pages/book/routes.dart';
 
 class BookApp extends StatelessWidget {
   const BookApp({Key? key}) : super(key: key);
-
-  static const String listRoute = routes.listRoute;
-  static const String detailRoute = routes.detailRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +13,14 @@ class BookApp extends StatelessWidget {
       title: 'Book',
       debugShowCheckedModeBanner: false,
       initialRoute: listRoute,
-      routes: <String, WidgetBuilder>{
-        listRoute: (context) => BookList(),
-        detailRoute: (context) => BookDetail(),
+      onGenerateRoute: (RouteSettings settings) {
+        final routes = <String, WidgetBuilder>{
+          listRoute: (context) => BookList(),
+          detailRoute: (context) =>
+              BookDetail(args: settings.arguments as DetailArguments),
+        };
+        WidgetBuilder builder = routes[settings.name]!;
+        return MaterialPageRoute(builder: builder, settings: settings);
       },
     );
   }

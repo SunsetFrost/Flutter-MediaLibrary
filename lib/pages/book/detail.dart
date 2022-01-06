@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:media_library/pages/book/routes.dart';
 
 class BookDetail extends StatelessWidget {
-  const BookDetail({Key? key}) : super(key: key);
+  const BookDetail({Key? key, required this.args}) : super(key: key);
+
+  final DetailArguments args;
 
   void openEpubBook(BuildContext context) {
     // EpubViewer.setConfig(
@@ -22,7 +24,6 @@ class BookDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as DetailArguments;
     final book = args.book;
 
     return Scaffold(

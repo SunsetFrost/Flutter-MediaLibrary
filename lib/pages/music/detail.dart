@@ -7,7 +7,9 @@ import 'package:media_library/net/music_data.dart';
 import 'package:media_library/pages/music/routes.dart';
 
 class MusicDetail extends StatefulWidget {
-  const MusicDetail({Key? key}) : super(key: key);
+  const MusicDetail({Key? key, required this.args}) : super(key: key);
+
+  final DetailArguments args;
 
   @override
   State<MusicDetail> createState() => _MusicDetailState();
@@ -22,8 +24,7 @@ class _MusicDetailState extends State<MusicDetail> {
 
   @override
   void initState() {
-    futureTracks = MusicData.getTrackList();
-
+    futureTracks = MusicData.getTrackList(widget.args.id);
     // init player
     _audioPlayer = AudioPlayer();
 

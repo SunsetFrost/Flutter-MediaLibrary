@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:media_library/widgets/library_card.dart';
+import 'package:media_library/pages/video/routes.dart' as video_routes;
+import 'package:media_library/pages/music/routes.dart' as music_routes;
+import 'package:media_library/pages/book/routes.dart' as book_routes;
 
 Map<String, LibraryCard> libraryCards = {
   '电影库': LibraryCard(
@@ -11,7 +14,7 @@ Map<String, LibraryCard> libraryCards = {
     color: Color(0xFFEFB36A),
     colorDark: Color(0xff30a1ae),
     colorLight: Color(0xFFFDF7EE),
-    path: '/video/list',
+    path: video_routes.listRoute,
     iconType: Icons.video_label,
   ),
   '音乐库': LibraryCard(
@@ -20,7 +23,7 @@ Map<String, LibraryCard> libraryCards = {
     color: Color(0xFF858A97),
     colorDark: Color(0xffb1b4b2),
     colorLight: Color(0xFFF2F3F4),
-    path: '/music',
+    path: music_routes.listRoute,
     iconType: Icons.music_video,
   ),
   '书库': LibraryCard(
@@ -29,7 +32,7 @@ Map<String, LibraryCard> libraryCards = {
     color: Color(0xFF66B7D9),
     colorDark: Color(0xffa4957e),
     colorLight: Color(0xFFECF7FA),
-    path: '/book',
+    path: book_routes.listRoute,
     iconType: Icons.book,
   ),
 };
