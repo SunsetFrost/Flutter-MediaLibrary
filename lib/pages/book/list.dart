@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/widgets/common_card.dart';
+
 import 'package:media_library/model/BookInfo.dart';
 import 'package:media_library/net/book_data.dart';
 import 'package:media_library/pages/book/routes.dart' as routes;
@@ -50,37 +52,20 @@ class BookGrid extends StatelessWidget {
         ),
         itemCount: books.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(routes.detailRoute,
-                  arguments: routes.DetailArguments(books[index]));
-            },
-            child: Column(
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * 1.3,
-                    margin: EdgeInsets.only(bottom: 6.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(books[index]
-                              .volumeInfo
-                              .imageLinks
-                              .smallThumbnail),
-                          fit: BoxFit.fill),
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(16.0, 20.0)),
-                    )),
-                Text(
-                  books[index].volumeInfo.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
+          print(books[index]);
+          return Column(
+            children: [
+              CommonCard(
+                name: books[index].volumeInfo.title,
+                imagePath: BookData.getBookImagePath(
+                    books[index].volumeInfo.imageLinks.smallThumbnail),
+                aspect: 1.3,
+                onClick: () => {
+                  Navigator.of(context).pushNamed(routes.detailRoute,
+                      arguments: routes.DetailArguments(books[index])),
+                },
+              )
+            ],
           );
         });
   }

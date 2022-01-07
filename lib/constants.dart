@@ -21,6 +21,9 @@ class PokemonType {
   });
 }
 
+// book
+const String bookImageUrl = backendURI + '/book/image';
+
 Map<String, PokemonType> pokemonTypeMap = {
   'normal': PokemonType(name: '一般', nameEn: 'normal', color: 0xFF8F8E5E),
   'fighting': PokemonType(name: '格斗', nameEn: 'fighting', color: 0xFF7B211E),

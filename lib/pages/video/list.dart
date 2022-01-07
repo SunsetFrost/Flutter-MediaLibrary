@@ -189,6 +189,7 @@ class _VideoGridItem extends StatelessWidget {
     return CommonCard(
       name: video.title,
       imagePath: VideoData.getImagePath(video.posterPath),
+      aspect: 1.3,
       onClick: () => {
         Navigator.of(context).pushNamed(routes.detailRoute,
             arguments: routes.DetailArguments(video.id)),
@@ -196,8 +197,6 @@ class _VideoGridItem extends StatelessWidget {
     );
   }
 }
-
-// TODO build empty card while loading
 
 class VideoSearchForm extends StatefulWidget {
   const VideoSearchForm({Key? key, required this.searchCallback})

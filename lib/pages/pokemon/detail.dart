@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-// import 'package:media_library/pages/pokemon/routes.dart';
+import 'package:media_library/pages/pokemon/routes.dart';
 import 'package:media_library/constants.dart';
 
 class PokemonDetail extends StatelessWidget {
-  const PokemonDetail({Key? key}) : super(key: key);
+  const PokemonDetail({Key? key, required this.args}) : super(key: key);
+
+  final DetailArguments args;
   static const List<String> mockType = ['grass', 'dragon'];
 
   Widget build(BuildContext context) {

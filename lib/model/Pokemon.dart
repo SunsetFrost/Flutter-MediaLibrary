@@ -6,14 +6,14 @@ part 'Pokemon.g.dart';
 class Pokemon {
   final int id;
   final String name;
-  final List<String> type;
-  final int state;
+  final List<Object> types;
+  final List<Object> stats;
 
   Pokemon(
     this.id,
     this.name,
-    this.type,
-    this.state,
+    this.types,
+    this.stats,
   );
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>

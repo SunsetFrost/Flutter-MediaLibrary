@@ -6,6 +6,7 @@ import 'package:media_library/widgets/library_card.dart';
 import 'package:media_library/pages/video/routes.dart' as video_routes;
 import 'package:media_library/pages/music/routes.dart' as music_routes;
 import 'package:media_library/pages/book/routes.dart' as book_routes;
+import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
 
 Map<String, LibraryCard> libraryCards = {
   '电影库': LibraryCard(
@@ -44,7 +45,7 @@ Map<String, LibraryCard> dataSourceCards = {
     color: Color(0xFFEFB36A),
     colorDark: Color(0xff30a1ae),
     colorLight: Color(0xFFFDF7EE),
-    path: '/pokemon',
+    path: pokemon_routes.listRoute,
     iconType: Icons.games,
   ),
 };

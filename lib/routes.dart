@@ -10,7 +10,9 @@ import 'package:media_library/pages/music/routes.dart' as music_routes;
 import 'package:media_library/pages/book/list.dart';
 import 'package:media_library/pages/book/detail.dart';
 import 'package:media_library/pages/book/routes.dart' as book_routes;
-// import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
+import 'package:media_library/pages/pokemon/list.dart';
+import 'package:media_library/pages/pokemon/detail.dart';
+import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, RouteSettings);
 
@@ -24,11 +26,6 @@ class Path {
 
 class RouteConfiguration {
   static List<Path> paths = [
-    // pokemon
-    // Path(
-    //   r'^' + pokemon_routes.listRoute,
-    //   (context, match) => ChildAppWrapper(childApp: pokemon_app.PokemonApp()),
-    // ),
     // video
     Path(
       r'^' + video_routes.listRoute,
@@ -58,6 +55,16 @@ class RouteConfiguration {
       r'^' + book_routes.detailRoute,
       (context, settings) =>
           BookDetail(args: settings.arguments as book_routes.DetailArguments),
+    ),
+    // pokemon
+    Path(
+      r'^' + pokemon_routes.listRoute,
+      (context, match) => PokemonList(),
+    ),
+    Path(
+      r'^' + pokemon_routes.detailRoute,
+      (context, settings) => PokemonDetail(
+          args: settings.arguments as pokemon_routes.DetailArguments),
     ),
     // home
     Path(r'^/', (context, match) => NavigatePage()),

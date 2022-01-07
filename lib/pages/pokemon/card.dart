@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/model/Pokemon.dart';
 import 'package:media_library/constants.dart';
+import 'package:media_library/model/Pokemon.dart';
 import 'package:media_library/pages/pokemon/routes.dart' as routes;
 
 class PokemonCard extends StatelessWidget {
@@ -18,15 +18,6 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          // AlertDialog alert = AlertDialog(
-          //   title: Text(pokemon.name),
-          // );
-          // showDialog(
-          //   context: context,
-          //   builder: (BuildContext context) {
-          //     return alert;
-          //   },
-          // );
           Navigator.of(context).pushNamed(routes.detailRoute,
               arguments: routes.DetailArguments(pokemon.id));
         },
@@ -37,7 +28,7 @@ class PokemonCard extends StatelessWidget {
               Positioned(
                 // height: MediaQuery.of(context).size.height / 6,
                 width: MediaQuery.of(context).size.width / 3.2,
-                height: 120,
+                height: MediaQuery.of(context).size.width / 3.2 * 1.0,
                 // left: 10.0,
                 top: 30,
                 child: Card(
@@ -48,7 +39,7 @@ class PokemonCard extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
                       Text(
                         pokemon.name,
@@ -60,18 +51,19 @@ class PokemonCard extends StatelessWidget {
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: pokemon.type
+                          children: pokemon.types
                               .map((e) => Container(
                                     width: 36,
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 6, vertical: 2),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      color: Color(pokemonTypeMap[e]!.color),
+                                      color: Color(
+                                          pokemonTypeMap['dragon']!.color),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
-                                      pokemonTypeMap[e]!.name,
+                                      pokemonTypeMap['poison']!.name,
                                       style:
                                           Theme.of(context).textTheme.headline5,
                                     ),
@@ -82,7 +74,7 @@ class PokemonCard extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0, -1.6),
+                alignment: Alignment(0, -1.4),
                 child: Hero(
                     tag: pokemon.id,
                     child: Container(
@@ -94,14 +86,13 @@ class PokemonCard extends StatelessWidget {
                         image: AssetImage(
                           _getImageUrl(pokemon.id),
                         ),
-                        // image: AssetImage('assets/pic/2.gif'),
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.scaleDown,
                       )),
                     )),
               ),
               Align(
-                  alignment: Alignment(0, .7),
+                  alignment: Alignment(0, .9),
                   child: Container(
                       width: 54,
                       height: 26,
@@ -119,7 +110,8 @@ class PokemonCard extends StatelessWidget {
                             size: 12,
                           ),
                           Text(
-                            pokemon.state.toString(),
+                            // pokemon.stats[0].base_stat.toString(),
+                            'test',
                             style: TextStyle(
                               color: Color.fromRGBO(40, 44, 82, 0.6),
                               fontFamily: 'IPix',

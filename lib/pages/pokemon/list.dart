@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:media_library/model/Pokemon.dart';
 import 'package:media_library/net/pokemon_data.dart';
-import 'package:media_library/pages/pokemon/card.dart';
 import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/pages/pokemon/card.dart';
+import 'package:media_library/pages/pokemon/app.dart';
 
 class PokemonList extends StatelessWidget {
   const PokemonList({Key? key}) : super(key: key);
@@ -11,50 +12,60 @@ class PokemonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
+      backgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
+      body: PokemonTheme(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: 20,
-                // left: 12,
-                bottom: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 20,
+                  // left: 12,
+                  bottom: 20,
+                ),
+                child: Text(
+                  '口袋图鉴',
+                  style: TextStyle(
+                    color: Color.fromRGBO(244, 176, 22, 1.0),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    wordSpacing: 10,
+                  ),
+                ),
               ),
-              child: Text(
-                '口袋图鉴',
-                style: Theme.of(context).textTheme.headline2,
+              SearchWidget(),
+              SizedBox(
+                height: 12,
               ),
-            ),
-            SearchWidget(),
-            SizedBox(
-              height: 12,
-            ),
-            FilterWidget(),
-            Expanded(
-                child: FutureBuilder<List<Pokemon>>(
-                    future: PokemonData.getPokemonList(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return
-                            // Container(
-                            //   width: 100,
-                            //   height: 100,
-                            //   color: Colors.white,
-                            // );
-                            PokemonGrid(pokemons: snapshot.data!);
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return const Center(
-                        child: SwordLoading(
-                          loadColor: Colors.white,
-                          size: 60,
-                        ),
-                      );
-                    }))
-          ])),
+              FilterWidget(),
+              Expanded(
+                  child: FutureBuilder<List<Pokemon>>(
+                      future: PokemonData.getPokemonList(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return
+                              // Container(
+                              //   width: 100,
+                              //   height: 100,
+                              //   color: Colors.white,
+                              // );
+                              PokemonGrid(pokemons: snapshot.data!);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return const Center(
+                          child: SwordLoading(
+                            loadColor: Colors.white,
+                            size: 60,
+                          ),
+                        );
+                      }))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -68,25 +79,20 @@ class PokemonGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        padding: EdgeInsets.all(4),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 10,
-          childAspectRatio: 0.6,
-        ),
-        itemCount: pokemons.length,
-        itemBuilder: (context, index) {
-          return
-              // Container(
-              //   width: MediaQuery.of(context).size.width / 3.8,
-              //   color: Colors.blueAccent,
-              //   child: Text(index.toString()),
-              // );
-              PokemonCard(
-            pokemon: pokemons[index],
-          );
-        });
+      padding: EdgeInsets.all(4),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 10,
+        childAspectRatio: 0.6,
+      ),
+      itemCount: pokemons.length,
+      itemBuilder: (context, index) {
+        return PokemonCard(
+          pokemon: pokemons[index],
+        );
+      },
+    );
   }
 }
 
