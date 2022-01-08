@@ -24,7 +24,7 @@ class BookList extends StatelessWidget {
             }
             return const Center(
               child: SwordLoading(
-                loadColor: Colors.white,
+                loadColor: Colors.black54,
                 size: 60,
               ),
             );
@@ -52,7 +52,6 @@ class BookGrid extends StatelessWidget {
         ),
         itemCount: books.length,
         itemBuilder: (context, index) {
-          print(books[index]);
           return Column(
             children: [
               CommonCard(

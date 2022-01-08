@@ -126,7 +126,6 @@ class _DetailPageState extends State<DetailPage> {
                                   GlobleCacheData.favorVideos.add(widget.video);
                                 }
                                 GlobleCacheData.saveVideos();
-                                print(GlobleCacheData.favorVideos);
                                 setState(() {
                                   _isFavored = !_isFavored;
                                 });

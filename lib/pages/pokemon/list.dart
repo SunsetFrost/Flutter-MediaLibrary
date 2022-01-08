@@ -45,13 +45,7 @@ class PokemonList extends StatelessWidget {
                       future: PokemonData.getPokemonList(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return
-                              // Container(
-                              //   width: 100,
-                              //   height: 100,
-                              //   color: Colors.white,
-                              // );
-                              PokemonGrid(pokemons: snapshot.data!);
+                          return PokemonGrid(pokemons: snapshot.data!);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }

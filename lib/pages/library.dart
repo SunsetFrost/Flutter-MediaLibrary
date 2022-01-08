@@ -58,7 +58,6 @@ class Library extends StatelessWidget {
 
     if (result != null) {
       File file = File(result.files.single.path!);
-      print(file);
     }
   }
 

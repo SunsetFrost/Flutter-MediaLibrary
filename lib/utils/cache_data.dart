@@ -15,7 +15,7 @@ class GlobleCacheData {
         favorVideos =
             _favorVideos.map((e) => VideoInfo.fromJson(jsonDecode(e))).toList();
       } catch (e) {
-        print(e);
+        favorVideos = [];
       }
     }
   }

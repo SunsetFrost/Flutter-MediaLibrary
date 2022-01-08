@@ -17,7 +17,6 @@ class MusicData {
 
   static Future<List<Track>> getTrackList(id) async {
     final url = '/music/' + id.toString();
-    print(url);
     final response = await httpManager.fetch(url);
     final result = response['items'];
     final trackList =

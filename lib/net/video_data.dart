@@ -7,11 +7,6 @@ import 'package:media_library/model/VideoTrailer.dart';
 class VideoData {
   static Future<List<Video>> getVideoList({page = 1, params = const {}}) async {
     final url = '/video';
-    print('net params' +
-        {
-          'page': page,
-          ...params,
-        }.toString());
     final response = await httpManager.fetch(url, queryParameters: {
       'page': page,
       ...params,
@@ -22,7 +17,6 @@ class VideoData {
           result.map<Video>((json) => Video.fromJson(json)).toList();
       return videoList;
     } catch (e) {
-      print(e);
       return [];
     }
   }
@@ -61,7 +55,6 @@ class VideoData {
           response.map<Video>((json) => Video.fromJson(json)).toList();
       return videoList;
     } catch (e) {
-      print(e);
       return [];
     }
   }

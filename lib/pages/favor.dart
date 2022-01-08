@@ -19,7 +19,6 @@ class _FavorState extends State<Favor> {
   @override
   void initState() {
     videos = GlobleCacheData.favorVideos;
-    print(videos);
     super.initState();
   }
 

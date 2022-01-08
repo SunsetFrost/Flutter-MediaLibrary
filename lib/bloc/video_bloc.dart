@@ -83,10 +83,8 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
 
       // fetch next search page
       final index = state.pageIndex + 1;
-      print('bloc search next results  page ' + index.toString());
       final videos =
           await VideoData.searchVideos(query: event.query, page: index);
-      print('bloc search next results' + videos.toString());
 
       videos.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
@@ -97,7 +95,6 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
               pageIndex: index,
             ));
     } catch (e) {
-      print(e.toString() + state.toString());
       emit(state.copyWith(status: VideoStatus.failure));
     }
   }

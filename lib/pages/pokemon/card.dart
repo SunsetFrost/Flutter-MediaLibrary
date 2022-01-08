@@ -58,12 +58,12 @@ class PokemonCard extends StatelessWidget {
                                         horizontal: 6, vertical: 2),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      color: Color(
-                                          pokemonTypeMap['dragon']!.color),
+                                      color:
+                                          Color(pokemonTypeMap[e.name]!.color),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
-                                      pokemonTypeMap['poison']!.name,
+                                      pokemonTypeMap[e.name]!.name,
                                       style:
                                           Theme.of(context).textTheme.headline5,
                                     ),
@@ -110,8 +110,11 @@ class PokemonCard extends StatelessWidget {
                             size: 12,
                           ),
                           Text(
-                            // pokemon.stats[0].base_stat.toString(),
-                            'test',
+                            pokemon.stats
+                                .reduce((value, element) => Stat(
+                                    'accm', value.baseStat + element.baseStat))
+                                .baseStat
+                                .toString(),
                             style: TextStyle(
                               color: Color.fromRGBO(40, 44, 82, 0.6),
                               fontFamily: 'IPix',

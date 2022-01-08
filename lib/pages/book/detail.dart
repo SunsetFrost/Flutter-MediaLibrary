@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:epub_viewer/epub_viewer.dart';
 
+import 'package:media_library/net/book_data.dart';
 import 'package:media_library/pages/book/routes.dart';
 
 class BookDetail extends StatelessWidget {
@@ -32,7 +33,8 @@ class BookDetail extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(book.volumeInfo.imageLinks.thumbnail),
+                image: NetworkImage(BookData.getBookImagePath(
+                    book.volumeInfo.imageLinks.smallThumbnail)),
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -72,7 +74,8 @@ class BookDetail extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      book.volumeInfo.imageLinks.smallThumbnail,
+                      BookData.getBookImagePath(
+                          book.volumeInfo.imageLinks.smallThumbnail),
                       fit: BoxFit.cover,
                     ),
                   ),

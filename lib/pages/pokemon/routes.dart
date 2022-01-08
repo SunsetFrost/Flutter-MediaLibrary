@@ -1,4 +1,4 @@
-const String listRoute = '/pokemon';
+const String listRoute = '/pokemon/list';
 const String detailRoute = '/pokemon/detail';
 
 class DetailArguments {
