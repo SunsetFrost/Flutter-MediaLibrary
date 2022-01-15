@@ -7,8 +7,15 @@ import 'package:media_library/model/MusicAlbum.dart';
 import 'package:media_library/net/music_data.dart';
 import 'package:media_library/pages/music/routes.dart' as routes;
 
-class MusicList extends StatelessWidget {
+class MusicList extends StatefulWidget {
   const MusicList({Key? key}) : super(key: key);
+
+  @override
+  State<MusicList> createState() => _MusicListState();
+}
+
+class _MusicListState extends State<MusicList> {
+  late ScrollController _scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -82,36 +89,6 @@ class MusicGrid extends StatelessWidget {
               ),
             },
           );
-          // return GestureDetector(
-          //   onTap: () {
-          //     Navigator.of(context).pushNamed(routes.detailRoute,
-          //         arguments: routes.DetailArguments(
-          //           albums[index].id,
-          //           albums[index].images[1].url,
-          //         ));
-          //   },
-          //   child: Column(
-          //     children: [
-          //       Container(
-          //           width: MediaQuery.of(context).size.width / 3.2,
-          //           height: MediaQuery.of(context).size.width / 3.2,
-          //           decoration: BoxDecoration(
-          //             image: DecorationImage(
-          //                 image: NetworkImage(albums[index].images[1].url),
-          //                 fit: BoxFit.contain),
-          //           )),
-          //       Text(
-          //         albums[index].name,
-          //         overflow: TextOverflow.ellipsis,
-          //       ),
-          //     ],
-          //   ),
-          // );
-          // Container(
-          //   width: MediaQuery.of(context).size.width / 3.8,
-          //   color: Colors.blueAccent,
-          //   child: Text(index.toString()),
-          // );
         });
   }
 }
