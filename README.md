@@ -29,7 +29,7 @@
     - [全局数据管理方案](#全局数据管理方案)
       - [concept](#concept)
       - [struct](#struct)
-      - [Bloc Event 传参](#bloc-event-传参)
+      - [Bloc](#bloc)
     - [数据初始化&持久化](#数据初始化持久化)
   - [组件](#组件)
     - [剑气加载动画](#剑气加载动画)
@@ -231,8 +231,21 @@ Bloc
   - Repository
   - Data Provider
 
-#### Bloc Event 传参
+#### Bloc 
+![bloc pattern](./assets/pic/bloc_pattern.png)
 
+Architecture
+- data layer
+- domain layer
+- feature layer
+  - presentation/UI (widgets)
+  - business logic (blocs/cubits)
+
+- Library
+  - Repository 
+    - cache 数据缓存
+    - equatable
+      > Note: We extend Equatable so that we can compare instances of GithubSearchEvent. By default, the equality operator returns true if and only if this and other are the same instance. 
 
 ### 数据初始化&持久化
 - share_preference 
