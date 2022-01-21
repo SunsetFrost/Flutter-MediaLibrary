@@ -247,6 +247,10 @@ Architecture
     - equatable
       > Note: We extend Equatable so that we can compare instances of GithubSearchEvent. By default, the equality operator returns true if and only if this and other are the same instance. 
 
+Dart Class
+- Extend
+- Mixin
+
 ### 数据初始化&持久化
 - share_preference 
 - path_provider
