@@ -5,34 +5,48 @@ part 'video.g.dart';
 @JsonSerializable()
 class Video {
   Video(
-    this.adult,
-    this.genreIds,
-    this.videoId,
-    this.originalLanguage,
-    this.originalTitle,
+    this.id,
     this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
     this.title,
+    this.popularity,
     this.video,
+    this.adult,
+    this.releaseDate,
     this.voteAverage,
     this.voteCount,
+    this.genreIds,
+    this.originalLanguage,
+    this.originalTitle,
+    // this.posterPath,
   );
 
-  final bool adult;
-  final List<int> genreIds;
-  final int videoId;
-  final String originalLanguage;
-  final String originalTitle;
+  final int id;
   final String overview;
-  final num popularity;
-  final String posterPath;
-  final String releaseDate;
   final String title;
+  final num popularity;
   final bool video;
+  final bool? adult;
+
+  @JsonKey(name: 'release_date')
+  final String releaseDate;
+
+  // @JsonKey(name: 'poster_path')
+  // final String posterPath;
+
+  @JsonKey(name: 'vote_average')
   final double voteAverage;
+
+  @JsonKey(name: 'vote_count')
   final int voteCount;
+
+  @JsonKey(name: 'genre_ids')
+  final List<int>? genreIds;
+
+  @JsonKey(name: 'original_language')
+  final String? originalLanguage;
+
+  @JsonKey(name: 'original_title')
+  final String? originalTitle;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 

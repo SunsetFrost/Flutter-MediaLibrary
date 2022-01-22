@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^4.4.0
+  common_api:
+    path: ../common_api
+  dio: ^4.0.4
 
 dev_dependencies:
   flutter_test:

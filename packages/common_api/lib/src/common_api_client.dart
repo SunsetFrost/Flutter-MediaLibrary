@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:common_api/common_api.dart';
 
 class CommonAPIRequestFailure implements Exception {}
 
@@ -9,18 +7,22 @@ class CommonAPINoFoundFailure implements Exception {}
 
 /// Common API Client
 class CommonAPIClient {
-  CommonAPIClient({required String baseUrl, Dio? dio})
+  CommonAPIClient(
+      {required String baseUrl,
+      Dio? dio,
+      this.recommandPattern = '/popular',
+      this.searchPattern = '/search/'})
       : _dio = dio ??
             Dio(
               BaseOptions(baseUrl: baseUrl),
             );
 
   final Dio _dio;
-  final String recommandPattern = '/popular/';
-  final String searchPattern = '/search/';
+  final String recommandPattern;
+  final String searchPattern;
 
   /// Get Recommand List
-  Future<Map<String, dynamic>> getRecommandList(
+  Future<List<dynamic>> getRecommandList(
       Map<String, dynamic> queryParams) async {
     final recommandResponse =
         await _dio.get(recommandPattern, queryParameters: queryParams);
@@ -29,13 +31,13 @@ class CommonAPIClient {
       throw CommonAPIRequestFailure();
     }
 
-    final commonJson = jsonDecode(recommandResponse.data) as List;
+    final commonJson = recommandResponse.data['results'] as List;
 
     if (commonJson.isEmpty) {
       throw CommonAPINoFoundFailure();
     }
 
-    return commonJson as Map<String, dynamic>;
+    return commonJson;
   }
 
   /// Get Search List

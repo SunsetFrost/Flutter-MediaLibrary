@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:dio/dio.dart';
 
 import 'package:media_library/widgets/library_card.dart';
 import 'package:media_library/pages/video/routes.dart' as video_routes;
 import 'package:media_library/pages/music/routes.dart' as music_routes;
 import 'package:media_library/pages/book/routes.dart' as book_routes;
 import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
+
+import 'package:moviedb_api/moviedb_api.dart';
 
 Map<String, LibraryCard> libraryCards = {
   '电影库': LibraryCard(
@@ -158,6 +161,21 @@ class Library extends StatelessWidget {
                 }),
               ),
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  MoviedbAPIClient movieAPI = new MoviedbAPIClient(
+                      baseUrl: 'http://127.0.0.1:3000/video',
+                      recommandPattern: '/',
+                      searchPattern: '/search/movie/');
+
+                  final version = movieAPI.version();
+                  print(version);
+                  final queryParams = {'page': 1};
+                  final recommand =
+                      await movieAPI.getRecommandList(queryParams);
+                  print('presetation layer' + recommand.toString());
+                },
+                child: Text('Test Movie API'))
           ],
         ),
       ),
