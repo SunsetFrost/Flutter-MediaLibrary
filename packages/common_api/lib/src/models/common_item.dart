@@ -10,3 +10,7 @@ class CommonItem {
   final String name;
   final String desc;
 }
+
+class CommonParams {
+  CommonParams();
+}

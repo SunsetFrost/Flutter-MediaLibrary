@@ -164,15 +164,12 @@ class Library extends StatelessWidget {
             ElevatedButton(
                 onPressed: () async {
                   MoviedbAPIClient movieAPI = new MoviedbAPIClient(
-                      baseUrl: 'http://127.0.0.1:3000/video',
-                      recommandPattern: '/',
-                      searchPattern: '/search/movie/');
+                    baseUrl: 'http://127.0.0.1:3000/video',
+                    recommandPattern: '/',
+                    searchPattern: '/search/movie/',
+                  );
 
-                  final version = movieAPI.version();
-                  print(version);
-                  final queryParams = {'page': 1};
-                  final recommand =
-                      await movieAPI.getRecommandList(queryParams);
+                  final recommand = await movieAPI.getRecommandList(1);
                   print('presetation layer' + recommand.toString());
                 },
                 child: Text('Test Movie API'))

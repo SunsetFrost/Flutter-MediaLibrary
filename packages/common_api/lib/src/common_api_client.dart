@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:common_api/common_api.dart';
 
 class CommonAPIRequestFailure implements Exception {}
 
@@ -22,8 +23,10 @@ class CommonAPIClient {
   final String searchPattern;
 
   /// Get Recommand List
-  Future<List<dynamic>> getRecommandList(
-      Map<String, dynamic> queryParams) async {
+  Future<List<dynamic>> getRecommandList(int page) async {
+    final queryParams = {
+      'page': page,
+    };
     final recommandResponse =
         await _dio.get(recommandPattern, queryParameters: queryParams);
 
@@ -41,10 +44,8 @@ class CommonAPIClient {
   }
 
   /// Get Search List
-  Future<Map<String, dynamic>> getSearchList(
-      Map<String, dynamic> queryParams) async {
-    final searchResponse =
-        await _dio.get(searchPattern, queryParameters: queryParams);
+  Future<Map<String, dynamic>> getSearchList({String? page}) async {
+    final searchResponse = await _dio.get(searchPattern);
 
     if (searchResponse.statusCode != 200) {
       throw CommonAPIRequestFailure();
