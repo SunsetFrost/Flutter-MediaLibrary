@@ -1,43 +1,39 @@
 import 'package:dio/dio.dart';
-import 'package:common_api/common_api.dart';
-import 'package:moviedb_api/moviedb_api.dart';
-import 'package:moviedb_api/src/models/video.dart';
 
-import 'models/models.dart';
+import 'package:moviedb_api/moviedb_api.dart';
+
+class MovieAPIRequestFailure implements Exception {}
 
 class MovieAPIConvertFailure implements Exception {}
 
-class MovieAPIQueryParams extends CommonParams {
-  MovieAPIQueryParams({required this.page}) : super();
+const String endPoint = '/video';
+const String recommandPattern = '/';
 
-  final int page;
-}
+class MoviedbAPIClient {
+  MoviedbAPIClient({
+    required this.baseUrl,
+  }) : this.dio = Dio(BaseOptions(baseUrl: baseUrl));
 
-class MoviedbAPIClient extends CommonAPIClient {
-  MoviedbAPIClient(
-      {required String baseUrl,
-      required String recommandPattern,
-      required String searchPattern,
-      Dio? dio})
-      : super(
-            baseUrl: baseUrl,
-            recommandPattern: recommandPattern,
-            searchPattern: searchPattern,
-            dio: dio);
+  final String baseUrl;
+  final Dio dio;
 
-  @override
-  Future<List<Video>> getRecommandList(int page) async {
-    final list = await super.getRecommandList(page);
+  Future<dynamic> getRecommandList(int page) async {
+    final params = {
+      'page': page,
+    };
+
     try {
-      final videoList =
-          list.map<Video>((json) => Video.fromJson(json)).toList();
-      return videoList;
+      final response =
+          await dio.get(endPoint + recommandPattern, queryParameters: params);
+      return response.data['results']
+          .map<Video>((json) => Video.fromJson(json))
+          .toList();
     } catch (e) {
-      throw MovieAPIConvertFailure();
+      throw MovieAPIRequestFailure();
     }
   }
 
-  String version() {
-    return 'version 0.0';
+  String get version {
+    return 'version 1.0';
   }
 }

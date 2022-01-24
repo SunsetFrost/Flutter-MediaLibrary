@@ -251,6 +251,13 @@ Dart Class
 - Extend
 - Mixin
 
+Abstract Bloc
+- bloc 1
+- bloc 2
+- bloc 3
+
+package: [get it](https://pub.dev/packages/get_it)
+
 ### 数据初始化&持久化
 - share_preference 
 - path_provider

@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:dio/dio.dart';
 
+import 'package:moviedb_api/moviedb_api.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/widgets/library_card.dart';
 import 'package:media_library/pages/video/routes.dart' as video_routes;
 import 'package:media_library/pages/music/routes.dart' as music_routes;
 import 'package:media_library/pages/book/routes.dart' as book_routes;
 import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
-
-import 'package:moviedb_api/moviedb_api.dart';
 
 Map<String, LibraryCard> libraryCards = {
   '电影库': LibraryCard(
@@ -164,9 +163,7 @@ class Library extends StatelessWidget {
             ElevatedButton(
                 onPressed: () async {
                   MoviedbAPIClient movieAPI = new MoviedbAPIClient(
-                    baseUrl: 'http://127.0.0.1:3000/video',
-                    recommandPattern: '/',
-                    searchPattern: '/search/movie/',
+                    baseUrl: backendURI,
                   );
 
                   final recommand = await movieAPI.getRecommandList(1);

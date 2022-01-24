@@ -17,10 +17,12 @@ class HttpManager {
     _dio.interceptors.add(new MockInterceptor());
   }
 
-  fetch(String url,
-      {dynamic params,
-      Map<String, dynamic>? queryParameters,
-      Options? option}) async {
+  fetch(
+    String url, {
+    dynamic params,
+    Map<String, dynamic>? queryParameters,
+    Options? option,
+  }) async {
     Response response;
 
     if (option == null) {
