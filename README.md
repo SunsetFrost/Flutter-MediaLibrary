@@ -30,6 +30,7 @@
       - [concept](#concept)
       - [struct](#struct)
       - [Bloc](#bloc)
+    - [refactor system structure](#refactor-system-structure)
     - [数据初始化&持久化](#数据初始化持久化)
   - [组件](#组件)
     - [剑气加载动画](#剑气加载动画)
@@ -257,6 +258,9 @@ Abstract Bloc
 - bloc 3
 
 package: [get it](https://pub.dev/packages/get_it)
+
+### refactor system structure 
+![structure](./assets/pic/structure.png)
 
 ### 数据初始化&持久化
 - share_preference 

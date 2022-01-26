@@ -1,36 +1,40 @@
-import 'package:dio/dio.dart';
-
+import 'package:common_api/common_api.dart';
 import 'package:moviedb_api/moviedb_api.dart';
-
-class MovieAPIRequestFailure implements Exception {}
 
 class MovieAPIConvertFailure implements Exception {}
 
-const String endPoint = '/video';
-const String recommandPattern = '/';
-
-class MoviedbAPIClient {
+class MoviedbAPIClient extends CommonAPI {
   MoviedbAPIClient({
-    required this.baseUrl,
-  }) : this.dio = Dio(BaseOptions(baseUrl: baseUrl));
+    required baseUrl,
+  }) : super(baseUrl: baseUrl);
 
-  final String baseUrl;
-  final Dio dio;
+  @override
+  String get endPoint {
+    return '/video';
+  }
 
-  Future<dynamic> getRecommandList(int page) async {
-    final params = {
-      'page': page,
-    };
+  @override
+  String get popularPattern {
+    return '/';
+  }
 
+  @override
+  String get searchPattern {
+    return '/search';
+  }
+
+  @override
+  Video toItem(Map<String, dynamic> json) {
     try {
-      final response =
-          await dio.get(endPoint + recommandPattern, queryParameters: params);
-      return response.data['results']
-          .map<Video>((json) => Video.fromJson(json))
-          .toList();
+      return Video.fromJson(json);
     } catch (e) {
-      throw MovieAPIRequestFailure();
+      throw MovieAPIConvertFailure();
     }
+  }
+
+  @override
+  List<dynamic> toList(Response res) {
+    return res.data['results'];
   }
 
   String get version {

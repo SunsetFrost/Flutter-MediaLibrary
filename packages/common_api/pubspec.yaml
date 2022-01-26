@@ -1,4 +1,4 @@
-name: library_respository
+name: common_api
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -8,10 +8,13 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  dio: ^4.0.4
   flutter:
     sdk: flutter
-  common_api:
-    path: ../common_api
+  moviedb_api:
+    path: ../moviedb_api
+  pokemon_api:
+    path: ../pokemon_api
 
 dev_dependencies:
   flutter_test:

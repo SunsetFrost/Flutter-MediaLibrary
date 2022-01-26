@@ -10,7 +10,7 @@ class PokemonAPIClient extends CommonAPI {
 
   @override
   String get endPoint {
-    return '/video';
+    return '/pokemon';
   }
 
   @override
@@ -25,11 +25,7 @@ class PokemonAPIClient extends CommonAPI {
 
   @override
   toItem(Map<String, dynamic> json) {
-    try {
-      return Pokemon.fromJson(json);
-    } catch (e) {
-      throw PokemonAPIConvertFailure();
-    }
+    return Pokemon.fromJson(json);
   }
 
   String get version {

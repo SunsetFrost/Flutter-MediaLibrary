@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
-import 'package:moviedb_api/moviedb_api.dart';
 import 'package:media_library/constants.dart';
 import 'package:media_library/widgets/library_card.dart';
 import 'package:media_library/pages/video/routes.dart' as video_routes;
@@ -160,16 +159,6 @@ class Library extends StatelessWidget {
                 }),
               ),
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  MoviedbAPIClient movieAPI = new MoviedbAPIClient(
-                    baseUrl: backendURI,
-                  );
-
-                  final recommand = await movieAPI.getRecommandList(1);
-                  print('presetation layer' + recommand.toString());
-                },
-                child: Text('Test Movie API'))
           ],
         ),
       ),
