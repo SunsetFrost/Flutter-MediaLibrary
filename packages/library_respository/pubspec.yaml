@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.3
   common_api:
     path: ../common_api
 
