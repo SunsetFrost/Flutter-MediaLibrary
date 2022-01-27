@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:library_respository/library_repository.dart';
+import 'package:library_repository/library_repository.dart';
 
 class CacheKey extends Equatable {
   const CacheKey(this.type, this.params);
