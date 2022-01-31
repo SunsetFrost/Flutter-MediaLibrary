@@ -5,15 +5,14 @@ abstract class ListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchDefaultList extends ListEvent {
-  FetchDefaultList({this.params});
-
+class FetchRecommandList extends ListEvent {
   final Map<String, dynamic>? params;
+
+  FetchRecommandList({this.params});
 }
 
 class FetchSearchList extends ListEvent {
-  FetchSearchList({required this.query, this.params});
-
   final String query;
-  final Map<String, dynamic>? params;
+
+  FetchSearchList(this.query);
 }

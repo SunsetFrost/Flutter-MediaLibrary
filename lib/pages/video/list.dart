@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:media_library/bloc/video_bloc.dart';
+// import 'package:media_library/bloc/video_bloc.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/model/Video.dart';
@@ -14,8 +14,8 @@ class VideoListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => VideoBloc()..add(VideoFetchPopular()),
+    return Container(
+      // create: (_) => VideoBloc()..add(VideoFetchPopular()),
       child: Center(child: Text('refactor')),
     );
   }
