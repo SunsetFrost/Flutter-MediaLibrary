@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:media_library/bloc/video_bloc.dart';
+
+import 'package:media_library/bloc/list_bloc.dart';
+import 'package:library_repository/library_repository.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
-import 'package:media_library/model/Video.dart';
-import 'package:media_library/net/video_data.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
 import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/search_filter.dart';
@@ -16,6 +16,7 @@ class VideoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // create: (_) => VideoBloc()..add(VideoFetchPopular()),
+      // create: (_) => ListBloc(libraryRepository: libraryRepository),
       child: Center(child: Text('refactor')),
     );
   }

@@ -17,9 +17,8 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class ListBloc extends Bloc<ListEvent, ListState> {
-  ListBloc({required String baseUrl, required APIType libraryType})
-      : _libraryRepository =
-            LibraryRepository(baseUrl: baseUrl, type: libraryType),
+  ListBloc({required LibraryRepository libraryRepository})
+      : _libraryRepository = libraryRepository,
         super(const ListState()) {
     on<FetchRecommandList>(_onFetchRecommandList,
         transformer: throttleDroppable(throttleDuration));
@@ -39,15 +38,16 @@ class ListBloc extends Bloc<ListEvent, ListState> {
         'page': state.pageIndex + 1,
       };
       final items = await _libraryRepository.getPopularList(parms);
-      print(items);
 
-      items.isEmpty
-          ? emit(state.copyWith(hasReachedMax: true))
-          : emit(state.copyWith(
-              status: Status.success,
-              type: Type.popular,
-              items: List.of(state.items)..addAll(items),
-            ));
+      // items.isEmpty
+      //     ? emit(state.copyWith(hasReachedMax: true))
+      //     : emit(state.copyWith(
+      //         status: Status.success,
+      //         type: Type.popular,
+      //         items: List.of(state.items)..addAll(items),
+      //       ));
+
+      emit(state.copyWith(status: Status.success));
     } catch (e) {
       print(e);
     }
