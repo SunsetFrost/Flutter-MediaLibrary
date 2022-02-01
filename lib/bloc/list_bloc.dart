@@ -34,20 +34,18 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ) async {
     if (state.hasReachedMax) return;
     try {
-      final parms = {
-        'page': state.pageIndex + 1,
+      final params = {
+        'page': 1,
       };
-      final items = await _libraryRepository.getPopularList(parms);
+      final items = await _libraryRepository.getPopularList(params);
 
-      // items.isEmpty
-      //     ? emit(state.copyWith(hasReachedMax: true))
-      //     : emit(state.copyWith(
-      //         status: Status.success,
-      //         type: Type.popular,
-      //         items: List.of(state.items)..addAll(items),
-      //       ));
-
-      emit(state.copyWith(status: Status.success));
+      items.isEmpty
+          ? emit(state.copyWith(hasReachedMax: true))
+          : emit(state.copyWith(
+              status: Status.success,
+              type: Type.popular,
+              items: List.of(state.items)..addAll(items),
+            ));
     } catch (e) {
       print(e);
     }

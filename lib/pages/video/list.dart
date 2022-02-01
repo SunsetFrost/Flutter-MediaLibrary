@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:media_library/bloc/list_bloc.dart';
 import 'package:library_repository/library_repository.dart';
+import 'package:moviedb_api/moviedb_api.dart';
 
 import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
@@ -14,11 +15,48 @@ class VideoListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // create: (_) => VideoBloc()..add(VideoFetchPopular()),
-      // create: (_) => ListBloc(libraryRepository: libraryRepository),
-      child: Center(child: Text('refactor')),
+    return BlocProvider(
+      create: (context) => ListBloc(
+          libraryRepository: LibraryRepository(
+              baseUrl: 'http://127.0.0.1:3000', type: APIType.movie))
+        ..add(FetchRecommandList(params: const {'page': 1})),
+      child: VideoLibrary(),
     );
+  }
+}
+
+class VideoLibrary extends StatefulWidget {
+  const VideoLibrary({Key? key}) : super(key: key);
+
+  @override
+  _VideoLibraryState createState() => _VideoLibraryState();
+}
+
+class _VideoLibraryState extends State<VideoLibrary> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ListBloc, ListState>(
+      builder: (context, state) {
+        return VideoList(videos: context.read<ListBloc>().state.items);
+        // return Text(context.read<ListBloc>().state.items.length.toString());
+      },
+    );
+  }
+}
+
+class VideoList extends StatelessWidget {
+  const VideoList({Key? key, required this.videos}) : super(key: key);
+
+  final List<Video> videos;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(itemBuilder: (BuildContext context, int index) {
+      return ListTile(
+        title: Text(videos[index].title),
+        subtitle: Text(videos[index].overview),
+      );
+    });
   }
 }
 

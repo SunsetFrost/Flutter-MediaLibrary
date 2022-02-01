@@ -11,7 +11,7 @@ void main() {
   group('bloc test', () {
     late LibraryRepository libraryRepository;
 
-    setUpAll(() {
+    setUp(() {
       final baseUrl = 'http://127.0.0.1:3000';
       final type = APIType.movie;
       libraryRepository = LibraryRepository(baseUrl: baseUrl, type: type);
@@ -21,14 +21,16 @@ void main() {
       return ListBloc(libraryRepository: libraryRepository);
     }
 
-    blocTest<ListBloc, ListState>(
-      'list bloc test',
-      build: buildBloc,
-      act: (bloc) => bloc.add(FetchRecommandList(params: {'page': 1})),
-      expect: () => [-1],
-    );
+    group('fetch list', () {
+      blocTest<ListBloc, ListState>(
+        'list bloc test',
+        build: buildBloc,
+        act: (bloc) => bloc.add(FetchRecommandList(params: {'page': 1})),
+        expect: () => [ListState()],
+      );
+    });
 
-    test('get data from cache', () async {
+    test('library repository', () async {
       final result2 = await libraryRepository.getPopularList({'page': 1});
       print(result2);
       expect(result2, isList);
