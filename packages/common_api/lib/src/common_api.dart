@@ -43,13 +43,13 @@ abstract class CommonAPI {
   }
 
   Future<List<dynamic>> getSearchList(Map<String, dynamic> params) async {
-    try {
-      final response =
-          await _dio.get(endPoint + searchPattern, queryParameters: params);
-      return toList(response).map((json) => toItem(json)).toList();
-    } catch (e) {
+    final response =
+        await _dio.get(endPoint + searchPattern, queryParameters: params);
+
+    if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
+    return toList(response).map((json) => toItem(json)).toList();
   }
 
   Future<dynamic> getDetail(String id) async {

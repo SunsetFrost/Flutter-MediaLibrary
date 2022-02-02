@@ -21,8 +21,8 @@ void main() {
     final repo = LibraryRepository(
         baseUrl: 'http://127.0.0.1:3000', type: APIType.movie);
 
-    await repo.getPopularList({'page': 1});
-    final result2 = await repo.getPopularList({'page': 1});
+    // await repo.getPopularList({'page': 1});
+    final result2 = await repo.getSearchList({'text': 'harry'});
     print(result2);
     expect(result2, isList);
   });

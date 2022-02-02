@@ -3,7 +3,7 @@ part of 'list_bloc.dart';
 enum Type { popular, search }
 enum Status { initial, success, failure }
 
-class ListState extends Equatable {
+class ListState<T> extends Equatable {
   const ListState({
     this.status = Status.initial,
     this.type = Type.popular,
@@ -16,7 +16,7 @@ class ListState extends Equatable {
 
   final Status status;
   final Type type;
-  final List<dynamic> items;
+  final List<T> items;
   final bool hasReachedMax;
   final int pageIndex;
   final String searchText;
@@ -25,7 +25,7 @@ class ListState extends Equatable {
   ListState copyWith({
     Status? status,
     Type? type,
-    List<dynamic>? items,
+    List<T>? items,
     bool? hasReachedMax,
     int? pageIndex,
     String? searchText,

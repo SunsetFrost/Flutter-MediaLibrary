@@ -20,7 +20,7 @@ class MoviedbAPIClient extends CommonAPI {
 
   @override
   String get searchPattern {
-    return '/search';
+    return '/search/movie';
   }
 
   @override
@@ -34,7 +34,7 @@ class MoviedbAPIClient extends CommonAPI {
 
   @override
   List<dynamic> toList(Response res) {
-    return res.data['results'];
+    return res.data;
   }
 
   String get version {

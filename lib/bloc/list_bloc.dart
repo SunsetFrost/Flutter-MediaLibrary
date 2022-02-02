@@ -33,87 +33,60 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     Emitter<ListState> emit,
   ) async {
     if (state.hasReachedMax) return;
-    try {
-      final params = {
-        'page': 1,
-      };
-      final items = await _libraryRepository.getPopularList(params);
 
-      items.isEmpty
-          ? emit(state.copyWith(hasReachedMax: true))
-          : emit(state.copyWith(
-              status: Status.success,
-              type: Type.popular,
-              items: List.of(state.items)..addAll(items),
-            ));
-    } catch (e) {
-      print(e);
-    }
-    // try {
-    //   // initial
-    //   if (state.status == VideoStatus.initial ||
-    //       state.type == VideoType.search) {
-    //     final videos = await VideoData.getVideoList();
-    //     return emit(state.copyWith(
-    //       status: VideoStatus.success,
-    //       type: VideoType.popular,
-    //       videos: videos,
-    //       hasReachedMax: false,
-    //       pageIndex: 1,
-    //     ));
-    //   }
-    //   // fetch next page
-    //   final videos =
-    //       await VideoData.getVideoList(page: index, params: event.params);
+    final pageIndex = state.pageIndex + 1;
+    final params = {
+      'page': pageIndex,
+    };
+    final items = await _libraryRepository.getPopularList(params);
 
-    //   videos.isEmpty
-    //       ? emit(state.copyWith(hasReachedMax: true))
-    //       : emit(state.copyWith(
-    //           status: VideoStatus.success,
-    //           type: VideoType.popular,
-    //           videos: List.of(state.videos)..addAll(videos),
-    //           hasReachedMax: false,
-    //           pageIndex: index));
-    // } catch (e) {
-    //   emit(state.copyWith(status: VideoStatus.failure));
-    // }
+    items.isEmpty
+        ? emit(state.copyWith(hasReachedMax: true))
+        : emit(state.copyWith(
+            status: Status.success,
+            type: Type.popular,
+            items: List.of(state.items)..addAll(items),
+            hasReachedMax: false,
+            pageIndex: pageIndex));
   }
 
   Future<void> _onFetchSearchList(
     FetchSearchList event,
     Emitter<ListState> emit,
   ) async {
-    // if (state.type == VideoType.search && state.hasReachedMax) return;
-    // try {
-    //   // if search text changed, initial
-    //   if (state.searchText != event.query) {
-    //     final videos = await VideoData.searchVideos(query: event.query);
+    if (state.hasReachedMax) return;
+    try {
+      // if search text changed, initial
+      if (state.searchText != event.query) {
+        final items = await _libraryRepository.getSearchList({
+          'text': event.query,
+        });
 
-    //     return emit(state.copyWith(
-    //       status: VideoStatus.success,
-    //       type: VideoType.search,
-    //       videos: videos,
-    //       hasReachedMax: false,
-    //       pageIndex: 1,
-    //       searchText: event.query,
-    //     ));
-    //   }
+        return emit(state.copyWith(
+          status: Status.success,
+          type: Type.search,
+          items: items,
+          hasReachedMax: false,
+          pageIndex: 1,
+          searchText: event.query,
+        ));
+      }
 
-    //   // fetch next search page
-    //   final index = state.pageIndex + 1;
-    //   final videos =
-    //       await VideoData.searchVideos(query: event.query, page: index);
+      // fetch next search page
+      final index = state.pageIndex + 1;
+      final items = await _libraryRepository
+          .getSearchList({'query': event.query, 'page': index});
 
-    //   videos.isEmpty
-    //       ? emit(state.copyWith(hasReachedMax: true))
-    //       : emit(state.copyWith(
-    //           status: VideoStatus.success,
-    //           type: VideoType.search,
-    //           videos: List.of(state.videos)..addAll(videos),
-    //           pageIndex: index,
-    //         ));
-    // } catch (e) {
-    //   emit(state.copyWith(status: VideoStatus.failure));
-    // }
+      items.isEmpty
+          ? emit(state.copyWith(hasReachedMax: true))
+          : emit(state.copyWith(
+              status: Status.success,
+              type: Type.search,
+              items: List.of(state.items)..addAll(items),
+              pageIndex: index,
+            ));
+    } catch (e) {
+      emit(state.copyWith(status: Status.failure));
+    }
   }
 }
