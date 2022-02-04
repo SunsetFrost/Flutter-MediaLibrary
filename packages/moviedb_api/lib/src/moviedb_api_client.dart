@@ -34,7 +34,7 @@ class MoviedbAPIClient extends CommonAPI {
 
   @override
   List<dynamic> toList(Response res) {
-    return res.data;
+    return res.data['results'];
   }
 
   String get version {

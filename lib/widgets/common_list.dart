@@ -4,9 +4,16 @@ import 'package:media_library/model/Card.dart';
 import 'package:flutter/widgets.dart';
 
 class CommonList extends StatefulWidget {
-  const CommonList({Key? key, required this.videos}) : super(key: key);
+  const CommonList(
+      {Key? key,
+      required this.items,
+      required this.fetchList,
+      required this.searchList})
+      : super(key: key);
 
-  final List<dynamic> videos;
+  final List<dynamic> items;
+  final VoidCallback fetchList;
+  final VoidCallback searchList;
 
   @override
   _CommonListState createState() => _CommonListState();
@@ -15,16 +22,34 @@ class CommonList extends StatefulWidget {
 class _CommonListState extends State<CommonList> {
   @override
   Widget build(BuildContext context) {
-    if (widget.videos.isEmpty) {
-      return CircularProgressIndicator();
-    }
-    return ListView.builder(
-        itemCount: widget.videos.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(widget.videos[index].title),
-            subtitle: Text(widget.videos[index].overview),
-          );
-        });
+    return Column(
+      children: [
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: widget.fetchList,
+              child: Text('Fetch Items'),
+            ),
+            ElevatedButton(
+              onPressed: widget.searchList,
+              child: Text('Search Items'),
+            ),
+          ],
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: widget.items.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (widget.items.isEmpty) {
+                return Center(child: Text('暂无数据'));
+              }
+              return ListTile(
+                title: Text(widget.items[index].id.toString()),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

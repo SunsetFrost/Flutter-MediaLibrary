@@ -8,6 +8,7 @@ import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
 import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/search_filter.dart';
+import 'package:media_library/widgets/common_list.dart';
 
 class VideoListPage extends StatelessWidget {
   const VideoListPage({Key? key}) : super(key: key);
@@ -16,8 +17,9 @@ class VideoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => ListBloc(
-            libraryRepository: LibraryRepository(
-                baseUrl: 'http://127.0.0.1:3000', type: APIType.movie)),
+              libraryRepository: LibraryRepository(
+                  baseUrl: 'http://127.0.0.1:3000', type: APIType.movie),
+            ),
         child: SafeArea(
           child: Scaffold(
             body: VideoLibrary(),
@@ -39,28 +41,14 @@ class _VideoLibraryState extends State<VideoLibrary> {
     return BlocBuilder<ListBloc, ListState>(
       builder: (context, state) {
         final items = context.read<ListBloc>().state.items;
-        return Column(
-          children: [
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<ListBloc>().add(FetchRecommandList());
-                  },
-                  child: Text('Fetch Movie'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<ListBloc>().add(FetchSearchList('harry'));
-                  },
-                  child: Text('Search Movie'),
-                ),
-              ],
-            ),
-            Expanded(
-              child: VideoList(videos: items),
-            ),
-          ],
+        return CommonList(
+          items: items,
+          fetchList: () {
+            context.read<ListBloc>().add(FetchRecommandList());
+          },
+          searchList: () {
+            context.read<ListBloc>().add(FetchSearchList('harry'));
+          },
         );
       },
     );

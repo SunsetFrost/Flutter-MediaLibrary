@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:media_library/bloc/list_bloc.dart';
+import 'package:library_repository/library_repository.dart';
 
 import 'package:media_library/model/Pokemon.dart';
 import 'package:media_library/net/pokemon_data.dart';
+import 'package:media_library/widgets/common_list.dart';
 import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/pages/pokemon/card.dart';
 import 'package:media_library/pages/pokemon/app.dart';
@@ -41,24 +46,52 @@ class PokemonList extends StatelessWidget {
               ),
               FilterWidget(),
               Expanded(
-                  child: FutureBuilder<List<Pokemon>>(
-                      future: PokemonData.getPokemonList(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return PokemonGrid(pokemons: snapshot.data!);
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-                        return const Center(
-                          child: SwordLoading(
-                            loadColor: Colors.white,
-                            size: 60,
-                          ),
-                        );
-                      }))
+                child: PokemonBlocTest(),
+                // if (snapshot.hasData) {
+                //   return PokemonGrid(pokemons: snapshot.data!);
+                // } else if (snapshot.hasError) {
+                //   return Text('${snapshot.error}');
+                // }
+                // return const Center(
+                //   child: SwordLoading(
+                //     loadColor: Colors.white,
+                //     size: 60,
+                //   ),
+                // );
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class PokemonBlocTest extends StatelessWidget {
+  const PokemonBlocTest({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return ListBloc(
+          libraryRepository: LibraryRepository(
+              baseUrl: 'http://127.0.0.1:3000', type: APIType.pokemon),
+        );
+      },
+      child: BlocBuilder<ListBloc, ListState>(
+        builder: (context, snapshot) {
+          final items = context.read<ListBloc>().state.items;
+          return CommonList(
+            items: items,
+            fetchList: () {
+              context.read<ListBloc>().add(FetchRecommandList());
+            },
+            searchList: () {
+              context.read<ListBloc>().add(FetchSearchList('pica'));
+            },
+          );
+        },
       ),
     );
   }

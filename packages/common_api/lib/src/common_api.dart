@@ -17,7 +17,7 @@ abstract class CommonAPI {
     } else if (type == APIType.pokemon) {
       return PokemonAPIClient(baseUrl: baseUrl);
     } else {
-      throw Exception('initialize error');
+      throw Exception('api initialize error');
     }
   }
 
@@ -33,13 +33,13 @@ abstract class CommonAPI {
   String get searchPattern;
 
   Future<List<dynamic>> getPopularList(Map<String, dynamic> params) async {
-    try {
-      final response =
-          await _dio.get(endPoint + popularPattern, queryParameters: params);
-      return toList(response).map((json) => toItem(json)).toList();
-    } catch (e) {
+    final response =
+        await _dio.get(endPoint + popularPattern, queryParameters: params);
+
+    if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
+    return toList(response).map((json) => toItem(json)).toList();
   }
 
   Future<List<dynamic>> getSearchList(Map<String, dynamic> params) async {
@@ -53,15 +53,11 @@ abstract class CommonAPI {
   }
 
   Future<dynamic> getDetail(String id) async {
-    // try {
     final response = await _dio.get(endPoint + '/' + id);
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
     return toItem(response.data);
-    // } catch (e) {
-    //   throw CommonAPIRequestFailure();
-    // }
   }
 
   Object toItem(Map<String, dynamic> json);
