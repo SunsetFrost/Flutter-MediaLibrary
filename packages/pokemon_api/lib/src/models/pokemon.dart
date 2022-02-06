@@ -9,17 +9,27 @@ class Pokemon {
   List<Type> types;
   List<Stat> stats;
 
+  @JsonKey(
+    name: 'sprites',
+    fromJson: spritesToImage,
+  )
+  String image;
+
   Pokemon(
     this.id,
     this.name,
     this.types,
     this.stats,
+    this.image,
   );
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
       _$PokemonFromJson(json);
 
   Map<String, dynamic> toJson() => _$PokemonToJson(this);
+
+  static String spritesToImage(dynamic sprites) => sprites['versions']
+      ['generation-v']['black-white']['animated']['front_default'];
 }
 
 @JsonSerializable(includeIfNull: false)
