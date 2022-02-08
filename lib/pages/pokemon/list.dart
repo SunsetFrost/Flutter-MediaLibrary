@@ -5,9 +5,8 @@ import 'package:media_library/bloc/list_bloc.dart';
 import 'package:library_repository/library_repository.dart';
 
 import 'package:media_library/model/Pokemon.dart';
-import 'package:media_library/net/pokemon_data.dart';
 import 'package:media_library/widgets/common_list.dart';
-import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/pages/pokemon/card.dart';
 import 'package:media_library/pages/pokemon/app.dart';
 
@@ -40,11 +39,11 @@ class PokemonList extends StatelessWidget {
                   ),
                 ),
               ),
-              SearchWidget(),
-              SizedBox(
-                height: 12,
-              ),
-              FilterWidget(),
+              // SearchWidget(),
+              // SizedBox(
+              //   height: 12,
+              // ),
+              // FilterWidget(),
               Expanded(
                 child: PokemonBlocTest(),
                 // if (snapshot.hasData) {
@@ -62,36 +61,6 @@ class PokemonList extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PokemonBlocTest extends StatelessWidget {
-  const PokemonBlocTest({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return ListBloc(
-          libraryRepository: LibraryRepository(
-              baseUrl: 'http://127.0.0.1:3000', type: APIType.pokemon),
-        );
-      },
-      child: BlocBuilder<ListBloc, ListState>(
-        builder: (context, snapshot) {
-          final items = context.read<ListBloc>().state.items;
-          return CommonList(
-            items: items,
-            fetchList: () {
-              context.read<ListBloc>().add(FetchRecommandList());
-            },
-            searchList: () {
-              context.read<ListBloc>().add(FetchSearchList('pica'));
-            },
-          );
-        },
       ),
     );
   }
@@ -227,6 +196,42 @@ class _FilterWidgetState extends State<FilterWidget> {
               padding: EdgeInsets.symmetric(horizontal: 4),
             ))
       ],
+    );
+  }
+}
+
+class PokemonBlocTest extends StatelessWidget {
+  const PokemonBlocTest({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return ListBloc(
+          libraryRepository: LibraryRepository(
+              baseUrl: 'http://127.0.0.1:3000', type: APIType.pokemon),
+        );
+      },
+      child: BlocBuilder<ListBloc, ListState>(
+        builder: (context, snapshot) {
+          final items = context.read<ListBloc>().state.items;
+          return CommonList(
+            items: items,
+            fetchList: () {
+              context.read<ListBloc>().add(FetchRecommandList());
+            },
+            searchList: () {
+              context.read<ListBloc>().add(FetchSearchList('pica'));
+            },
+            cardBuilder: (context, index) {
+              return CommonCard(
+                name: items[index].name,
+                imagePath: items[index].image,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

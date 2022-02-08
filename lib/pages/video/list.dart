@@ -49,6 +49,12 @@ class _VideoLibraryState extends State<VideoLibrary> {
           searchList: () {
             context.read<ListBloc>().add(FetchSearchList('harry'));
           },
+          cardBuilder: (context, index) {
+            return CommonCard(
+              name: items[index]['title'],
+              imagePath: items[index]['originalTitle'],
+            );
+          },
         );
       },
     );
