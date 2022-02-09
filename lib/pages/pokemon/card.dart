@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:pokemon_api/pokemon_api.dart';
 import 'package:media_library/constants.dart';
-import 'package:media_library/model/Pokemon.dart';
 import 'package:media_library/pages/pokemon/routes.dart' as routes;
 
 class PokemonCard extends StatelessWidget {
@@ -9,13 +9,14 @@ class PokemonCard extends StatelessWidget {
 
   final Pokemon pokemon;
 
-  String _getImageUrl(sourceIndex) {
-    final imgUrl = 'assets/pic/' + sourceIndex.toString() + '的副本.gif';
-    return imgUrl;
-  }
+  // String _getImageUrl(sourceIndex) {
+  //   final imgUrl = 'assets/pic/' + sourceIndex.toString() + '的副本.gif';
+  //   return imgUrl;
+  // }
 
   @override
   Widget build(BuildContext context) {
+    print(pokemon.image);
     return GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(routes.detailRoute,
@@ -76,20 +77,28 @@ class PokemonCard extends StatelessWidget {
               Align(
                 alignment: Alignment(0, -1.4),
                 child: Hero(
-                    tag: pokemon.id,
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      alignment: Alignment.bottomCenter,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage(
-                          _getImageUrl(pokemon.id),
-                        ),
-                        alignment: Alignment.bottomCenter,
-                        fit: BoxFit.scaleDown,
-                      )),
-                    )),
+                  tag: pokemon.id,
+                  child: Image.network(
+                    pokemon.image,
+                    width: 80,
+                    height: 80,
+                    alignment: Alignment.bottomCenter,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                // Container(
+                //   width: 80,
+                //   height: 80,
+                //   alignment: Alignment.bottomCenter,
+                //   decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //     image: AssetImage(
+                //       _getImageUrl(pokemon.id),
+                //     ),
+                //     alignment: Alignment.bottomCenter,
+                //     fit: BoxFit.scaleDown,
+                //   )),
+                // )),
               ),
               Align(
                   alignment: Alignment(0, .9),

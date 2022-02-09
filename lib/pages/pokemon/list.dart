@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:media_library/bloc/list_bloc.dart';
 import 'package:library_repository/library_repository.dart';
+import 'package:pokemon_api/pokemon_api.dart';
 
-import 'package:media_library/model/Pokemon.dart';
+import 'package:media_library/bloc/list_bloc.dart';
 import 'package:media_library/widgets/common_list.dart';
-import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/pages/pokemon/card.dart';
 import 'package:media_library/pages/pokemon/app.dart';
 
@@ -224,10 +223,8 @@ class PokemonBlocTest extends StatelessWidget {
               context.read<ListBloc>().add(FetchSearchList('pica'));
             },
             cardBuilder: (context, index) {
-              return CommonCard(
-                name: items[index].name,
-                imagePath: items[index].image,
-              );
+              final pokemon = items[index] as Pokemon;
+              return PokemonCard(pokemon: pokemon);
             },
           );
         },
