@@ -60,18 +60,18 @@ class _CommonListState extends State<CommonList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            ElevatedButton(
-              onPressed: widget.fetchList,
-              child: Text('Fetch Items'),
-            ),
-            ElevatedButton(
-              onPressed: widget.searchList,
-              child: Text('Search Items'),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     ElevatedButton(
+        //       onPressed: widget.fetchList,
+        //       child: Text('Fetch Items'),
+        //     ),
+        //     ElevatedButton(
+        //       onPressed: widget.searchList,
+        //       child: Text('Search Items'),
+        //     ),
+        //   ],
+        // ),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),

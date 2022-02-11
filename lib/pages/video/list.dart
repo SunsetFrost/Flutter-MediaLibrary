@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_library/bloc/list_bloc.dart';
 import 'package:library_repository/library_repository.dart';
 
-import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
-import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/search_filter.dart';
+import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/common_list.dart';
 
 class VideoListPage extends StatelessWidget {
@@ -17,13 +17,11 @@ class VideoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => ListBloc(
-              libraryRepository: LibraryRepository(
-                  baseUrl: 'http://127.0.0.1:3000', type: APIType.movie),
-            ),
-        child: SafeArea(
-          child: Scaffold(
-            body: VideoLibrary(),
-          ),
+              libraryRepository:
+                  LibraryRepository(baseUrl: backendURI, type: APIType.movie),
+            )..add(FetchRecommandList()),
+        child: Scaffold(
+          body: VideoLibrary(),
         ));
   }
 }
@@ -41,20 +39,36 @@ class _VideoLibraryState extends State<VideoLibrary> {
     return BlocBuilder<ListBloc, ListState>(
       builder: (context, state) {
         final items = context.read<ListBloc>().state.items;
-        return CommonList(
-          items: items,
-          fetchList: () {
-            context.read<ListBloc>().add(FetchRecommandList());
-          },
-          searchList: () {
-            context.read<ListBloc>().add(FetchSearchList('harry'));
-          },
-          cardBuilder: (context, index) {
-            return CommonCard(
-              name: items[index]['title'],
-              imagePath: items[index]['originalTitle'],
-            );
-          },
+        return Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [Color(0xFF3F3F3F), Color(0xFF181818)],
+                  center: Alignment(0.6, -0.3),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: CommonList(
+                items: items,
+                fetchList: () {
+                  context.read<ListBloc>().add(FetchRecommandList());
+                },
+                searchList: () {
+                  context.read<ListBloc>().add(FetchSearchList('harry'));
+                },
+                cardBuilder: (context, index) {
+                  return CommonCard(
+                    name: items[index].title,
+                    imagePath: items[index].posterPath,
+                    aspect: 1.3,
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );

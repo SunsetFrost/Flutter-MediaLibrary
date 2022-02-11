@@ -19,6 +19,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       json['original_language'] as String?,
       json['original_title'] as String?,
+      Video.imageToMiddleSizeImagePath(json['poster_path'] as String),
     );
 
 Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
@@ -29,6 +30,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'video': instance.video,
       'adult': instance.adult,
       'release_date': instance.releaseDate,
+      'poster_path': instance.posterPath,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
       'genre_ids': instance.genreIds,

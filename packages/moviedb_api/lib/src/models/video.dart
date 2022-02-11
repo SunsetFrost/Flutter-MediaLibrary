@@ -17,7 +17,7 @@ class Video {
     this.genreIds,
     this.originalLanguage,
     this.originalTitle,
-    // this.posterPath,
+    this.posterPath,
   );
 
   final int id;
@@ -30,8 +30,8 @@ class Video {
   @JsonKey(name: 'release_date')
   final String releaseDate;
 
-  // @JsonKey(name: 'poster_path')
-  // final String posterPath;
+  @JsonKey(name: 'poster_path', fromJson: imageToMiddleSizeImagePath)
+  final String posterPath;
 
   @JsonKey(name: 'vote_average')
   final double voteAverage;
@@ -51,4 +51,9 @@ class Video {
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 
   Map<String, dynamic> toJson() => _$VideoToJson(this);
+
+  static String imageToMiddleSizeImagePath(String image) {
+    const String videoImageUrl = 'https://image.tmdb.org/t/p/w154/';
+    return videoImageUrl + image;
+  }
 }
