@@ -30,11 +30,11 @@ class Album {
   final String id;
   final List<Images> images;
   final String name;
-  final String releaseDate;
+  final String? releaseDate;
 
   @JsonKey(name: 'total_tracks')
-  final int totalTracks;
-  final String type;
+  final int? totalTracks;
+  final String? type;
   final String uri;
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);

@@ -20,9 +20,9 @@ Album _$AlbumFromJson(Map<String, dynamic> json) => Album(
           .map((e) => Images.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['name'] as String,
-      json['releaseDate'] as String,
-      json['total_tracks'] as int,
-      json['type'] as String,
+      json['releaseDate'] as String?,
+      json['total_tracks'] as int?,
+      json['type'] as String?,
       json['uri'] as String,
     );
 
