@@ -26,4 +26,14 @@ void main() {
     print(result2);
     expect(result2, isList);
   });
+
+  test('get book data', () async {
+    final repo =
+        LibraryRepository(baseUrl: 'http://127.0.0.1:3000', type: APIType.book);
+
+    // await repo.getPopularList({'page': 1});
+    final result2 = await repo.getPopularList({});
+    print(result2);
+    expect(result2, isList);
+  });
 }

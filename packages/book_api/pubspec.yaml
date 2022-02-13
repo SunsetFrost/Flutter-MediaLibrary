@@ -1,29 +1,25 @@
-name: common_api
+name: book_api
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
-  dio: ^4.0.4
   flutter:
     sdk: flutter
-  moviedb_api:
-    path: ../moviedb_api
-  pokemon_api:
-    path: ../pokemon_api
-  spotify_api:
-    path: ../spotify_api
-  book_api:
-    path: ../book_api
+  json_annotation: ^4.4.0
+  common_api:
+    path: ../common_api
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  json_serializable: ^6.1.4
+  build_runner: ^2.1.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
