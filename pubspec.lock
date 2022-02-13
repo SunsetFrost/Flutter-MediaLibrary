@@ -714,6 +714,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
+  spotify_api:
+    dependency: transitive
+    description:
+      path: "packages/spotify_api"
+      relative: true
+    source: path
+    version: "0.0.0"
   stack_trace:
     dependency: transitive
     description:

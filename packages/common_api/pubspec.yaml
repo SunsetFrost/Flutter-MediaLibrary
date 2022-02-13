@@ -15,6 +15,8 @@ dependencies:
     path: ../moviedb_api
   pokemon_api:
     path: ../pokemon_api
+  spotify_api:
+    path: ../spotify_api
 
 dev_dependencies:
   flutter_test:

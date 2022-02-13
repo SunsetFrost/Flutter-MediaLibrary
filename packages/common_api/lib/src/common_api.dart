@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import 'package:moviedb_api/moviedb_api.dart';
 import 'package:pokemon_api/pokemon_api.dart';
+import 'package:spotify_api/spotify_api.dart';
 
 enum APIType { movie, music, book, pokemon }
 
@@ -16,6 +17,8 @@ abstract class CommonAPI {
       return MoviedbAPIClient(baseUrl: baseUrl);
     } else if (type == APIType.pokemon) {
       return PokemonAPIClient(baseUrl: baseUrl);
+    } else if (type == APIType.music) {
+      return SpotifyAPIClient(baseUrl: baseUrl);
     } else {
       throw Exception('api initialize error');
     }
