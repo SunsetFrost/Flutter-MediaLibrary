@@ -43,32 +43,33 @@ class VolumeInfo {
     this.maturityRating,
     this.allowAnonLogging,
     this.contentVersion,
-    this.imageLinks,
+    ImageLinks? imageLinks,
     this.language,
     this.previewLink,
     this.infoLink,
     this.canonicalVolumeLink,
-  );
+  ) : imageLinks = imageLinks ?? ImageLinks(smallThumbnail: '', thumbnail: '');
+
   final String title;
   final List<String> authors;
-  final String publisher;
-  final String publishedDate;
-  final String description;
-  final ReadingModes readingModes;
-  final int pageCount;
-  final int printedPageCount;
-  final String printType;
-  final List<String> categories;
-  final double averageRating;
-  final int ratingsCount;
-  final String maturityRating;
-  final bool allowAnonLogging;
-  final String contentVersion;
+  final String? publisher;
+  final String? publishedDate;
+  final String? description;
+  final ReadingModes? readingModes;
+  final int? pageCount;
+  final int? printedPageCount;
+  final String? printType;
+  final List<String>? categories;
+  final double? averageRating;
+  final int? ratingsCount;
+  final String? maturityRating;
+  final bool? allowAnonLogging;
+  final String? contentVersion;
   final ImageLinks imageLinks;
-  final String language;
-  final String previewLink;
-  final String infoLink;
-  final String canonicalVolumeLink;
+  final String? language;
+  final String? previewLink;
+  final String? infoLink;
+  final String? canonicalVolumeLink;
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) =>
       _$VolumeInfoFromJson(json);
@@ -91,7 +92,7 @@ class ReadingModes {
   Map<String, dynamic> toJson() => _$ReadingModesToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ImageLinks {
   ImageLinks({
     required this.smallThumbnail,

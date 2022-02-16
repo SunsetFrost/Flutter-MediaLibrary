@@ -5,10 +5,10 @@ import 'package:media_library/bloc/list_bloc.dart';
 import 'package:library_repository/library_repository.dart';
 
 import 'package:media_library/constants.dart';
-import 'package:media_library/pages/video/routes.dart' as routes;
-import 'package:media_library/widgets/search_filter.dart';
 import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/common_list.dart';
+import 'package:media_library/widgets/search_filter.dart';
+import 'package:media_library/pages/video/routes.dart' as routes;
 
 class VideoListPage extends StatelessWidget {
   const VideoListPage({Key? key}) : super(key: key);
@@ -16,61 +16,59 @@ class VideoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ListBloc(
-              libraryRepository:
-                  LibraryRepository(baseUrl: backendURI, type: APIType.movie),
-            )..add(FetchRecommandList()),
-        child: Scaffold(
-          body: VideoLibrary(),
-        ));
+      create: (context) => ListBloc(
+        libraryRepository:
+            LibraryRepository(baseUrl: backendURI, type: APIType.movie),
+      )..add(FetchRecommandList()),
+      child: Scaffold(
+        body: BlocBuilder<ListBloc, ListState>(builder: (context, state) {
+          final items = context.read<ListBloc>().state.items;
+          return VideoLibrary(
+            items: items,
+          );
+        }),
+      ),
+    );
   }
 }
 
-class VideoLibrary extends StatefulWidget {
-  const VideoLibrary({Key? key}) : super(key: key);
+class VideoLibrary extends StatelessWidget {
+  const VideoLibrary({Key? key, required this.items}) : super(key: key);
 
-  @override
-  _VideoLibraryState createState() => _VideoLibraryState();
-}
+  final List<dynamic> items;
 
-class _VideoLibraryState extends State<VideoLibrary> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListBloc, ListState>(
-      builder: (context, state) {
-        final items = context.read<ListBloc>().state.items;
-        return Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  colors: [Color(0xFF3F3F3F), Color(0xFF181818)],
-                  center: Alignment(0.6, -0.3),
-                ),
-              ),
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              colors: [Color(0xFF3F3F3F), Color(0xFF181818)],
+              center: Alignment(0.6, -0.3),
             ),
-            Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: CommonList(
-                items: items,
-                fetchList: () {
-                  context.read<ListBloc>().add(FetchRecommandList());
-                },
-                searchList: () {
-                  context.read<ListBloc>().add(FetchSearchList('harry'));
-                },
-                cardBuilder: (context, index) {
-                  return CommonCard(
-                    name: items[index].title,
-                    imagePath: items[index].posterPath,
-                    aspect: 1.3,
-                  );
-                },
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: CommonList(
+            items: items,
+            fetchList: () {
+              context.read<ListBloc>().add(FetchRecommandList());
+            },
+            searchList: () {
+              context.read<ListBloc>().add(FetchSearchList('harry'));
+            },
+            cardBuilder: (context, index) {
+              return CommonCard(
+                name: items[index].title,
+                imagePath: items[index].posterPath,
+                aspect: 1.3,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

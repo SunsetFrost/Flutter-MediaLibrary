@@ -27,24 +27,28 @@ Map<String, dynamic> _$BookInfoToJson(BookInfo instance) => <String, dynamic>{
 VolumeInfo _$VolumeInfoFromJson(Map<String, dynamic> json) => VolumeInfo(
       json['title'] as String,
       (json['authors'] as List<dynamic>).map((e) => e as String).toList(),
-      json['publisher'] as String,
-      json['publishedDate'] as String,
-      json['description'] as String,
-      ReadingModes.fromJson(json['readingModes'] as Map<String, dynamic>),
-      json['pageCount'] as int,
-      json['printedPageCount'] as int,
-      json['printType'] as String,
-      (json['categories'] as List<dynamic>).map((e) => e as String).toList(),
-      (json['averageRating'] as num).toDouble(),
-      json['ratingsCount'] as int,
-      json['maturityRating'] as String,
-      json['allowAnonLogging'] as bool,
-      json['contentVersion'] as String,
-      ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
-      json['language'] as String,
-      json['previewLink'] as String,
-      json['infoLink'] as String,
-      json['canonicalVolumeLink'] as String,
+      json['publisher'] as String?,
+      json['publishedDate'] as String?,
+      json['description'] as String?,
+      json['readingModes'] == null
+          ? null
+          : ReadingModes.fromJson(json['readingModes'] as Map<String, dynamic>),
+      json['pageCount'] as int?,
+      json['printedPageCount'] as int?,
+      json['printType'] as String?,
+      (json['categories'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['averageRating'] as num?)?.toDouble(),
+      json['ratingsCount'] as int?,
+      json['maturityRating'] as String?,
+      json['allowAnonLogging'] as bool?,
+      json['contentVersion'] as String?,
+      json['imageLinks'] == null
+          ? null
+          : ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
+      json['language'] as String?,
+      json['previewLink'] as String?,
+      json['infoLink'] as String?,
+      json['canonicalVolumeLink'] as String?,
     );
 
 Map<String, dynamic> _$VolumeInfoToJson(VolumeInfo instance) =>
