@@ -26,7 +26,7 @@ Map<String, dynamic> _$BookInfoToJson(BookInfo instance) => <String, dynamic>{
 
 VolumeInfo _$VolumeInfoFromJson(Map<String, dynamic> json) => VolumeInfo(
       json['title'] as String,
-      (json['authors'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['publisher'] as String?,
       json['publishedDate'] as String?,
       json['description'] as String?,
@@ -87,14 +87,15 @@ Map<String, dynamic> _$ReadingModesToJson(ReadingModes instance) =>
     };
 
 ImageLinks _$ImageLinksFromJson(Map<String, dynamic> json) => ImageLinks(
-      smallThumbnail: json['smallThumbnail'] as String,
       thumbnail: json['thumbnail'] as String,
+      proxyThumbnail:
+          ImageLinks.imageToProxyImagePath(json['smallThumbnail'] as String),
     );
 
 Map<String, dynamic> _$ImageLinksToJson(ImageLinks instance) =>
     <String, dynamic>{
-      'smallThumbnail': instance.smallThumbnail,
       'thumbnail': instance.thumbnail,
+      'smallThumbnail': instance.proxyThumbnail,
     };
 
 SaleInfo _$SaleInfoFromJson(Map<String, dynamic> json) => SaleInfo(

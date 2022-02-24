@@ -51,7 +51,8 @@ class BookGrid extends StatelessWidget {
         cardBuilder: (context, index) {
           return CommonCard(
             name: items[index].volumeInfo.title,
-            imagePath: items[index].volumeInfo.imageLinks.smallThumbnail,
+            imagePath:
+                backendURI + items[index].volumeInfo.imageLinks.proxyThumbnail,
             aspect: 1.3,
           );
         },

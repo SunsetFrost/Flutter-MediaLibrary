@@ -48,10 +48,10 @@ class VolumeInfo {
     this.previewLink,
     this.infoLink,
     this.canonicalVolumeLink,
-  ) : imageLinks = imageLinks ?? ImageLinks(smallThumbnail: '', thumbnail: '');
+  ) : imageLinks = imageLinks ?? ImageLinks(thumbnail: '', proxyThumbnail: '');
 
   final String title;
-  final List<String> authors;
+  final List<String>? authors;
   final String? publisher;
   final String? publishedDate;
   final String? description;
@@ -95,16 +95,23 @@ class ReadingModes {
 @JsonSerializable(includeIfNull: false)
 class ImageLinks {
   ImageLinks({
-    required this.smallThumbnail,
     required this.thumbnail,
+    required this.proxyThumbnail,
   });
-  final String smallThumbnail;
   final String thumbnail;
+
+  @JsonKey(name: 'smallThumbnail', fromJson: imageToProxyImagePath)
+  final String proxyThumbnail;
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) =>
       _$ImageLinksFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImageLinksToJson(this);
+
+  static String imageToProxyImagePath(String imagePath) {
+    final id = Uri.parse(imagePath).queryParameters['id'] ?? '';
+    return '/book/image/' + id;
+  }
 }
 
 @JsonSerializable()

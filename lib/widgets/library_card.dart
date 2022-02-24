@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:media_library/pages/book/routes.dart' as book_routes;
 
 class LibraryCard extends StatelessWidget {
   const LibraryCard({
@@ -28,7 +29,30 @@ class LibraryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          if (path != '') {
+          if (path == '') {
+            return;
+          } else if (path == book_routes.listRoute) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Book Page Coming soon!',
+                  style: TextStyle(color: Theme.of(context).cardColor),
+                ),
+                // action: SnackBarAction(
+                //   label: 'Action',
+                //   onPressed: () {
+                //     // Code to execute.
+                //   },
+                // ),
+                backgroundColor: colorLight,
+                margin: EdgeInsets.symmetric(horizontal: 12.0),
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            );
+          } else {
             Navigator.of(context).pushNamed(path);
           }
         },

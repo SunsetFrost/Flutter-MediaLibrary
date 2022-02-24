@@ -13,7 +13,7 @@ class BookAPIClient extends CommonAPI {
 
   @override
   String get popularPattern {
-    return '/best-sellers';
+    return '/search';
   }
 
   @override
@@ -32,7 +32,8 @@ class BookAPIClient extends CommonAPI {
 
   @override
   List<dynamic> toList(Response res) {
-    return res.data;
+    print(res);
+    return res.data['items'];
   }
 
   String get version {
