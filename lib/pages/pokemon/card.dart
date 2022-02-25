@@ -16,7 +16,6 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(pokemon.image);
     return GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(routes.detailRoute,
@@ -27,9 +26,8 @@ class PokemonCard extends StatelessWidget {
             alignment: Alignment.center,
             children: <Widget>[
               Positioned(
-                // height: MediaQuery.of(context).size.height / 6,
                 width: MediaQuery.of(context).size.width / 3.2,
-                height: MediaQuery.of(context).size.width / 3.2 * 1.0,
+                height: MediaQuery.of(context).size.width / 3.2 * 1.1,
                 // left: 10.0,
                 top: 30,
                 child: Card(
@@ -75,37 +73,23 @@ class PokemonCard extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0, -1.4),
+                alignment: Alignment(0, -1.3),
                 child: Hero(
                   tag: pokemon.id,
                   child: Image.network(
-                    backendURI + '/pokemon/image/' + pokemon.id.toString(),
+                    imageServerURI + '/image/' + pokemon.id.toString() + '.gif',
                     width: 80,
                     height: 80,
                     alignment: Alignment.bottomCenter,
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                // Container(
-                //   width: 80,
-                //   height: 80,
-                //   alignment: Alignment.bottomCenter,
-                //   decoration: BoxDecoration(
-                //       image: DecorationImage(
-                //     image: AssetImage(
-                //       _getImageUrl(pokemon.id),
-                //     ),
-                //     alignment: Alignment.bottomCenter,
-                //     fit: BoxFit.scaleDown,
-                //   )),
-                // )),
               ),
               Align(
-                  alignment: Alignment(0, .9),
+                  alignment: Alignment(0, .7),
                   child: Container(
                       width: 54,
                       height: 26,
-                      // padding: EdgeInsets.symmetric(horizontal: 6),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(244, 176, 22, 1.0),

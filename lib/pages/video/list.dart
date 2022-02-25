@@ -53,11 +53,11 @@ class VideoLibrary extends StatelessWidget {
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: CommonList(
             items: items,
-            fetchList: () {
+            fetchRecommandList: () {
               context.read<ListBloc>().add(FetchRecommandList());
             },
-            searchList: () {
-              context.read<ListBloc>().add(FetchSearchList('harry'));
+            fetchSearchList: (searchText) {
+              context.read<ListBloc>().add(FetchSearchList(searchText));
             },
             cardBuilder: (context, index) {
               return CommonCard(
@@ -250,68 +250,68 @@ class VideoLibrary extends StatelessWidget {
 //   }
 // }
 
-// class VideoSearchForm extends StatefulWidget {
-//   const VideoSearchForm({Key? key, required this.searchCallback})
-//       : super(key: key);
+class VideoSearchForm extends StatefulWidget {
+  const VideoSearchForm({Key? key, required this.searchCallback})
+      : super(key: key);
 
-//   final Function(String?) searchCallback;
+  final Function(String?) searchCallback;
 
-//   @override
-//   _VideoSearchFormState createState() => _VideoSearchFormState();
-// }
+  @override
+  _VideoSearchFormState createState() => _VideoSearchFormState();
+}
 
-// class _VideoSearchFormState extends State<VideoSearchForm> {
-//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _VideoSearchFormState extends State<VideoSearchForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 12.0),
-//       child: Form(
-//         key: _formKey,
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: <Widget>[
-//             Expanded(
-//               child: TextFormField(
-//                 cursorColor: Colors.white,
-//                 style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
-//                 decoration: const InputDecoration(
-//                   hintText: '请输入搜索的电影名',
-//                   hintStyle:
-//                       TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
-//                   border: OutlineInputBorder(
-//                       borderRadius:
-//                           const BorderRadius.all(Radius.circular(16))),
-//                   focusedBorder: OutlineInputBorder(
-//                     borderSide: BorderSide(width: 0.0),
-//                     borderRadius: const BorderRadius.all(Radius.circular(16)),
-//                   ),
-//                   filled: true,
-//                   fillColor: Color(0xFF3F3F3F),
-//                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-//                   prefixIcon: Icon(
-//                     Icons.search,
-//                     color: Color(0xffe5e7eb),
-//                   ),
-//                 ),
-//                 // validator: (String? value) {
-//                 //   if (value == null || value.isEmpty) {
-//                 //     return '请输入名称';
-//                 //   }
-//                 //   return null;
-//                 // },
-//                 onSaved: (String? value) {
-//                   widget.searchCallback(value);
-//                 },
-//                 onEditingComplete: () {
-//                   _formKey.currentState!.save();
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: Form(
+        key: _formKey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                cursorColor: Colors.white,
+                style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                decoration: const InputDecoration(
+                  hintText: '请输入搜索的电影名',
+                  hintStyle:
+                      TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  ),
+                  filled: true,
+                  fillColor: Color(0xFF3F3F3F),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color(0xffe5e7eb),
+                  ),
+                ),
+                // validator: (String? value) {
+                //   if (value == null || value.isEmpty) {
+                //     return '请输入名称';
+                //   }
+                //   return null;
+                // },
+                onSaved: (String? value) {
+                  widget.searchCallback(value);
+                },
+                onEditingComplete: () {
+                  _formKey.currentState!.save();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

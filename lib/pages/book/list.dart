@@ -42,11 +42,11 @@ class BookGrid extends StatelessWidget {
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       child: CommonList(
         items: items,
-        fetchList: () {
+        fetchRecommandList: () {
           context.read<ListBloc>().add(FetchRecommandList());
         },
-        searchList: () {
-          context.read<ListBloc>().add(FetchSearchList('harry'));
+        fetchSearchList: (searchText) {
+          context.read<ListBloc>().add(FetchSearchList(searchText));
         },
         cardBuilder: (context, index) {
           return CommonCard(

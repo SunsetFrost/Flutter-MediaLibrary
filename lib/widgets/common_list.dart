@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/model/Card.dart';
-import 'package:flutter/widgets.dart';
-
 class CommonList extends StatefulWidget {
   const CommonList({
     Key? key,
     required this.items,
-    required this.fetchList,
-    required this.searchList,
+    required this.fetchRecommandList,
+    required this.fetchSearchList,
     required this.cardBuilder,
+    this.showSearchForm = true,
   });
 
   final List<dynamic> items;
-  final VoidCallback fetchList;
-  final VoidCallback searchList;
+  final VoidCallback fetchRecommandList;
+  final void Function(String searchText) fetchSearchList;
   final Widget Function(BuildContext context, int index) cardBuilder;
+  final bool showSearchForm;
 
   @override
   _CommonListState createState() => _CommonListState();
@@ -40,11 +39,11 @@ class _CommonListState extends State<CommonList> {
   void _scrollListener() {
     if (_isBottom) {
       /// search text is null, fetch popular movies
-      /// isn't null, fetch search movies
+      /// isn't null, fetch search items
       if (searchText == '') {
-        widget.fetchList();
+        widget.fetchRecommandList();
       } else {
-        widget.searchList();
+        widget.fetchSearchList(searchText);
       }
     }
   }
@@ -56,22 +55,35 @@ class _CommonListState extends State<CommonList> {
     return currentScroll >= (maxScroll * 0.9);
   }
 
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+
+  void _onSearchCallback(String? query) {
+    setState(() {
+      searchText = query!;
+    });
+    if (query == '') {
+      widget.fetchRecommandList();
+    } else {
+      widget.fetchSearchList(query!);
+    }
+    _scrollToTop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Row(
-        //   children: [
-        //     ElevatedButton(
-        //       onPressed: widget.fetchList,
-        //       child: Text('Fetch Items'),
-        //     ),
-        //     ElevatedButton(
-        //       onPressed: widget.searchList,
-        //       child: Text('Search Items'),
-        //     ),
-        //   ],
-        // ),
+        widget.showSearchForm
+            ? CommonSearch(searchCallback: _onSearchCallback)
+            : SizedBox(
+                height: 10,
+              ),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
@@ -93,13 +105,70 @@ class _CommonListState extends State<CommonList> {
   }
 }
 
-class CommonSearch extends StatelessWidget {
-  const CommonSearch({Key? key}) : super(key: key);
+class CommonSearch extends StatefulWidget {
+  const CommonSearch({Key? key, required this.searchCallback})
+      : super(key: key);
+
+  final Function(String?) searchCallback;
+
+  @override
+  State<CommonSearch> createState() => _CommonSearchState();
+}
+
+class _CommonSearchState extends State<CommonSearch> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('search'),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(12.0, 6.0, 12.0, 16.0),
+      child: Form(
+        key: _formKey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                cursorColor: Colors.white,
+                style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                decoration: const InputDecoration(
+                  hintText: '请输入搜索内容',
+                  hintStyle:
+                      TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  ),
+                  filled: true,
+                  // fillColor: Color(0xFF3F3F3F),
+                  fillColor: Color.fromRGBO(40, 44, 82, 1.0),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color(0xffe5e7eb),
+                  ),
+                ),
+                // validator: (String? value) {
+                //   if (value == null || value.isEmpty) {
+                //     return '请输入名称';
+                //   }
+                //   return null;
+                // },
+                onSaved: (String? value) {
+                  widget.searchCallback(value);
+                },
+                onEditingComplete: () {
+                  _formKey.currentState!.save();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

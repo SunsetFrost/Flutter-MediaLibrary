@@ -22,7 +22,7 @@ class SpotifyAPIClient extends CommonAPI {
 
   @override
   String get searchPattern {
-    return '/new-releases';
+    return '/search';
   }
 
   @override
