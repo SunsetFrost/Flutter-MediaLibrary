@@ -198,6 +198,7 @@ class PokemonGrid extends StatelessWidget {
           final items = context.read<ListBloc>().state.items;
           return CommonList(
             items: items,
+            color: Color.fromRGBO(40, 44, 82, 1.0),
             fetchRecommandList: () {
               context.read<ListBloc>().add(FetchRecommandList());
             },

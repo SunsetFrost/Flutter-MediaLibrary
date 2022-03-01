@@ -13,12 +13,17 @@ class BookAPIClient extends CommonAPI {
 
   @override
   String get popularPattern {
-    return '/search';
+    return '/best-sellers';
   }
 
   @override
   String get searchPattern {
     return '/search';
+  }
+
+  @override
+  String get detailPattern {
+    return '/volumes/';
   }
 
   @override
@@ -31,9 +36,17 @@ class BookAPIClient extends CommonAPI {
   }
 
   @override
+  BookInfo toDetailItem(Map<String, dynamic> json) {
+    try {
+      return BookInfo.fromJson(json);
+    } catch (e) {
+      throw BookAPIConvertFailure();
+    }
+  }
+
+  @override
   List<dynamic> toList(Response res) {
-    print(res);
-    return res.data['items'];
+    return res.data;
   }
 
   String get version {

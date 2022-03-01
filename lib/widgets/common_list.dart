@@ -8,6 +8,7 @@ class CommonList extends StatefulWidget {
     required this.fetchSearchList,
     required this.cardBuilder,
     this.showSearchForm = true,
+    this.color = const Color(0xFF3F3F3F),
   });
 
   final List<dynamic> items;
@@ -15,6 +16,7 @@ class CommonList extends StatefulWidget {
   final void Function(String searchText) fetchSearchList;
   final Widget Function(BuildContext context, int index) cardBuilder;
   final bool showSearchForm;
+  final Color color;
 
   @override
   _CommonListState createState() => _CommonListState();
@@ -80,7 +82,10 @@ class _CommonListState extends State<CommonList> {
     return Column(
       children: [
         widget.showSearchForm
-            ? CommonSearch(searchCallback: _onSearchCallback)
+            ? CommonSearch(
+                color: widget.color,
+                searchCallback: _onSearchCallback,
+              )
             : SizedBox(
                 height: 10,
               ),
@@ -106,10 +111,12 @@ class _CommonListState extends State<CommonList> {
 }
 
 class CommonSearch extends StatefulWidget {
-  const CommonSearch({Key? key, required this.searchCallback})
+  const CommonSearch(
+      {Key? key, required this.color, required this.searchCallback})
       : super(key: key);
 
   final Function(String?) searchCallback;
+  final Color color;
 
   @override
   State<CommonSearch> createState() => _CommonSearchState();
@@ -131,7 +138,7 @@ class _CommonSearchState extends State<CommonSearch> {
               child: TextFormField(
                 cursorColor: Colors.white,
                 style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: '请输入搜索内容',
                   hintStyle:
                       TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
@@ -144,8 +151,7 @@ class _CommonSearchState extends State<CommonSearch> {
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                   ),
                   filled: true,
-                  // fillColor: Color(0xFF3F3F3F),
-                  fillColor: Color.fromRGBO(40, 44, 82, 1.0),
+                  fillColor: widget.color,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                   prefixIcon: Icon(
                     Icons.search,

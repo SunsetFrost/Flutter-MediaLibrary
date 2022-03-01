@@ -38,6 +38,9 @@ abstract class CommonAPI {
   @protected
   String get searchPattern;
 
+  @protected
+  String get detailPattern;
+
   Future<List<dynamic>> getPopularList(Map<String, dynamic> params) async {
     final response =
         await _dio.get(endPoint + popularPattern, queryParameters: params);
@@ -59,14 +62,16 @@ abstract class CommonAPI {
   }
 
   Future<dynamic> getDetail(String id) async {
-    final response = await _dio.get(endPoint + '/' + id);
+    final response = await _dio.get(endPoint + detailPattern + id);
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
-    return toItem(response.data);
+    return toDetailItem(response.data);
   }
 
   Object toItem(Map<String, dynamic> json);
+
+  Object toDetailItem(Map<String, dynamic> json);
 
   List<dynamic> toList(Response res) {
     return res.data;

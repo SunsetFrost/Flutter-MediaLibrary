@@ -1,5 +1,4 @@
 import 'package:common_api/common_api.dart';
-import 'package:moviedb_api/moviedb_api.dart';
 
 class MovieAPIConvertFailure implements Exception {}
 
@@ -24,7 +23,21 @@ class MoviedbAPIClient extends CommonAPI {
   }
 
   @override
+  String get detailPattern {
+    return '/';
+  }
+
+  @override
   Video toItem(Map<String, dynamic> json) {
+    try {
+      return Video.fromJson(json);
+    } catch (e) {
+      throw MovieAPIConvertFailure();
+    }
+  }
+
+  @override
+  Video toDetailItem(Map<String, dynamic> json) {
     try {
       return Video.fromJson(json);
     } catch (e) {

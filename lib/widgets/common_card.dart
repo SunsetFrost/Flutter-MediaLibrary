@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CommonCard extends StatelessWidget {
   const CommonCard({
@@ -7,12 +8,14 @@ class CommonCard extends StatelessWidget {
     required this.imagePath,
     this.aspect = 1.0,
     this.onClick,
+    this.textColor = Colors.white,
   }) : super(key: key);
 
   final String name;
   final String imagePath;
   final void Function()? onClick;
   final num aspect;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +27,20 @@ class CommonCard extends StatelessWidget {
           Hero(
             tag: 'Poster' + name,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                imagePath,
-                width: MediaQuery.of(context).size.width / 3.2,
-                height: MediaQuery.of(context).size.width / 3.2 * aspect,
-                fit: BoxFit.fill,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-
-                  return Container(
+                borderRadius: BorderRadius.circular(8.0),
+                child: CachedNetworkImage(
+                  imageUrl: imagePath,
+                  placeholder: (context, url) => Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     height: MediaQuery.of(context).size.width / 3.2 * aspect,
                     color: Colors.grey[300],
-                  );
-                },
-                errorBuilder: (context, object, stack) {
-                  return Container(
+                  ),
+                  errorWidget: (context, url, error) => Container(
                     width: MediaQuery.of(context).size.width / 3.2,
                     height: MediaQuery.of(context).size.width / 3.2 * aspect,
                     color: Colors.red[100],
-                  );
-                },
-              ),
-            ),
+                  ),
+                )),
           ),
           SizedBox(
             height: 6.0,
@@ -59,7 +50,7 @@ class CommonCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
             style: TextStyle(
-              color: Colors.white,
+              color: textColor,
               fontSize: 12.0,
             ),
           ),

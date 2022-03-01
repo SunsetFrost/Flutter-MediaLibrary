@@ -26,12 +26,27 @@ class SpotifyAPIClient extends CommonAPI {
   }
 
   @override
+  String get detailPattern {
+    return '/';
+  }
+
+  @override
   Album toItem(Map<String, dynamic> json) {
-    // try {
-    return Album.fromJson(json);
-    // } catch (e) {
-    //   rethrow;
-    // }
+    try {
+      return Album.fromJson(json);
+    } catch (e) {
+      throw SpotifyAPIConvertFailure;
+    }
+  }
+
+  @override
+  List<Track> toDetailItem(Map<String, dynamic> json) {
+    try {
+      List<dynamic> items = json['items'];
+      return items.map((item) => Track.fromJson(item)).toList();
+    } catch (e) {
+      throw SpotifyAPIConvertFailure;
+    }
   }
 
   @override

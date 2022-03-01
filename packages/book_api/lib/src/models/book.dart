@@ -48,7 +48,7 @@ class VolumeInfo {
     this.previewLink,
     this.infoLink,
     this.canonicalVolumeLink,
-  ) : imageLinks = imageLinks ?? ImageLinks(thumbnail: '', proxyThumbnail: '');
+  ) : imageLinks = imageLinks ?? ImageLinks(thumbnail: '', smallThumbnail: '');
 
   final String title;
   final List<String>? authors;
@@ -96,12 +96,12 @@ class ReadingModes {
 class ImageLinks {
   ImageLinks({
     required this.thumbnail,
-    required this.proxyThumbnail,
+    required this.smallThumbnail,
   });
   final String thumbnail;
 
-  @JsonKey(name: 'smallThumbnail', fromJson: imageToProxyImagePath)
-  final String proxyThumbnail;
+  @JsonKey(name: 'smallThumbnail')
+  final String smallThumbnail;
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) =>
       _$ImageLinksFromJson(json);

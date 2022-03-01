@@ -24,7 +24,17 @@ class PokemonAPIClient extends CommonAPI {
   }
 
   @override
-  toItem(Map<String, dynamic> json) {
+  String get detailPattern {
+    return '/';
+  }
+
+  @override
+  Pokemon toItem(Map<String, dynamic> json) {
+    return Pokemon.fromJson(json);
+  }
+
+  @override
+  Pokemon toDetailItem(Map<String, dynamic> json) {
     return Pokemon.fromJson(json);
   }
 

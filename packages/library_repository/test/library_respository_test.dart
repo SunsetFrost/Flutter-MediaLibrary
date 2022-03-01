@@ -1,3 +1,4 @@
+import 'package:common_api/common_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:library_repository/library_repository.dart';
@@ -35,5 +36,33 @@ void main() {
     final result2 = await repo.getPopularList({});
     print(result2);
     expect(result2, isList);
+  });
+
+  /// detail test
+  group('detail test', () {
+    test('get movie detail data', () async {
+      final repo = LibraryRepository(
+          baseUrl: 'http://127.0.0.1:3000', type: APIType.movie);
+      final data = await repo.getDetail('634649');
+      print(data);
+    });
+    test('get music detail data', () async {
+      final repo = LibraryRepository(
+          baseUrl: 'http://127.0.0.1:3000', type: APIType.music);
+      final data = await repo.getDetail('1tiCHRx9AI11hfcLmkGEXT');
+      print(data);
+    });
+    test('get book detail data', () async {
+      final repo = LibraryRepository(
+          baseUrl: 'http://127.0.0.1:3000', type: APIType.book);
+      final data = await repo.getDetail('BMzjMgEACAAJ');
+      print(data);
+    });
+    test('get pokemon detail data', () async {
+      final repo = LibraryRepository(
+          baseUrl: 'http://127.0.0.1:3000', type: APIType.pokemon);
+      final data = await repo.getDetail('1');
+      print(data);
+    });
   });
 }

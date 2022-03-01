@@ -42,6 +42,7 @@ class BookGrid extends StatelessWidget {
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       child: CommonList(
         items: items,
+        color: Color(0xFFF2F3F4),
         fetchRecommandList: () {
           context.read<ListBloc>().add(FetchRecommandList());
         },
@@ -51,9 +52,9 @@ class BookGrid extends StatelessWidget {
         cardBuilder: (context, index) {
           return CommonCard(
             name: items[index].volumeInfo.title,
-            imagePath:
-                backendURI + items[index].volumeInfo.imageLinks.proxyThumbnail,
+            imagePath: items[index].volumeInfo.imageLinks.smallThumbnail,
             aspect: 1.3,
+            textColor: Colors.grey[500]!,
           );
         },
       ),

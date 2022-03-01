@@ -88,14 +88,13 @@ Map<String, dynamic> _$ReadingModesToJson(ReadingModes instance) =>
 
 ImageLinks _$ImageLinksFromJson(Map<String, dynamic> json) => ImageLinks(
       thumbnail: json['thumbnail'] as String,
-      proxyThumbnail:
-          ImageLinks.imageToProxyImagePath(json['smallThumbnail'] as String),
+      smallThumbnail: json['smallThumbnail'] as String,
     );
 
 Map<String, dynamic> _$ImageLinksToJson(ImageLinks instance) =>
     <String, dynamic>{
       'thumbnail': instance.thumbnail,
-      'smallThumbnail': instance.proxyThumbnail,
+      'smallThumbnail': instance.smallThumbnail,
     };
 
 SaleInfo _$SaleInfoFromJson(Map<String, dynamic> json) => SaleInfo(
