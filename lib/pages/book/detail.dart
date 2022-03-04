@@ -91,15 +91,92 @@ class BookDetail extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 32.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.orange,
+                          size: 16.0,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        Text(
+                          book.volumeInfo.averageRating.toString(),
+                          style: _getInlineTextStyle(),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.people,
+                          color: Colors.grey,
+                          size: 16.0,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        Text(
+                          book.volumeInfo.authors![0].toString(),
+                          style: _getInlineTextStyle(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.pages,
+                          color: Colors.grey,
+                          size: 16.0,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        Text(
+                          book.volumeInfo.pageCount.toString(),
+                          style: _getInlineTextStyle(),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.language,
+                          color: Colors.grey,
+                          size: 16.0,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        Text(
+                          book.volumeInfo.language!,
+                          style: _getInlineTextStyle(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 16.0,
                 ),
                 Text(
                   book.volumeInfo.description!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
+                  textAlign: TextAlign.left,
+                  style: _getInlineTextStyle(),
                   maxLines: 6,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -128,3 +205,8 @@ class BookDetail extends StatelessWidget {
     );
   }
 }
+
+TextStyle _getInlineTextStyle() => TextStyle(
+      color: Colors.grey[350],
+      fontSize: 14,
+    );

@@ -42,9 +42,24 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bgColor =
+        Color(pokemonTypeMap[pokemon.types[0].name]?.color ?? 0xFF76BB6C);
+
+    final infoTextStyle = TextStyle(
+      // color: Color.fromRGBO(190, 193, 215, 1.0),
+      color: Colors.grey[600],
+      fontSize: 18.0,
+    );
+    final infoTextSecondaryStyle = TextStyle(
+      color: Color.fromRGBO(244, 176, 22, 1.0),
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+    );
+    print(pokemon.toString());
+
     return Scaffold(
         // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        backgroundColor: Color(0xFF76BB6C),
+        backgroundColor: bgColor,
         body: ListView(children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -58,28 +73,19 @@ class DetailPage extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Icon(Icons.chevron_left),
-                    style: TextButton.styleFrom(
-                        primary: Theme.of(context).colorScheme.secondary),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Navigator.of(context).pop();
-                    },
-                    child: Icon(Icons.favorite_border),
-                    style: TextButton.styleFrom(
-                        primary: Theme.of(context).colorScheme.secondary),
+                    style: TextButton.styleFrom(primary: Colors.white),
                   ),
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Text(
                   pokemon.name,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 32,
                     fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -87,18 +93,23 @@ class DetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: pokemon.types
                       .map((e) => Container(
-                            width: 48,
+                            width: 64,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 6),
-                            margin: EdgeInsets.symmetric(horizontal: 30),
+                            margin: EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: Color(pokemonTypeMap[e.name]!.color),
+                              // color: Color(pokemonTypeMap[e.name]!.color),
+                              color: Colors.grey[100],
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
                               pokemonTypeMap[e.name]!.name,
-                              style: Theme.of(context).textTheme.headline4,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                              ),
                             ),
                           ))
                       .toList()),
@@ -127,7 +138,7 @@ class DetailPage extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 170,
-                color: Color(0xFF76BB6C),
+                color: bgColor,
                 // color: Colors.pinkAccent,
               ),
               Positioned(
@@ -171,13 +182,9 @@ class DetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    pokemon.name,
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  // SizedBox(
+                  //   height: 16,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -185,11 +192,11 @@ class DetailPage extends StatelessWidget {
                         children: [
                           Text(
                             '高度',
-                            style: Theme.of(context).textTheme.headline4,
+                            style: infoTextStyle,
                           ),
                           Text(
-                            '2.05',
-                            style: Theme.of(context).textTheme.headline6,
+                            '12.05',
+                            style: infoTextSecondaryStyle,
                           )
                         ],
                       ),
@@ -197,11 +204,11 @@ class DetailPage extends StatelessWidget {
                         children: [
                           Text(
                             '重量',
-                            style: Theme.of(context).textTheme.headline4,
+                            style: infoTextStyle,
                           ),
                           Text(
-                            '2.05',
-                            style: Theme.of(context).textTheme.headline6,
+                            '4.05',
+                            style: infoTextSecondaryStyle,
                           )
                         ],
                       ),
@@ -209,11 +216,11 @@ class DetailPage extends StatelessWidget {
                         children: [
                           Text(
                             '种类',
-                            style: Theme.of(context).textTheme.headline4,
+                            style: infoTextStyle,
                           ),
                           Text(
-                            '2.05',
-                            style: Theme.of(context).textTheme.headline6,
+                            '24.00',
+                            style: infoTextSecondaryStyle,
                           )
                         ],
                       ),
@@ -222,120 +229,41 @@ class DetailPage extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
+                  ...pokemon.stats
+                      .map(
+                        (stat) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 100.0,
+                              // constraints: BoxConstraints(
+                              //   maxWidth: 100.0,
+                              // ),
+                              child: Text(
+                                stat.name,
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                            Slider(
+                              value: stat.baseStat.toDouble(),
+                              onChanged: (double value) {},
+                              min: 0,
+                              max: 255,
+                            ),
+                            Text(
+                              stat.baseStat.toString(),
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '力量',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        '132',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Slider(
-                        value: 132,
-                        onChanged: (double value) {},
-                        min: 0,
-                        max: 255,
-                      )
-                    ],
-                  ),
+                      .toList(),
                 ],
               ),
             ),

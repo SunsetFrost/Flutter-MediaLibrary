@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/pages/pokemon/list.dart';
-import 'package:media_library/pages/pokemon/detail.dart';
-import 'package:media_library/pages/pokemon/routes.dart';
-
 class PokemonTheme extends StatelessWidget {
   const PokemonTheme({Key? key, required this.child}) : super(key: key);
 
@@ -21,8 +17,8 @@ class PokemonTheme extends StatelessWidget {
             backgroundColor: Color.fromRGBO(33, 35, 64, 1.0),
             primaryColor: Color.fromRGBO(244, 176, 22, 1.0),
             cardColor: Color.fromRGBO(40, 44, 82, 1.0),
-            colorScheme: ColorScheme.fromSwatch()
-                .copyWith(secondary: Color.fromRGBO(190, 193, 215, 1.0)),
+            colorScheme:
+                ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
             textTheme: TextTheme(
               headline2: TextStyle(
                 color: Colors.white,

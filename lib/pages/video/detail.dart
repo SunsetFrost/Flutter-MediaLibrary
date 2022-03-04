@@ -95,12 +95,14 @@ class _DetailPageState extends State<DetailPage> {
                         children: [
                           /// Poster
                           Hero(
-                            tag: 'Poster' + widget.video.title,
-                            child: Image.network(
-                              this.widget.video.posterPath,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              tag: 'Poster' + widget.video.title,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.0),
+                                child: Image.network(
+                                  this.widget.video.posterPath,
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
 
                           /// favor
                           Align(
@@ -149,13 +151,34 @@ class _DetailPageState extends State<DetailPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                '评分: ' + widget.video.voteAverage.toString(),
-                                style: _getInlineTextStyle(),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.orange,
+                                    size: 16.0,
+                                  ),
+                                  Text(
+                                    widget.video.voteAverage.toString(),
+                                    style: _getInlineTextStyle(),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '发行日期: ' + widget.video.releaseDate,
-                                style: _getInlineTextStyle(),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range,
+                                    color: Colors.grey,
+                                    size: 16.0,
+                                  ),
+                                  SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  Text(
+                                    widget.video.releaseDate,
+                                    style: _getInlineTextStyle(),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -163,10 +186,7 @@ class _DetailPageState extends State<DetailPage> {
                           Text(
                             widget.video.overview,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
+                            style: _getInlineTextStyle(),
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -201,6 +221,34 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 TextStyle _getInlineTextStyle() => TextStyle(
-      color: Colors.white,
+      color: Colors.grey[350],
       fontSize: 14,
     );
+
+class Tag extends StatelessWidget {
+  const Tag({
+    Key? key,
+    required this.text,
+    this.color = Colors.grey,
+  }) : super(key: key);
+
+  final String text;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 36,
+      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.headline5,
+      ),
+    );
+  }
+}
