@@ -42,6 +42,7 @@ class MusicList extends StatelessWidget {
                       EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                   child: CommonList(
                     items: items,
+                    aspectRatio: 0.8,
                     fetchRecommandList: () {
                       context.read<ListBloc>().add(FetchRecommandList());
                     },
@@ -52,7 +53,11 @@ class MusicList extends StatelessWidget {
                       return CommonCard(
                         name: items[index].name,
                         imagePath: items[index].images[1].url,
-                        // aspect: 1.3,
+                        onClick: () {
+                          Navigator.of(context).pushNamed(routes.detailRoute,
+                              arguments: routes.DetailArguments(
+                                  items[index].id, items[index].images[1].url));
+                        },
                       );
                     },
                   ),

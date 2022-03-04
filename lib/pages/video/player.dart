@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:moviedb_api/moviedb_api.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/widgets/sword_paint.dart';
-import 'package:media_library/model/VideoTrailer.dart';
-import 'package:media_library/net/video_data.dart';
 
 class Player extends StatelessWidget {
-  const Player({Key? key, required this.id}) : super(key: key);
+  Player({Key? key, required this.id})
+      : _client = MoviedbAPIClient(baseUrl: backendURI),
+        super(key: key);
 
   final String id;
+  final MoviedbAPIClient _client;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width / 16 * 9,
-      child: FutureBuilder<VideoTrailer>(
-          future: VideoData.getVideoTrailer(id),
+      child: FutureBuilder<List<dynamic>>(
+          future: _client.getVideoTrailer(id),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return TrailerPlayer(trailer: snapshot.data!);
@@ -35,7 +38,7 @@ class Player extends StatelessWidget {
 class TrailerPlayer extends StatefulWidget {
   TrailerPlayer({Key? key, required this.trailer}) : super(key: key);
 
-  final VideoTrailer trailer;
+  final List<dynamic> trailer;
 
   @override
   State<TrailerPlayer> createState() => _TrailerPlayerState();
@@ -47,7 +50,7 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   @override
   void initState() {
     _controller = YoutubePlayerController(
-      initialVideoId: widget.trailer.key,
+      initialVideoId: widget.trailer[0].key,
       flags: YoutubePlayerFlags(
         mute: false,
         autoPlay: true,

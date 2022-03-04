@@ -9,6 +9,7 @@ class CommonList extends StatefulWidget {
     required this.cardBuilder,
     this.showSearchForm = true,
     this.color = const Color(0xFF3F3F3F),
+    this.aspectRatio = 0.55,
   });
 
   final List<dynamic> items;
@@ -17,6 +18,7 @@ class CommonList extends StatefulWidget {
   final Widget Function(BuildContext context, int index) cardBuilder;
   final bool showSearchForm;
   final Color color;
+  final double aspectRatio;
 
   @override
   _CommonListState createState() => _CommonListState();
@@ -93,11 +95,11 @@ class _CommonListState extends State<CommonList> {
           child: GridView.builder(
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
             controller: _scrollController,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 20,
+              crossAxisSpacing: 20.0,
               mainAxisSpacing: 20.0,
-              childAspectRatio: 0.55,
+              childAspectRatio: widget.aspectRatio,
             ),
             itemCount: widget.items.length,
             itemBuilder: (BuildContext context, int index) {

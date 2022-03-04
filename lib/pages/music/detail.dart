@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:library_repository/library_repository.dart';
 
+import 'package:spotify_api/spotify_api.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/widgets/sword_paint.dart';
-import 'package:media_library/model/MusicTrack.dart';
-import 'package:media_library/net/music_data.dart';
 import 'package:media_library/pages/music/routes.dart';
 
 class MusicDetail extends StatefulWidget {
-  const MusicDetail({Key? key, required this.args}) : super(key: key);
+  MusicDetail({Key? key, required this.args})
+      : _repo = LibraryRepository(baseUrl: backendURI, type: APIType.music),
+        super(key: key);
 
   final DetailArguments args;
+  final LibraryRepository _repo;
 
   @override
   State<MusicDetail> createState() => _MusicDetailState();
 }
 
 class _MusicDetailState extends State<MusicDetail> {
-  late Future<List<Track>> futureTracks;
+  late Future<dynamic> futureTracks;
   List<Track> tracks = [];
   AudioPlayer _audioPlayer = AudioPlayer();
   int _playIndex = 0;
@@ -24,7 +28,7 @@ class _MusicDetailState extends State<MusicDetail> {
 
   @override
   void initState() {
-    futureTracks = MusicData.getTrackList(widget.args.id);
+    futureTracks = widget._repo.getDetail(widget.args.id);
     // init player
     _audioPlayer = AudioPlayer();
 
@@ -114,7 +118,7 @@ class _MusicDetailState extends State<MusicDetail> {
                 )),
           ),
           Expanded(
-            child: FutureBuilder<List<Track>>(
+            child: FutureBuilder<dynamic>(
               future: futureTracks,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {

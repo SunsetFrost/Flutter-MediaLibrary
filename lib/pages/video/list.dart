@@ -7,7 +7,6 @@ import 'package:library_repository/library_repository.dart';
 import 'package:media_library/constants.dart';
 import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/widgets/common_list.dart';
-import 'package:media_library/widgets/search_filter.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
 
 class VideoListPage extends StatelessWidget {
@@ -64,6 +63,10 @@ class VideoLibrary extends StatelessWidget {
                 name: items[index].title,
                 imagePath: items[index].posterPath,
                 aspect: 1.3,
+                onClick: () {
+                  Navigator.of(context).pushNamed(routes.detailRoute,
+                      arguments: routes.DetailArguments(items[index].id));
+                },
               );
             },
           ),

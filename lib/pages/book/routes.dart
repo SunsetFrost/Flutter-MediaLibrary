@@ -1,4 +1,4 @@
-import 'package:media_library/model/BookInfo.dart';
+import 'package:book_api/book_api.dart';
 
 const String listRoute = '/book/list';
 const String detailRoute = '/book/detail';

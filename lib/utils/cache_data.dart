@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:media_library/model/VideoDetail.dart';
+import 'package:library_repository/library_repository.dart';
 
 class GlobleCacheData {
-  static List<VideoInfo> favorVideos = [];
+  static List<Video> favorVideos = [];
   static late SharedPreferences _prefs;
 
   static Future init() async {
@@ -13,7 +13,7 @@ class GlobleCacheData {
     if (_favorVideos != null) {
       try {
         favorVideos =
-            _favorVideos.map((e) => VideoInfo.fromJson(jsonDecode(e))).toList();
+            _favorVideos.map((e) => Video.fromJson(jsonDecode(e))).toList();
       } catch (e) {
         favorVideos = [];
       }

@@ -11,7 +11,7 @@ enum APIType { movie, music, book, pokemon }
 class CommonAPIRequestFailure implements Exception {}
 
 abstract class CommonAPI {
-  CommonAPI({required baseUrl}) : _dio = Dio(BaseOptions(baseUrl: baseUrl));
+  CommonAPI({required baseUrl}) : dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   factory CommonAPI.fromLibrary(String baseUrl, APIType type) {
     if (type == APIType.movie) {
@@ -27,7 +27,7 @@ abstract class CommonAPI {
     }
   }
 
-  final Dio _dio;
+  Dio dio;
 
   @protected
   String get endPoint;
@@ -43,7 +43,7 @@ abstract class CommonAPI {
 
   Future<List<dynamic>> getPopularList(Map<String, dynamic> params) async {
     final response =
-        await _dio.get(endPoint + popularPattern, queryParameters: params);
+        await dio.get(endPoint + popularPattern, queryParameters: params);
 
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
@@ -53,7 +53,7 @@ abstract class CommonAPI {
 
   Future<List<dynamic>> getSearchList(Map<String, dynamic> params) async {
     final response =
-        await _dio.get(endPoint + searchPattern, queryParameters: params);
+        await dio.get(endPoint + searchPattern, queryParameters: params);
 
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
@@ -62,7 +62,7 @@ abstract class CommonAPI {
   }
 
   Future<dynamic> getDetail(String id) async {
-    final response = await _dio.get(endPoint + detailPattern + id);
+    final response = await dio.get(endPoint + detailPattern + id);
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }

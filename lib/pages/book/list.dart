@@ -55,6 +55,10 @@ class BookGrid extends StatelessWidget {
             imagePath: items[index].volumeInfo.imageLinks.smallThumbnail,
             aspect: 1.3,
             textColor: Colors.grey[500]!,
+            onClick: () {
+              Navigator.of(context).pushNamed(routes.detailRoute,
+                  arguments: routes.DetailArguments(items[index]));
+            },
           );
         },
       ),

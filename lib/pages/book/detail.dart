@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 // import 'package:epub_viewer/epub_viewer.dart';
+import 'package:library_repository/library_repository.dart';
 
-import 'package:media_library/net/book_data.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/pages/book/routes.dart';
 
 class BookDetail extends StatelessWidget {
-  const BookDetail({Key? key, required this.args}) : super(key: key);
+  BookDetail({Key? key, required this.args})
+      : _repo = LibraryRepository(baseUrl: backendURI, type: APIType.book),
+        super(key: key);
 
   final DetailArguments args;
+  final LibraryRepository _repo;
 
   void openEpubBook(BuildContext context) {
     // EpubViewer.setConfig(
@@ -33,8 +37,7 @@ class BookDetail extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(BookData.getBookImagePath(
-                    book.volumeInfo.imageLinks.smallThumbnail)),
+                image: NetworkImage(book.volumeInfo.imageLinks.smallThumbnail),
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -74,8 +77,7 @@ class BookDetail extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      BookData.getBookImagePath(
-                          book.volumeInfo.imageLinks.smallThumbnail),
+                      book.volumeInfo.imageLinks.smallThumbnail,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -92,7 +94,7 @@ class BookDetail extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  book.volumeInfo.description,
+                  book.volumeInfo.description!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,

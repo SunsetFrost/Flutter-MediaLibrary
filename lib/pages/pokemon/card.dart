@@ -9,11 +9,6 @@ class PokemonCard extends StatelessWidget {
 
   final Pokemon pokemon;
 
-  // String _getImageUrl(sourceIndex) {
-  //   final imgUrl = 'assets/pic/' + sourceIndex.toString() + '的副本.gif';
-  //   return imgUrl;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

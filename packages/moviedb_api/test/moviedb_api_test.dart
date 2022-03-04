@@ -14,4 +14,10 @@ void main() {
     print(movies);
     expect(movies, isList);
   });
+
+  test('trailer', () async {
+    final trailers = await movieAPI.getVideoTrailer(512195);
+    print(trailers);
+    expect(trailers, isList);
+  });
 }

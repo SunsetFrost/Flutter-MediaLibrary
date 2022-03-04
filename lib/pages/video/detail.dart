@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:library_repository/library_repository.dart';
 
-import 'package:media_library/widgets/sword_paint.dart';
+import 'package:media_library/constants.dart';
 import 'package:media_library/utils/cache_data.dart';
-import 'package:media_library/net/video_data.dart';
 import 'package:media_library/pages/video/routes.dart';
-import 'package:media_library/model/VideoDetail.dart';
+import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/pages/video/player.dart';
 
 class VideoDetail extends StatelessWidget {
-  const VideoDetail({Key? key, required this.args}) : super(key: key);
+  VideoDetail({Key? key, required this.args})
+      : _repo = LibraryRepository(baseUrl: backendURI, type: APIType.movie),
+        super(key: key);
 
   final DetailArguments args;
+  final LibraryRepository _repo;
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<VideoInfo>(
-      future: VideoData.getVideoDetail(args.id),
+    return FutureBuilder<dynamic>(
+      future: _repo.getDetail(args.id.toString()),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return DetailPage(video: snapshot.data!);
@@ -36,7 +39,7 @@ class VideoDetail extends StatelessWidget {
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key, required this.video}) : super(key: key);
 
-  final VideoInfo video;
+  final Video video;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -65,8 +68,7 @@ class _DetailPageState extends State<DetailPage> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                      VideoData.getImagePath(this.widget.video.posterPath)),
+                  image: NetworkImage(this.widget.video.posterPath),
                   fit: BoxFit.cover,
                   // add opacity
                   colorFilter: ColorFilter.mode(
@@ -91,20 +93,11 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       child: Stack(
                         children: [
-                          // ClipRRect(
-                          //   borderRadius: BorderRadius.circular(20),
-                          //   child: Image.network(
-                          //     VideoData.getImagePath(
-                          //         this.widget.video.posterPath),
-                          //     fit: BoxFit.cover,
-                          //   ),
-                          // ),
                           /// Poster
                           Hero(
                             tag: 'Poster' + widget.video.title,
                             child: Image.network(
-                              VideoData.getImagePath(
-                                  this.widget.video.posterPath),
+                              this.widget.video.posterPath,
                               fit: BoxFit.cover,
                             ),
                           ),

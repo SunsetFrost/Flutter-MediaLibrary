@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:library_repository/library_repository.dart';
-import 'package:pokemon_api/pokemon_api.dart';
 
 import 'package:media_library/constants.dart';
 import 'package:media_library/bloc/list_bloc.dart';

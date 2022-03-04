@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:library_repository/library_repository.dart';
 
-import 'package:media_library/pages/pokemon/routes.dart';
 import 'package:media_library/constants.dart';
+import 'package:media_library/pages/pokemon/routes.dart';
+import 'package:media_library/widgets/sword_paint.dart';
 
 class PokemonDetail extends StatelessWidget {
-  const PokemonDetail({Key? key, required this.args}) : super(key: key);
+  PokemonDetail({Key? key, required this.args})
+      : _repo = LibraryRepository(baseUrl: backendURI, type: APIType.pokemon),
+        super(key: key);
 
   final DetailArguments args;
-  static const List<String> mockType = ['grass', 'dragon'];
+  final LibraryRepository _repo;
 
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context)?.settings.arguments as DetailArguments;
+    return FutureBuilder<dynamic>(
+        future: _repo.getDetail(args.id.toString()),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return DetailPage(pokemon: snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const Center(
+            child: SwordLoading(
+              loadColor: Colors.white,
+              size: 60,
+            ),
+          );
+        });
+  }
+}
 
+class DetailPage extends StatelessWidget {
+  const DetailPage({
+    Key? key,
+    required this.pokemon,
+  }) : super(key: key);
+
+  final Pokemon pokemon;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         backgroundColor: Color(0xFF76BB6C),
@@ -44,7 +74,7 @@ class PokemonDetail extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Text(
-                  '妙蛙种子',
+                  pokemon.name,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 24,
@@ -55,7 +85,7 @@ class PokemonDetail extends StatelessWidget {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: mockType
+                  children: pokemon.types
                       .map((e) => Container(
                             width: 48,
                             padding: EdgeInsets.symmetric(
@@ -63,11 +93,11 @@ class PokemonDetail extends StatelessWidget {
                             margin: EdgeInsets.symmetric(horizontal: 30),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: Color(pokemonTypeMap[e]!.color),
+                              color: Color(pokemonTypeMap[e.name]!.color),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              pokemonTypeMap[e]!.name,
+                              pokemonTypeMap[e.name]!.name,
                               style: Theme.of(context).textTheme.headline4,
                             ),
                           ))
@@ -120,7 +150,10 @@ class PokemonDetail extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: AssetImage('assets/pic/1的副本.gif'),
+                        image: NetworkImage(imageServerURI +
+                            '/image/' +
+                            pokemon.id.toString() +
+                            '.gif'),
                         fit: BoxFit.cover,
                       )))
                   // alignment: Alignment(2.0, 1.8),
@@ -139,7 +172,7 @@ class PokemonDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'XXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxxXXXXxxxxxxxxxx',
+                    pokemon.name,
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   SizedBox(

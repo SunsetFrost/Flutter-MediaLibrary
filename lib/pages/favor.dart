@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_library/model/VideoDetail.dart';
-import 'package:media_library/net/video_data.dart';
+import 'package:library_repository/library_repository.dart';
 import 'package:media_library/utils/cache_data.dart';
 import 'package:media_library/widgets/common_card.dart';
 import 'package:media_library/pages/video/routes.dart' as routes;
@@ -14,7 +13,7 @@ class Favor extends StatefulWidget {
 }
 
 class _FavorState extends State<Favor> {
-  late List<VideoInfo> videos;
+  late List<Video> videos;
 
   @override
   void initState() {
@@ -63,8 +62,7 @@ class _FavorState extends State<Favor> {
                     padding: EdgeInsets.symmetric(horizontal: 6.0),
                     child: CommonCard(
                       name: videos[index].title,
-                      imagePath:
-                          VideoData.getImagePath(videos[index].posterPath),
+                      imagePath: videos[index].posterPath,
                       onClick: () => {
                         Navigator.of(context).pushNamed(routes.detailRoute,
                             arguments:
