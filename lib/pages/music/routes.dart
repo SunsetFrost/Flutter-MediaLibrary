@@ -1,9 +1,10 @@
+import 'package:library_repository/library_repository.dart';
+
 const String listRoute = '/music/list';
 const String detailRoute = '/music/detail';
 
 class DetailArguments {
-  final String id;
-  final String image;
+  final Album album;
 
-  DetailArguments(this.id, this.image);
+  DetailArguments(this.album);
 }

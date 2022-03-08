@@ -4,6 +4,7 @@ import 'package:library_repository/library_repository.dart';
 
 import 'package:spotify_api/spotify_api.dart';
 import 'package:media_library/constants.dart';
+import 'package:media_library/utils/cache_data.dart';
 import 'package:media_library/widgets/sword_paint.dart';
 import 'package:media_library/pages/music/routes.dart';
 
@@ -25,12 +26,20 @@ class _MusicDetailState extends State<MusicDetail> {
   AudioPlayer _audioPlayer = AudioPlayer();
   int _playIndex = 0;
   bool _isPlaying = false;
+  bool _isFavored = false;
 
   @override
   void initState() {
-    futureTracks = widget._repo.getDetail(widget.args.id);
+    futureTracks = widget._repo.getDetail(widget.args.album.id);
     // init player
     _audioPlayer = AudioPlayer();
+
+    // init favor
+    GlobleCacheData.favorMusics.forEach((element) {
+      if (element.id == widget.args.album.id) {
+        _isFavored = true;
+      }
+    });
 
     super.initState();
   }
@@ -59,6 +68,22 @@ class _MusicDetailState extends State<MusicDetail> {
     });
   }
 
+  void onFavorClick() {
+    if (_isFavored) {
+      // cancel favor
+      GlobleCacheData.favorMusics
+          .removeWhere((element) => element.id == widget.args.album.id);
+    } else {
+      // add favor
+      GlobleCacheData.favorMusics.add(widget.args.album);
+    }
+    GlobleCacheData.saveMusics();
+    setState(() {
+      _isFavored = !_isFavored;
+    });
+    print(GlobleCacheData.favorMusics);
+  }
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as DetailArguments;
@@ -85,24 +110,30 @@ class _MusicDetailState extends State<MusicDetail> {
                 ),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                args.image,
-                fit: BoxFit.cover,
-              ),
+            child: Stack(
+              children: [
+                Hero(
+                  tag: widget.args.album.images[1].url,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image.network(
+                      args.album.images[1].url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    child: Icon(Icons.favorite),
+                    onPressed: onFavorClick,
+                    style: TextButton.styleFrom(
+                        primary: _isFavored ? Colors.red : Colors.white),
+                  ),
+                ),
+              ],
             ),
           ),
-          // Text(
-          //   tracks[_playIndex].name,
-          //   style: TextStyle(
-          //     fontSize: 18,
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 10,
-          // ),
-          // Text(tracks[_playIndex].artists[0].name),
           Container(
             alignment: Alignment.center,
             child: IconButton(
@@ -131,10 +162,11 @@ class _MusicDetailState extends State<MusicDetail> {
                   return Text('${snapshot.error}');
                 }
                 return const Center(
-                    child: SwordLoading(
-                  loadColor: Colors.white,
-                  size: 60,
-                ));
+                  child: SwordLoading(
+                    loadColor: Colors.white,
+                    size: 60,
+                  ),
+                );
               },
             ),
           )

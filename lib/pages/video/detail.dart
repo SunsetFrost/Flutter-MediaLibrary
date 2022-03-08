@@ -59,6 +59,22 @@ class _DetailPageState extends State<DetailPage> {
     super.initState();
   }
 
+  void onFavorClick() {
+    if (_isFavored) {
+      // cancel favor
+      GlobleCacheData.favorVideos
+          .removeWhere((element) => element.id == widget.video.id);
+      GlobleCacheData.saveVideos();
+    } else {
+      // add favor
+      GlobleCacheData.favorVideos.add(widget.video);
+    }
+    GlobleCacheData.saveVideos();
+    setState(() {
+      _isFavored = !_isFavored;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -93,9 +109,9 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       child: Stack(
                         children: [
-                          /// Poster
+                          // Poster
                           Hero(
-                              tag: 'Poster' + widget.video.title,
+                              tag: widget.video.posterPath,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12.0),
                                 child: Image.network(
@@ -104,27 +120,12 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               )),
 
-                          /// favor
+                          // favor
                           Align(
                             alignment: Alignment.topRight,
                             child: TextButton(
                               child: Icon(Icons.favorite),
-                              onPressed: () {
-                                if (_isFavored) {
-                                  // cancel favor
-                                  GlobleCacheData.favorVideos.removeWhere(
-                                      (element) =>
-                                          element.id == widget.video.id);
-                                  GlobleCacheData.saveVideos();
-                                } else {
-                                  // add favor
-                                  GlobleCacheData.favorVideos.add(widget.video);
-                                }
-                                GlobleCacheData.saveVideos();
-                                setState(() {
-                                  _isFavored = !_isFavored;
-                                });
-                              },
+                              onPressed: onFavorClick,
                               style: TextButton.styleFrom(
                                   primary:
                                       _isFavored ? Colors.red : Colors.white),
@@ -195,20 +196,7 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ],
                       ),
-                    )
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.of(context).pushNamed(playerRoute,
-                    //         arguments: DetailArguments(widget.video.id));
-                    //   },
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //     children: [Icon(Icons.play_arrow), Text('播放')],
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     fixedSize: Size(100, 30),
-                    //   ),
-                    // )
+                    ),
                   ],
                 ),
               ),

@@ -5,8 +5,9 @@ const String playerRoute = '/video/player';
 
 class DetailArguments {
   final int id;
+  final String imagePath;
 
-  DetailArguments(this.id);
+  DetailArguments(this.id, this.imagePath);
 }
 
 // class VideoRoute extends StatefulWidget {

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:library_repository/library_repository.dart';
 
 import 'package:media_library/constants.dart';
+import 'package:media_library/utils/cache_data.dart';
 import 'package:media_library/pages/book/routes.dart';
 
-class BookDetail extends StatelessWidget {
+class BookDetail extends StatefulWidget {
   BookDetail({Key? key, required this.args})
       : _repo = LibraryRepository(baseUrl: backendURI, type: APIType.book),
         super(key: key);
@@ -13,7 +14,27 @@ class BookDetail extends StatelessWidget {
   final DetailArguments args;
   final LibraryRepository _repo;
 
+  @override
+  State<BookDetail> createState() => _BookDetailState();
+}
+
+class _BookDetailState extends State<BookDetail> {
+  bool _isFavored = false;
+
+  @override
+  void initState() {
+    GlobleCacheData.favorBooks.forEach((element) {
+      if (element.id == widget.args.book.id) {
+        _isFavored = true;
+      }
+    });
+
+    super.initState();
+  }
+
+  // TODO open book function
   void openEpubBook(BuildContext context) {
+    print('open book invoke');
     // EpubViewer.setConfig(
     //   themeColor: Theme.of(context).primaryColor,
     //   identifier: "iosBook",
@@ -27,9 +48,25 @@ class BookDetail extends StatelessWidget {
     //     'assets/book/Jue Ji _ Yong Sheng Zhi Hai . Di Er Juan - Guo Jing Ming.epub');
   }
 
+  void onFavorClick() {
+    if (_isFavored) {
+      // cancel favor
+      GlobleCacheData.favorBooks
+          .removeWhere((element) => element.id == widget.args.book.id);
+    } else {
+      // add favor
+      GlobleCacheData.favorBooks.add(widget.args.book);
+    }
+    GlobleCacheData.saveBooks();
+    setState(() {
+      _isFavored = !_isFavored;
+    });
+    print(GlobleCacheData.favorBooks);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final book = args.book;
+    final book = widget.args.book;
 
     return Scaffold(
       body: Stack(
@@ -65,21 +102,25 @@ class BookDetail extends StatelessWidget {
                   height: 300,
                   margin: EdgeInsets.symmetric(vertical: 30),
                   alignment: Alignment.center,
-                  // decoration: BoxDecoration(
-                  //   // image: DecorationImage(
-                  //   //   image: NetworkImage(
-                  //   //     VideoData.getImagePath(relativePath: video.posterPath),
-                  //   //   ),
-
-                  //   // ),
-                  //   borderRadius: BorderRadius.circular(20),
-                  // ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      book.volumeInfo.imageLinks.smallThumbnail,
-                      fit: BoxFit.cover,
-                    ),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          book.volumeInfo.imageLinks.smallThumbnail,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: TextButton(
+                          child: Icon(Icons.favorite),
+                          onPressed: onFavorClick,
+                          style: TextButton.styleFrom(
+                              primary: _isFavored ? Colors.red : Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Text(

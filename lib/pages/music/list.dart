@@ -53,10 +53,10 @@ class MusicList extends StatelessWidget {
                       return CommonCard(
                         name: items[index].name,
                         imagePath: items[index].images[1].url,
+                        aspect: 0.9,
                         onClick: () {
                           Navigator.of(context).pushNamed(routes.detailRoute,
-                              arguments: routes.DetailArguments(
-                                  items[index].id, items[index].images[1].url));
+                              arguments: routes.DetailArguments(items[index]));
                         },
                       );
                     },

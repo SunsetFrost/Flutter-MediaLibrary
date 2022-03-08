@@ -19,25 +19,32 @@ class CommonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cardWidth = MediaQuery.of(context).size.width / 3.2;
+    final cardHeight = MediaQuery.of(context).size.width / 3.2 * aspect;
+
     return GestureDetector(
       onTap: onClick,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: 'Poster' + name,
+            tag: imagePath,
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: CachedNetworkImage(
                   imageUrl: imagePath,
+                  width: cardWidth,
+                  height: cardHeight,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.centerLeft,
                   placeholder: (context, url) => Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * aspect,
+                    width: cardWidth,
+                    height: cardHeight,
                     color: Colors.grey[300],
                   ),
                   errorWidget: (context, url, error) => Container(
-                    width: MediaQuery.of(context).size.width / 3.2,
-                    height: MediaQuery.of(context).size.width / 3.2 * aspect,
+                    width: cardWidth,
+                    height: cardHeight,
                     color: Colors.red[100],
                   ),
                 )),
