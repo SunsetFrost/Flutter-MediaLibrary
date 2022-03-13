@@ -49,6 +49,15 @@ Map<String, LibraryCard> dataSourceCards = {
     path: pokemon_routes.listRoute,
     iconType: Icons.games,
   ),
+  'RssHub': LibraryCard(
+    name: 'RssHub',
+    desc: 'All kind of rss info',
+    color: Color(0xFF66B7D9),
+    colorDark: Color(0xffa4957e),
+    colorLight: Color(0xFFECF7FA),
+    path: '/rss',
+    iconType: Icons.rss_feed,
+  ),
 };
 
 class Library extends StatelessWidget {
@@ -152,7 +161,7 @@ class Library extends StatelessWidget {
               ),
             ),
             Container(
-              height: 160.0,
+              height: 220.0,
               child: Column(
                 children: List.generate(dataSourceCards.length, (index) {
                   return dataSourceCards.values.toList()[index];

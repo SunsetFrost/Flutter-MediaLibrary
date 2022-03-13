@@ -13,6 +13,7 @@ import 'package:media_library/pages/book/routes.dart' as book_routes;
 import 'package:media_library/pages/pokemon/list.dart';
 import 'package:media_library/pages/pokemon/detail.dart';
 import 'package:media_library/pages/pokemon/routes.dart' as pokemon_routes;
+import 'package:media_library/pages/rss/list.dart';
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, RouteSettings);
 
@@ -66,6 +67,8 @@ class RouteConfiguration {
       (context, settings) => PokemonDetail(
           args: settings.arguments as pokemon_routes.DetailArguments),
     ),
+    // rss
+    Path(r'^' + '/rss', (context, settings) => RssPage()),
     // home
     Path(r'^/', (context, match) => NavigatePage()),
   ];

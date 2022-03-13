@@ -66,59 +66,63 @@ class LibraryCard extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
             ),
-            child: Row(children: <Widget>[
-              SizedBox(
-                width: 10.0,
-              ),
-              Container(
-                // margin: EdgeInsets.all(20),
-                padding: EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: colorLight,
-                  border: Border.all(color: colorLight),
-                  shape: BoxShape.circle,
-                  // border: Border.all(width: 2, color: color),
-                ),
-                child: Icon(
-                  iconType,
-                  color: color,
-                  size: 20.0,
-                ),
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      color: Theme.of(context).cardColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Row(children: [
+                    Container(
+                      // margin: EdgeInsets.all(20),
+                      padding: EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: colorLight,
+                        border: Border.all(color: colorLight),
+                        shape: BoxShape.circle,
+                        // border: Border.all(width: 2, color: color),
+                      ),
+                      child: Icon(
+                        iconType,
+                        color: color,
+                        size: 20.0,
+                      ),
                     ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: TextStyle(
+                            color: Theme.of(context).cardColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(desc,
+                            style: TextStyle(
+                              color: Theme.of(context).secondaryHeaderColor,
+                              fontSize: 12,
+                            ))
+                      ],
+                    ),
+                  ]),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Icon(
+                    Icons.navigate_next,
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
-                  SizedBox(
-                    height: 6.0,
-                  ),
-                  Text(desc,
-                      style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor,
-                        fontSize: 12,
-                      ))
-                ],
-              ),
-              Expanded(child: SizedBox()),
-              Icon(
-                Icons.navigate_next,
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-              SizedBox(
-                width: 10.0,
-              )
-            ]),
+                ),
+              ],
+            ),
           ),
         ));
   }

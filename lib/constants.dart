@@ -3,6 +3,7 @@
 const String backendURI = 'http://127.0.0.1:3000';
 const String imageServerURI = 'http://127.0.0.1:8090';
 const String apiVersion = '/api/v1';
+const String rssURI = 'https://rsshub.app';
 const bool isDev = true;
 const bool isMock = false;
 

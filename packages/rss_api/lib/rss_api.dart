@@ -1,6 +1,7 @@
 library rss_api;
 
 export 'src/rss_api_client.dart';
+export 'package:webfeed/webfeed.dart';
 
 /// A Calculator.
 class Calculator {

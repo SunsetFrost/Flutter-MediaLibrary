@@ -22,8 +22,11 @@ dependencies:
   equatable: ^2.0.3
   stream_transform: ^2.0.0
   cached_network_image: ^3.2.0
+  url_launcher: ^6.0.20
   library_repository:
     path: ./packages/library_repository
+  rss_api:
+    path: ./packages/rss_api
 
 dev_dependencies:
   build_runner: ^2.1.4
