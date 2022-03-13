@@ -27,10 +27,10 @@ class Track {
   late final String id;
   late final bool isLocal;
   late final String name;
-  late final String previewUrl;
-  late final int trackNumber;
-  late final String type;
-  late final String uri;
+  late final String? previewUrl;
+  late final int? trackNumber;
+  late final String? type;
+  late final String? uri;
 
   Track.fromJson(Map<String, dynamic> json) {
     artists =

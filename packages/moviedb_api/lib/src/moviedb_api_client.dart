@@ -9,24 +9,16 @@ class MoviedbAPIClient extends CommonAPI {
   }) : super(baseUrl: baseUrl);
 
   @override
-  String get endPoint {
-    return '/video';
-  }
+  String endPoint = '/video';
 
   @override
-  String get popularPattern {
-    return '/';
-  }
+  String popularPattern = '/';
 
   @override
-  String get searchPattern {
-    return '/search/movie';
-  }
+  String searchPattern = '/search/movie';
 
   @override
-  String get detailPattern {
-    return '/';
-  }
+  String detailPattern = '/';
 
   @override
   Video toItem(Map<String, dynamic> json) {
@@ -47,21 +39,23 @@ class MoviedbAPIClient extends CommonAPI {
   }
 
   @override
-  List<dynamic> toList(Response res) {
-    return res.data['results'];
+  List<Video> toList(dynamic data) {
+    final list = data['results'];
+    return list.map<Video>((json) => toItem(json)).toList();
   }
 
   String get version {
     return 'version 1.0';
   }
 
-  Future<List<dynamic>> getVideoTrailer(id) async {
+  Future<List<VideoTrailer>> getVideoTrailer(id) async {
     final url = '/video/trailer/' + id.toString();
 
     final response = await super.dio.get(url);
 
-    final trailers =
-        response.data.map((json) => VideoTrailer.fromJson(json)).toList();
+    final trailers = response.data
+        .map<VideoTrailer>((json) => VideoTrailer.fromJson(json))
+        .toList();
     return trailers;
   }
 }

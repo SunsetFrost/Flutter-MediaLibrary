@@ -54,11 +54,20 @@ class _MusicDetailState extends State<MusicDetail> {
     setState(() {
       _playIndex = trackIndex;
     });
-    await _audioPlayer.setUrl(tracks[_playIndex].previewUrl);
-    _audioPlayer.play();
-    setState(() {
-      _isPlaying = true;
-    });
+    if (tracks[_playIndex].previewUrl != null) {
+      await _audioPlayer.setUrl(tracks[_playIndex].previewUrl!);
+      _audioPlayer.play();
+      setState(() {
+        _isPlaying = true;
+      });
+    } else {
+      // alert don't have online preview
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('预览地址不存在！'),
+        ),
+      );
+    }
   }
 
   void _pauseAudio() {

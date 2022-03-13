@@ -1,5 +1,4 @@
 import 'package:common_api/common_api.dart';
-import 'package:book_api/book_api.dart';
 
 class BookAPIConvertFailure implements Exception {}
 
@@ -45,8 +44,8 @@ class BookAPIClient extends CommonAPI {
   }
 
   @override
-  List<dynamic> toList(Response res) {
-    return res.data;
+  List<BookInfo> toList(dynamic data) {
+    return data.map<BookInfo>((json) => toItem(json)).toList();
   }
 
   String get version {

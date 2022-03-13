@@ -9,15 +9,23 @@ void main() {
   setUpAll(() {
     movieAPI = MoviedbAPIClient(baseUrl: _baseUrl);
   });
-  test('popular movie api', () async {
-    final movies = await movieAPI.getPopularList({'page': 1});
-    print(movies);
-    expect(movies, isList);
-  });
+  group('api test', () {
+    test('popular movie api', () async {
+      final movies = await movieAPI.getPopularList({'page': 1});
+      print(movies);
+      expect(movies, isList);
+    });
 
-  test('trailer', () async {
-    final trailers = await movieAPI.getVideoTrailer(512195);
-    print(trailers);
-    expect(trailers, isList);
+    test('detail', () async {
+      final movie = await movieAPI.getDetail('512195');
+      print(movie);
+      expect(movie, isInstanceOf<Video>());
+    });
+
+    test('trailer', () async {
+      final trailers = await movieAPI.getVideoTrailer(512195);
+      print(trailers);
+      expect(trailers, isList);
+    });
   });
 }

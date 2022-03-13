@@ -41,39 +41,43 @@ abstract class CommonAPI {
   @protected
   String get detailPattern;
 
-  Future<List<dynamic>> getPopularList(Map<String, dynamic> params) async {
+  Object toItem(Map<String, dynamic> json) {
+    return json;
+  }
+
+  Object toDetailItem(Map<String, dynamic> json) {
+    return json;
+  }
+
+  List<Object> toList(dynamic data) {
+    return data.map((json) => toItem(json)).toList();
+  }
+
+  Future<List<Object>> getPopularList(Map<String, dynamic> params) async {
     final response =
         await dio.get(endPoint + popularPattern, queryParameters: params);
 
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
-    return toList(response).map((json) => toItem(json)).toList();
+    return toList(response.data);
   }
 
-  Future<List<dynamic>> getSearchList(Map<String, dynamic> params) async {
+  Future<List<Object>> getSearchList(Map<String, dynamic> params) async {
     final response =
         await dio.get(endPoint + searchPattern, queryParameters: params);
 
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
-    return toList(response).map((json) => toItem(json)).toList();
+    return toList(response.data);
   }
 
-  Future<dynamic> getDetail(String id) async {
+  Future<Object> getDetail(String id) async {
     final response = await dio.get(endPoint + detailPattern + id);
     if (response.statusCode != 200) {
       throw CommonAPIRequestFailure();
     }
     return toDetailItem(response.data);
-  }
-
-  Object toItem(Map<String, dynamic> json);
-
-  Object toDetailItem(Map<String, dynamic> json);
-
-  List<dynamic> toList(Response res) {
-    return res.data;
   }
 }

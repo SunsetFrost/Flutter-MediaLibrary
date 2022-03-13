@@ -50,9 +50,11 @@ class SpotifyAPIClient extends CommonAPI {
   }
 
   @override
-  List<dynamic> toList(Response res) {
+  List<Album> toList(dynamic data) {
     try {
-      return res.data['albums']['items'];
+      return data['albums']['items']
+          .map<Album>((json) => toItem(json))
+          .toList();
     } catch (e) {
       throw SpotifyAPIToListFailture();
     }

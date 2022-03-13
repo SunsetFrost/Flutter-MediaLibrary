@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,6 +39,7 @@ class VideoLibrary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('is web' + kIsWeb.toString());
     return Stack(
       children: [
         Container(
