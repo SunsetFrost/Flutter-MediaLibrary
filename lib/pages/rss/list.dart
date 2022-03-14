@@ -31,8 +31,58 @@ class _RssPageState extends State<RssPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: RssBuilder(rssFeed: rssFeed),
+      body: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).padding.top,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: TextField(
+              cursorColor: Color(0xff9ca3af),
+              style: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+              decoration: InputDecoration(
+                hintText: '请输入Rss路径',
+                hintStyle: TextStyle(color: Color(0xff9ca3af), fontSize: 14.0),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                ),
+                filled: true,
+                // fillColor: widget.color,
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Color(0xffe5e7eb),
+                ),
+              ),
+              onSubmitted: (String? value) {
+                setState(() {
+                  rssFeed = widget.rssAPIClient.getRssObject(value!);
+                });
+              },
+            ),
+          ),
+          Expanded(
+            child: RssBuilder(rssFeed: rssFeed),
+          )
+        ],
+      ),
+      floatingActionButton: Ink(
+        decoration: const ShapeDecoration(
+          shape: CircleBorder(),
+          color: Colors.lightBlue,
+        ),
+        child: IconButton(
+          onPressed: (() {
+            launch('https://docs.rsshub.app/new-media.html');
+          }),
+          icon: Icon(Icons.hub_rounded),
+          color: Colors.amber,
+        ),
       ),
     );
   }
@@ -70,12 +120,14 @@ class RssList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.all(0.0),
       itemCount: rssList.length,
-      itemExtent: 54.0,
+      itemExtent: 80.0,
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(rssList[index].title!),
           subtitle: Text(rssList[index].link!),
+          focusColor: Colors.grey[400],
           onTap: () {
             launch(rssList[index].link!);
           },
