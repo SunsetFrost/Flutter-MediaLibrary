@@ -72,7 +72,7 @@ class PokemonCard extends StatelessWidget {
                 child: Hero(
                   tag: pokemon.id,
                   child: Image.network(
-                    imageServerURI + '/image/' + pokemon.id.toString() + '.gif',
+                    imageServerURI + pokemon.id.toString() + '.gif',
                     width: 80,
                     height: 80,
                     alignment: Alignment.bottomCenter,

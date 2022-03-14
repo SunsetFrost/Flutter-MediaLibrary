@@ -1,5 +1,4 @@
 import 'package:common_api/common_api.dart';
-import 'package:pokemon_api/pokemon_api.dart';
 
 class PokemonAPIConvertFailure implements Exception {}
 
@@ -31,6 +30,11 @@ class PokemonAPIClient extends CommonAPI {
   @override
   Pokemon toItem(Map<String, dynamic> json) {
     return Pokemon.fromJson(json);
+  }
+
+  @override
+  List<Pokemon> toList(dynamic data) {
+    return data.map<Pokemon>((json) => toItem(json)).toList();
   }
 
   @override

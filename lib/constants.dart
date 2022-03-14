@@ -1,7 +1,9 @@
 // const String backendURI = 'http://192.168.4.224';
 // const String backendURI = 'http://192.168.3.2:3000';
 const String backendURI = 'http://127.0.0.1:3000';
-const String imageServerURI = 'http://127.0.0.1:8090';
+// const String imageServerURI = 'http://127.0.0.1:8090';
+const String imageServerURI =
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/';
 const String apiVersion = '/api/v1';
 const String rssURI = 'https://rsshub.app';
 const bool isDev = true;

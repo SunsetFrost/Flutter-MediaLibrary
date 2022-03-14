@@ -98,8 +98,8 @@ class _BookDetailState extends State<BookDetail> {
                   ),
                 ),
                 Container(
-                  width: 300,
-                  height: 300,
+                  width: 128,
+                  height: 206,
                   margin: EdgeInsets.symmetric(vertical: 30),
                   alignment: Alignment.center,
                   child: Stack(
@@ -122,6 +122,9 @@ class _BookDetailState extends State<BookDetail> {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 80.0,
                 ),
                 Text(
                   book.volumeInfo.title,
