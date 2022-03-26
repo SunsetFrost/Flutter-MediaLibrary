@@ -95,6 +95,7 @@ class _CommonListState extends State<CommonList> {
           child: GridView.builder(
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
             controller: _scrollController,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 20.0,
